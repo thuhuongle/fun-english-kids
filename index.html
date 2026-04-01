@@ -257,7 +257,7 @@
 <!-- ===== STUDENT APP ===== -->
 <div class="app-section" id="studentApp" style="display:none">
 <div class="header">
-    <h1>Fun <span>English</span> Kids</h1>
+    <h1 ondblclick="showAdminLogin()" style="cursor:pointer">Fun <span>English</span> Kids</h1>
     <div class="stats-bar">
         <div class="stat-item">⭐ <span id="coins">0</span></div>
         <div class="stat-item">🔥 <span id="streakCount">0</span> ngày</div>
@@ -334,6 +334,11 @@
     <!-- EXAM --><div class="screen" id="examScreen"><div class="lesson-header"><button class="btn-back" onclick="goHome()">←</button><div class="lesson-title" style="color:#6366F1">📋 Bài Kiểm Tra</div></div><div class="lesson-progress"><div class="fill" id="examLessonProgress" style="width:0%"></div></div><div class="exam-container" id="examContent"></div></div>
     <!-- RESULT --><div class="screen" id="resultScreen"><div class="result-screen" id="resultContent"></div></div>
     <!-- REPORT --><div class="screen" id="reportScreen"><div class="lesson-header"><button class="btn-back" onclick="goHome()">←</button><div class="lesson-title" style="color:#6366F1">📊 Bảng Điểm</div></div><div class="report-card" id="reportContent"></div></div>
+    <!-- ADMIN -->
+    <div class="screen" id="adminScreen">
+        <div class="lesson-header"><button class="btn-back" onclick="goHome()">←</button><div class="lesson-title" style="color:#EF4444">⚙️ Quản Trị Hệ Thống</div></div>
+        <div id="adminContent" style="max-width:800px;margin:0 auto"></div>
+    </div>
 </div>
 </div><!-- end studentApp -->
 
@@ -988,6 +993,160 @@ function showReport() {
 function playCorrectSound() { try { const c=new(window.AudioContext||window.webkitAudioContext)();const o=c.createOscillator();const g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.setValueAtTime(523,c.currentTime);o.frequency.setValueAtTime(659,c.currentTime+.1);o.frequency.setValueAtTime(784,c.currentTime+.2);g.gain.setValueAtTime(.3,c.currentTime);g.gain.exponentialRampToValueAtTime(.01,c.currentTime+.4);o.start(c.currentTime);o.stop(c.currentTime+.4);}catch(e){} }
 function showConfetti() { const c=document.getElementById('confettiContainer');c.innerHTML='';const cols=['#FF6B9D','#4ECDC4','#FFE66D','#A855F7','#22C55E','#FF8C42'];for(let i=0;i<50;i++){const d=document.createElement('div');d.className='confetti';d.style.left=Math.random()*100+'%';d.style.background=cols[Math.floor(Math.random()*cols.length)];d.style.animationDelay=Math.random()*2+'s';d.style.width=(Math.random()*8+5)+'px';d.style.height=(Math.random()*8+5)+'px';c.appendChild(d);}setTimeout(()=>c.innerHTML='',4000); }
 function createFloatingShapes() { const shapes=['⭐','🌟','🌈','💙','💚','💛','🌸','☀️','☁️','🌎'];const c=document.getElementById('floatingShapes');for(let i=0;i<12;i++){const s=document.createElement('span');s.innerHTML=shapes[Math.floor(Math.random()*shapes.length)];s.style.left=Math.random()*100+'%';s.style.animationDelay=Math.random()*15+'s';s.style.fontSize=(Math.random()*1.5+1)+'rem';c.appendChild(s);} }
+
+// ============================================
+// ADMIN PANEL (tích hợp trong app chính)
+// ============================================
+let adminLoggedIn = false;
+function getAdminPw() { return localStorage.getItem('fekAdminPw') || 'funeng2024admin'; }
+
+function showAdminLogin() {
+    const pw = prompt('🔑 Nhập mật khẩu quản trị:');
+    if (!pw) return;
+    if (pw === getAdminPw()) {
+        adminLoggedIn = true;
+        showScreen('adminScreen');
+        renderAdminPanel();
+    } else {
+        alert('Sai mật khẩu!');
+    }
+}
+
+function renderAdminPanel() {
+    const sub = Subscription.currentPlan || { plan: 'free' };
+    const planNames = { free: 'Miễn Phí', basic: 'Cơ Bản (99k/tháng)', premium: 'Premium (199k/tháng)', yearly: 'Năm Học (1.49M/năm)' };
+    const planColors = { free: '#888', basic: '#4ECDC4', premium: '#A855F7', yearly: '#F59E0B' };
+
+    document.getElementById('adminContent').innerHTML = `
+        <div style="background:linear-gradient(135deg,#EF4444,#DC2626);border-radius:20px;padding:20px;color:#fff;text-align:center;margin-bottom:20px">
+            <div style="font-size:2rem;margin-bottom:5px">⚙️</div>
+            <h2 style="font-family:'Fredoka One',cursive;font-size:1.4rem">Bảng Quản Trị</h2>
+            <p style="opacity:.8;font-size:.9rem">Quản lý gói dịch vụ và cài đặt hệ thống</p>
+        </div>
+
+        <!-- Thông tin hiện tại -->
+        <div style="background:#fff;border-radius:16px;padding:20px;margin-bottom:15px;box-shadow:0 2px 10px rgba(0,0,0,.06)">
+            <h3 style="font-family:'Fredoka One',cursive;color:var(--purple);margin-bottom:12px">📋 Thông tin hiện tại</h3>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                <div style="background:#f8f8f8;padding:12px;border-radius:10px"><div style="font-size:.8rem;color:#888">Tên học sinh</div><div style="font-weight:800">${state.studentName || 'Chưa đặt'}</div></div>
+                <div style="background:#f8f8f8;padding:12px;border-radius:10px"><div style="font-size:.8rem;color:#888">Lớp đang học</div><div style="font-weight:800">Lớp ${state.selectedGrade || 1}</div></div>
+                <div style="background:#f8f8f8;padding:12px;border-radius:10px"><div style="font-size:.8rem;color:#888">Sao tích lũy</div><div style="font-weight:800;color:var(--orange)">⭐ ${state.coins}</div></div>
+                <div style="background:#f8f8f8;padding:12px;border-radius:10px"><div style="font-size:.8rem;color:#888">Bài đã hoàn thành</div><div style="font-weight:800;color:var(--purple)">${state.totalLessonsCompleted}</div></div>
+            </div>
+        </div>
+
+        <!-- Quản lý gói dịch vụ -->
+        <div style="background:#fff;border-radius:16px;padding:20px;margin-bottom:15px;box-shadow:0 2px 10px rgba(0,0,0,.06)">
+            <h3 style="font-family:'Fredoka One',cursive;color:var(--purple);margin-bottom:12px">👑 Quản lý gói dịch vụ</h3>
+            <div style="background:#f0fdf4;border:2px solid #22C55E;border-radius:12px;padding:15px;margin-bottom:15px">
+                <div style="font-size:.85rem;color:#888">Gói hiện tại:</div>
+                <div style="font-weight:800;font-size:1.2rem;color:${planColors[sub.plan] || '#888'}">${planNames[sub.plan] || 'Miễn Phí'}</div>
+                ${sub.expiry ? `<div style="font-size:.8rem;color:#888;margin-top:4px">Hết hạn: ${new Date(sub.expiry).toLocaleDateString('vi-VN')}</div>` : ''}
+            </div>
+            <div style="margin-bottom:12px">
+                <label style="font-weight:700;font-size:.9rem;display:block;margin-bottom:6px">Chọn gói mới:</label>
+                <select id="adminPlanSelect" style="width:100%;padding:12px;border:2px solid #eee;border-radius:10px;font-size:1rem;font-family:'Nunito',sans-serif">
+                    <option value="free">Miễn Phí (Lớp 1)</option>
+                    <option value="basic">Cơ Bản - 99,000đ/tháng (Lớp 1-3)</option>
+                    <option value="premium">Premium - 199,000đ/tháng (Lớp 1-12)</option>
+                    <option value="yearly">Năm Học - 1,490,000đ/năm (Lớp 1-12)</option>
+                </select>
+            </div>
+            <div style="margin-bottom:12px">
+                <label style="font-weight:700;font-size:.9rem;display:block;margin-bottom:6px">Ngày hết hạn:</label>
+                <input type="date" id="adminExpiryDate" style="width:100%;padding:12px;border:2px solid #eee;border-radius:10px;font-size:1rem;font-family:'Nunito',sans-serif">
+            </div>
+            <button onclick="adminActivatePlan()" style="width:100%;padding:14px;background:linear-gradient(135deg,#22C55E,#16A34A);color:#fff;border:none;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif">✅ Kích hoạt gói</button>
+        </div>
+
+        <!-- Thay đổi lớp -->
+        <div style="background:#fff;border-radius:16px;padding:20px;margin-bottom:15px;box-shadow:0 2px 10px rgba(0,0,0,.06)">
+            <h3 style="font-family:'Fredoka One',cursive;color:var(--purple);margin-bottom:12px">🎓 Thay đổi lớp học</h3>
+            <select id="adminGradeSelect" style="width:100%;padding:12px;border:2px solid #eee;border-radius:10px;font-size:1rem;font-family:'Nunito',sans-serif;margin-bottom:12px">
+                ${GRADE_INFO.map(g => `<option value="${g.id}" ${g.id === state.selectedGrade ? 'selected' : ''}>${g.icon} ${g.name} (${g.age}) - ${g.desc}</option>`).join('')}
+            </select>
+            <button onclick="adminChangeGrade()" style="width:100%;padding:14px;background:linear-gradient(135deg,#6366F1,#A855F7);color:#fff;border:none;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif">📚 Đổi lớp</button>
+        </div>
+
+        <!-- Đổi mật khẩu -->
+        <div style="background:#fff;border-radius:16px;padding:20px;margin-bottom:15px;box-shadow:0 2px 10px rgba(0,0,0,.06)">
+            <h3 style="font-family:'Fredoka One',cursive;color:var(--purple);margin-bottom:12px">🔑 Đổi mật khẩu quản trị</h3>
+            <input type="password" id="adminNewPw" placeholder="Mật khẩu mới" style="width:100%;padding:12px;border:2px solid #eee;border-radius:10px;font-size:1rem;font-family:'Nunito',sans-serif;margin-bottom:8px">
+            <input type="password" id="adminConfirmPw" placeholder="Xác nhận mật khẩu" style="width:100%;padding:12px;border:2px solid #eee;border-radius:10px;font-size:1rem;font-family:'Nunito',sans-serif;margin-bottom:12px">
+            <button onclick="adminChangePw()" style="width:100%;padding:14px;background:linear-gradient(135deg,#F59E0B,#D97706);color:#fff;border:none;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif">🔑 Đổi mật khẩu</button>
+        </div>
+
+        <!-- Xóa dữ liệu -->
+        <div style="background:#fff;border-radius:16px;padding:20px;margin-bottom:15px;box-shadow:0 2px 10px rgba(0,0,0,.06)">
+            <h3 style="font-family:'Fredoka One',cursive;color:var(--red);margin-bottom:12px">🗑 Quản lý dữ liệu</h3>
+            <button onclick="adminResetProgress()" style="width:100%;padding:14px;background:linear-gradient(135deg,#F97316,#EA580C);color:#fff;border:none;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;margin-bottom:8px">🔄 Reset tiến trình học (giữ tên)</button>
+            <button onclick="if(confirm('Xóa TOÀN BỘ dữ liệu? Không thể hoàn tác!')){localStorage.clear();location.reload()}" style="width:100%;padding:14px;background:linear-gradient(135deg,#EF4444,#DC2626);color:#fff;border:none;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif">⚠️ Xóa toàn bộ dữ liệu</button>
+        </div>
+
+        <div style="text-align:center;margin-top:15px">
+            <button class="btn-next" onclick="goHome()" style="background:linear-gradient(135deg,var(--blue),var(--green))">Về trang chủ 🏠</button>
+        </div>`;
+
+    // Set default values
+    document.getElementById('adminPlanSelect').value = sub.plan || 'free';
+    const d = new Date(); d.setMonth(d.getMonth() + 1);
+    document.getElementById('adminExpiryDate').value = d.toISOString().split('T')[0];
+}
+
+function adminActivatePlan() {
+    const plan = document.getElementById('adminPlanSelect').value;
+    const expiry = document.getElementById('adminExpiryDate').value;
+    Subscription.currentPlan = { plan: plan, expiry: expiry ? new Date(expiry).toISOString() : null, activatedAt: new Date().toISOString() };
+    localStorage.setItem('fekSubscription', JSON.stringify(Subscription.currentPlan));
+    if (firebaseReady && Auth.currentUser) {
+        DB.saveSubscription(Subscription.currentPlan);
+    }
+    alert('Đã kích hoạt gói: ' + document.getElementById('adminPlanSelect').selectedOptions[0].text);
+    renderAdminPanel();
+}
+
+async function adminChangeGrade() {
+    const gradeId = parseInt(document.getElementById('adminGradeSelect').value);
+    state.selectedGrade = gradeId;
+    state.selectedLevel = 1;
+    state.selectedMonth = 1;
+    try {
+        await loadGradeData(gradeId);
+        applyMonth(1);
+        saveState();
+        alert('Đã đổi sang ' + GRADE_INFO.find(g => g.id === gradeId).name);
+        renderAdminPanel();
+        updateUI();
+    } catch(e) {
+        alert('Giáo trình lớp ' + gradeId + ' chưa sẵn sàng!');
+    }
+}
+
+function adminChangePw() {
+    const newPw = document.getElementById('adminNewPw').value;
+    const confirmPw = document.getElementById('adminConfirmPw').value;
+    if (!newPw || newPw.length < 4) { alert('Mật khẩu phải có ít nhất 4 ký tự!'); return; }
+    if (newPw !== confirmPw) { alert('Mật khẩu không khớp!'); return; }
+    localStorage.setItem('fekAdminPw', newPw);
+    alert('Đổi mật khẩu thành công!');
+    document.getElementById('adminNewPw').value = '';
+    document.getElementById('adminConfirmPw').value = '';
+}
+
+function adminResetProgress() {
+    if (!confirm('Reset toàn bộ tiến trình học? Tên học sinh sẽ được giữ lại.')) return;
+    const name = state.studentName;
+    const grade = state.selectedGrade;
+    state.coins = 0; state.streak = 0;
+    state.streakDays = [false,false,false,false,false,false,false];
+    state.moduleProgress = { vocab:0, phonics:0, sentences:0, matching:0, listening:0, spelling:0, exam:0 };
+    state.examHistory = [];
+    state.moduleHistory = { vocab:[], phonics:[], sentences:[], matching:[], listening:[], spelling:[] };
+    state.totalLessonsCompleted = 0; state.totalCorrectAnswers = 0; state.totalQuestionsSeen = 0;
+    state.studentName = name; state.selectedGrade = grade;
+    saveState(); renderAdminPanel(); updateUI();
+    alert('Đã reset tiến trình học!');
+}
 
 // ============================================
 // INIT
