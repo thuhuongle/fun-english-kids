@@ -1069,6 +1069,17 @@ function renderAdminPanel() {
             <button onclick="adminChangeGrade()" style="width:100%;padding:14px;background:linear-gradient(135deg,#6366F1,#A855F7);color:#fff;border:none;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif">📚 Đổi lớp</button>
         </div>
 
+        <!-- Kiểm tra giáo trình -->
+        <div style="background:#fff;border-radius:16px;padding:20px;margin-bottom:15px;box-shadow:0 2px 10px rgba(0,0,0,.06)">
+            <h3 style="font-family:'Fredoka One',cursive;color:var(--purple);margin-bottom:12px">📖 Kiểm tra giáo trình</h3>
+            <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+                <select id="adminPreviewGrade" onchange="adminPreviewCurriculum()" style="flex:1;min-width:120px;padding:10px;border:2px solid #eee;border-radius:10px;font-size:.95rem;font-family:'Nunito',sans-serif">
+                    ${GRADE_INFO.map(g => `<option value="${g.id}">${g.icon} ${g.name}</option>`).join('')}
+                </select>
+            </div>
+            <div id="adminCurriculumPreview" style="max-height:500px;overflow-y:auto;border:2px solid #eee;border-radius:12px;padding:15px;background:#fafafa"></div>
+        </div>
+
         <!-- Đổi mật khẩu -->
         <div style="background:#fff;border-radius:16px;padding:20px;margin-bottom:15px;box-shadow:0 2px 10px rgba(0,0,0,.06)">
             <h3 style="font-family:'Fredoka One',cursive;color:var(--purple);margin-bottom:12px">🔑 Đổi mật khẩu quản trị</h3>
@@ -1092,6 +1103,63 @@ function renderAdminPanel() {
     document.getElementById('adminPlanSelect').value = sub.plan || 'free';
     const d = new Date(); d.setMonth(d.getMonth() + 1);
     document.getElementById('adminExpiryDate').value = d.toISOString().split('T')[0];
+}
+
+async function adminPreviewCurriculum() {
+    const gradeId = parseInt(document.getElementById('adminPreviewGrade').value);
+    const preview = document.getElementById('adminCurriculumPreview');
+    preview.innerHTML = '<div style="text-align:center;padding:20px;color:#888">Đang tải...</div>';
+
+    try {
+        await loadGradeData(gradeId);
+        const d = GRADE_DATA[gradeId];
+        if (!d) { preview.innerHTML = '<div style="text-align:center;color:#EF4444;padding:20px">Chưa có giáo trình lớp này</div>'; return; }
+
+        const gi = GRADE_INFO.find(g => g.id === gradeId);
+        let vocabCount = 0, topicCount = 0;
+        let topicsHTML = '';
+
+        if (d.vocab) {
+            Object.entries(d.vocab).forEach(([key, topic]) => {
+                topicCount++;
+                vocabCount += topic.words ? topic.words.length : 0;
+                const sampleWords = topic.words ? topic.words.slice(0, 5).map(w => `${w.emoji} ${w.en} (${w.vi})`).join(', ') : '';
+                topicsHTML += `
+                    <div style="background:#fff;border:1px solid #eee;border-radius:10px;padding:10px;margin-bottom:6px">
+                        <div style="display:flex;justify-content:space-between;align-items:center">
+                            <strong style="color:var(--purple);font-size:.9rem">${topic.name || key}</strong>
+                            <span style="font-size:.75rem;background:#E0F7FA;padding:2px 8px;border-radius:10px">Tháng ${topic.month} | Cấp ${topic.level} | ${topic.words ? topic.words.length : 0} từ</span>
+                        </div>
+                        <div style="font-size:.8rem;color:#888;margin-top:4px">${sampleWords}${topic.words && topic.words.length > 5 ? '...' : ''}</div>
+                    </div>`;
+            });
+        }
+
+        const phonicsCount = d.phonics ? d.phonics.length : 0;
+        const sentenceCount = d.sentences ? Object.values(d.sentences).reduce((s, arr) => s + arr.length, 0) : 0;
+        const spellingCount = d.spelling ? Object.values(d.spelling).reduce((s, arr) => s + arr.length, 0) : 0;
+        const listeningCount = d.listening ? Object.values(d.listening).reduce((s, arr) => s + arr.length, 0) : 0;
+
+        preview.innerHTML = `
+            <div style="text-align:center;margin-bottom:15px">
+                <div style="font-size:2rem">${gi.icon}</div>
+                <h3 style="font-family:'Fredoka One',cursive;color:${gi.color}">${gi.name} - ${gi.age}</h3>
+                <p style="color:#888;font-size:.85rem">${gi.desc}</p>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:15px;text-align:center">
+                <div style="background:#E0F7FA;padding:8px;border-radius:8px"><div style="font-family:'Fredoka One',cursive;color:#4ECDC4">${vocabCount}</div><div style="font-size:.7rem;color:#888">Từ vựng</div></div>
+                <div style="background:#FCE7F3;padding:8px;border-radius:8px"><div style="font-family:'Fredoka One',cursive;color:#FF6B9D">${phonicsCount}</div><div style="font-size:.7rem;color:#888">Phonics</div></div>
+                <div style="background:#F3E8FF;padding:8px;border-radius:8px"><div style="font-family:'Fredoka One',cursive;color:#A855F7">${sentenceCount}</div><div style="font-size:.7rem;color:#888">Đặt câu</div></div>
+                <div style="background:#FEF3C7;padding:8px;border-radius:8px"><div style="font-family:'Fredoka One',cursive;color:#F59E0B">${spellingCount}</div><div style="font-size:.7rem;color:#888">Đánh vần</div></div>
+                <div style="background:#DCFCE7;padding:8px;border-radius:8px"><div style="font-family:'Fredoka One',cursive;color:#22C55E">${listeningCount}</div><div style="font-size:.7rem;color:#888">Nghe</div></div>
+            </div>
+            <h4 style="font-family:'Fredoka One',cursive;color:var(--purple);margin-bottom:8px;font-size:.95rem">📝 ${topicCount} chủ đề từ vựng:</h4>
+            ${topicsHTML}
+            ${d.phonics ? `<h4 style="font-family:'Fredoka One',cursive;color:var(--pink);margin:12px 0 8px;font-size:.95rem">🎤 Phonics:</h4>
+            <div style="display:flex;flex-wrap:wrap;gap:6px">${d.phonics.map(p => `<span style="background:#FCE7F3;padding:4px 10px;border-radius:8px;font-size:.8rem;font-weight:700"><strong style="color:#FF6B9D">${p.letter}</strong> ${p.sound}</span>`).join('')}</div>` : ''}`;
+    } catch(e) {
+        preview.innerHTML = `<div style="text-align:center;color:#EF4444;padding:20px">⚠️ Chưa có giáo trình lớp ${gradeId}<br><span style="font-size:.8rem;color:#888">${e.message}</span></div>`;
+    }
 }
 
 function adminActivatePlan() {
