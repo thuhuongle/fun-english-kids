@@ -1,11 +1,8 @@
 // ============================================
-// GIÁO TRÌNH 12 THÁNG - 3 CẤP ĐỘ
-// Level 1: Beginner (Tháng 1-4)
-// Level 2: Elementary (Tháng 5-8)
-// Level 3: Pre-Intermediate (Tháng 9-12)
+// LỚP 1 - GIÁO TRÌNH 12 THÁNG - 3 CẤP ĐỘ
 // ============================================
-
-const CURRICULUM = {
+GRADE_DATA[1] = {};
+GRADE_DATA[1].info = {
     levels: [
         { id: 1, name: 'Beginner', nameVi: 'Người mới bắt đầu', months: [1,2,3,4], color: '#4ECDC4', icon: '🌱' },
         { id: 2, name: 'Elementary', nameVi: 'Cơ bản', months: [5,6,7,8], color: '#A855F7', icon: '🌿' },
@@ -30,7 +27,7 @@ const CURRICULUM = {
 // ============================================
 // TỪ VỰNG - 400+ từ chia theo chủ đề
 // ============================================
-const ALL_VOCAB = {
+GRADE_DATA[1].vocab = {
     // === THÁNG 1 ===
     greetings: {
         name: 'Chào hỏi',
@@ -618,7 +615,7 @@ const ALL_VOCAB = {
 // ============================================
 // PHONICS ĐẦY ĐỦ 26 CHỮ CÁI + BLENDS
 // ============================================
-const ALL_PHONICS = [
+GRADE_DATA[1].phonics = [
     { letter: 'A', sound: '/æ/', words: [
         { word: 'Apple', highlight: 'A', emoji: '🍎' },
         { word: 'Ant', highlight: 'A', emoji: '🐜' },
@@ -775,7 +772,7 @@ const ALL_PHONICS = [
 // ============================================
 // CÂU MẪU THEO CẤP ĐỘ
 // ============================================
-const ALL_SENTENCES = {
+GRADE_DATA[1].sentences = {
     level1: [
         { sentence: ['I', 'like', 'apples'], emoji: '🍎', vi: 'Tôi thích táo', extra: ['dog', 'is'] },
         { sentence: ['The', 'cat', 'is', 'big'], emoji: '🐱', vi: 'Con mèo to', extra: ['like', 'we'] },
@@ -811,7 +808,7 @@ const ALL_SENTENCES = {
 // ============================================
 // SPELLING THEO CẤP ĐỘ
 // ============================================
-const ALL_SPELLING = {
+GRADE_DATA[1].spelling = {
     level1: [
         { word: 'CAT', emoji: '🐱', vi: 'Con mèo' },
         { word: 'DOG', emoji: '🐶', vi: 'Con chó' },
@@ -868,7 +865,7 @@ const ALL_SPELLING = {
 // ============================================
 // NGHE HIỂU THEO CẤP ĐỘ
 // ============================================
-const ALL_LISTENING = {
+GRADE_DATA[1].listening = {
     level1: [
         { word: 'Cat', options: [{ emoji: '🐱', label: 'Cat' }, { emoji: '🐶', label: 'Dog' }, { emoji: '🐦', label: 'Bird' }, { emoji: '🐟', label: 'Fish' }], correct: 0 },
         { word: 'Apple', options: [{ emoji: '🍌', label: 'Banana' }, { emoji: '🍎', label: 'Apple' }, { emoji: '🍊', label: 'Orange' }, { emoji: '🍇', label: 'Grape' }], correct: 1 },

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fun English Kids - Học Tiếng Anh Vui</title>
-    <script src="data.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap');
         *{margin:0;padding:0;box-sizing:border-box}
@@ -20,10 +19,11 @@
         .stat-item{background:rgba(255,255,255,.25);padding:6px 14px;border-radius:20px;color:#fff;font-weight:700;font-size:.95rem;display:flex;align-items:center;gap:6px}
         .main-container{max-width:1200px;margin:0 auto;padding:20px;position:relative;z-index:1}
         .screen{display:none}.screen.active{display:block}
+        .app-section{display:none}
         .welcome-banner{background:linear-gradient(135deg,#667eea,#764ba2);border-radius:24px;padding:30px;color:#fff;text-align:center;margin-bottom:20px;position:relative;overflow:hidden}
         .welcome-banner h2{font-family:'Fredoka One',cursive;font-size:2rem;margin-bottom:8px}
         .welcome-banner p{font-size:1.1rem;opacity:.9}
-        .student-bar{background:#fff;border-radius:16px;padding:15px 20px;margin-bottom:15px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+        .student-bar{background:#fff;border-radius:16px;padding:15px 20px;margin-bottom:15px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 10px rgba(0,0,0,.06);flex-wrap:wrap;gap:8px}
         .student-info{display:flex;align-items:center;gap:12px}
         .student-avatar{width:45px;height:45px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-size:1.5rem}
         .student-name{font-weight:800;font-size:1.1rem}
@@ -36,7 +36,6 @@
         .streak-days{display:flex;gap:6px;margin-top:6px}
         .streak-day{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:.65rem;color:#fff;font-weight:700}
         .streak-day.completed{background:#fff;color:var(--orange)}
-        /* Level Selector */
         .level-selector{max-width:700px;margin:0 auto}
         .level-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:20px}
         .level-card{background:#fff;border-radius:16px;padding:20px;text-align:center;cursor:pointer;transition:all .3s;border:3px solid #eee;box-shadow:0 2px 10px rgba(0,0,0,.05)}
@@ -50,7 +49,6 @@
         .month-card:hover{border-color:var(--purple);transform:scale(1.03)}
         .month-card .m-num{font-family:'Fredoka One',cursive;font-size:1.2rem;color:var(--purple)}
         .month-card .m-title{font-size:.75rem;color:#888;margin-top:2px}
-        /* Modules */
         .modules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:15px;margin-top:15px}
         .module-card{background:#fff;border-radius:20px;padding:22px;text-align:center;cursor:pointer;transition:all .3s;border:3px solid transparent;box-shadow:0 4px 15px rgba(0,0,0,.08)}
         .module-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,.15)}
@@ -66,14 +64,12 @@
         .module-card.c7{border-color:#6366F1} .module-card.c7 h3{color:#6366F1}
         .module-card .progress-bar{width:100%;height:8px;background:#eee;border-radius:4px;margin-top:10px;overflow:hidden}
         .module-card .progress-bar .fill{height:100%;border-radius:4px;transition:width .5s}
-        /* Lesson */
         .lesson-header{display:flex;align-items:center;gap:15px;margin-bottom:15px}
         .btn-back{background:#fff;border:none;width:42px;height:42px;border-radius:50%;font-size:1.2rem;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.1);transition:all .2s}
         .btn-back:hover{transform:scale(1.1)}
         .lesson-title{font-family:'Fredoka One',cursive;font-size:1.4rem}
         .lesson-progress{width:100%;height:10px;background:#eee;border-radius:5px;margin-bottom:15px;overflow:hidden}
         .lesson-progress .fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--green));border-radius:5px;transition:width .5s}
-        /* Vocab */
         .vocab-container{display:flex;flex-direction:column;align-items:center;gap:15px}
         .vocab-card-big{background:#fff;border-radius:24px;padding:35px;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.1);max-width:480px;width:100%}
         .vocab-card-big .word-image{font-size:5rem;margin-bottom:10px;animation:bounce 2s infinite}
@@ -93,7 +89,6 @@
         .btn-next{background:linear-gradient(135deg,var(--orange),var(--pink));color:#fff;border:none;padding:12px 35px;border-radius:25px;font-size:1.1rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s}
         .btn-next:hover{transform:scale(1.05)}
         .btn-next:disabled{opacity:.5;cursor:not-allowed}
-        /* Phonics */
         .phonics-card{background:#fff;border-radius:24px;padding:35px;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.1);max-width:550px;margin:0 auto 15px}
         .phonics-letter{font-family:'Fredoka One',cursive;font-size:5rem;color:var(--pink);line-height:1}
         .phonics-sound{font-size:1.4rem;color:var(--purple);margin:8px 0}
@@ -103,13 +98,11 @@
         .phonics-word-item .emoji{font-size:2.2rem}
         .phonics-word-item .word{font-weight:700;font-size:1rem;margin-top:4px}
         .phonics-word-item .highlight{color:var(--pink);font-weight:800}
-        /* Matching */
         .game-area{max-width:600px;margin:0 auto}
         .matching-game{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
         .match-card{aspect-ratio:1;background:linear-gradient(135deg,var(--blue),var(--purple));border-radius:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.8rem;color:#fff;font-weight:800;transition:all .3s;box-shadow:0 3px 8px rgba(0,0,0,.1)}
         .match-card.flipped{background:#fff;color:#333;transform:rotateY(180deg)}
         .match-card.matched{background:var(--green);color:#fff;transform:scale(.95)}
-        /* Sentences */
         .sentence-builder{max-width:600px;margin:0 auto}
         .sentence-image{font-size:4rem;text-align:center;margin-bottom:10px}
         .sentence-hint{text-align:center;color:#888;font-size:1rem;margin-bottom:12px}
@@ -119,7 +112,6 @@
         .word-chip{background:#fff;border:2px solid var(--purple);color:var(--purple);padding:8px 15px;border-radius:10px;font-weight:700;font-size:1rem;cursor:pointer;transition:all .2s}
         .word-chip:hover{background:var(--purple);color:#fff}
         .word-chip.used{opacity:.3;pointer-events:none}
-        /* Listening */
         .listening-container{max-width:480px;margin:0 auto;text-align:center}
         .listen-prompt{font-size:1.2rem;margin-bottom:15px;color:#555}
         .btn-listen-big{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--blue));border:none;font-size:2.5rem;color:#fff;cursor:pointer;margin:0 auto 25px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(34,197,94,.3);transition:all .2s}
@@ -132,7 +124,6 @@
         .listen-option .label{font-size:.85rem;font-weight:700;margin-top:4px;color:#666}
         .listen-option.correct{border-color:var(--green);background:#DCFCE7}
         .listen-option.wrong{border-color:var(--red);background:#FEE2E2}
-        /* Spelling */
         .spelling-container{max-width:480px;margin:0 auto;text-align:center}
         .spelling-image{font-size:4rem;margin-bottom:8px}
         .spelling-word{font-family:'Fredoka One',cursive;font-size:1.1rem;color:#888;margin-bottom:15px}
@@ -145,7 +136,6 @@
         .key-btn{width:38px;height:42px;border:2px solid #ddd;border-radius:8px;background:#fff;font-family:'Fredoka One',cursive;font-size:1.1rem;cursor:pointer;transition:all .2s;color:#333}
         .key-btn:hover{background:var(--purple);color:#fff;border-color:var(--purple)}
         .key-btn.backspace{width:70px;font-size:.85rem;font-family:'Nunito',sans-serif;font-weight:700}
-        /* Exam */
         .exam-container{max-width:600px;margin:0 auto}
         .exam-question{background:#fff;border-radius:20px;padding:25px;box-shadow:0 4px 15px rgba(0,0,0,.08);margin-bottom:15px}
         .exam-q-number{font-size:.85rem;color:#888;margin-bottom:6px}
@@ -158,7 +148,6 @@
         .exam-opt.correct{border-color:var(--green);background:#DCFCE7}
         .exam-opt.wrong{border-color:var(--red);background:#FEE2E2}
         .exam-opt-letter{width:28px;height:28px;border-radius:50%;background:#ddd;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem}
-        /* Result */
         .result-screen{text-align:center;padding:30px}
         .result-emoji{font-size:4.5rem;margin-bottom:12px}
         .result-title{font-family:'Fredoka One',cursive;font-size:1.8rem;margin-bottom:8px}
@@ -166,7 +155,6 @@
         .stars{font-size:2.5rem;margin-bottom:15px}
         .star{opacity:.2;transition:all .5s}.star.earned{opacity:1;animation:starPop .5s}
         @keyframes starPop{0%{transform:scale(0)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
-        /* Report */
         .report-card{max-width:700px;margin:0 auto}
         .report-header{background:linear-gradient(135deg,#667eea,#764ba2);border-radius:24px 24px 0 0;padding:25px;color:#fff;text-align:center}
         .report-header h2{font-family:'Fredoka One',cursive;font-size:1.6rem}
@@ -187,7 +175,6 @@
         .chart-bar-bg{flex:1;height:20px;background:#eee;border-radius:10px;overflow:hidden}
         .chart-bar-fill{height:100%;border-radius:10px;transition:width 1s}
         .chart-value{width:35px;font-size:.8rem;font-weight:700}
-        /* Modal */
         .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:200}
         .modal-content{background:#fff;border-radius:24px;padding:35px;text-align:center;max-width:380px;width:90%;animation:popIn .5s}
         @keyframes popIn{0%{transform:scale(.5);opacity:0}100%{transform:scale(1);opacity:1}}
@@ -195,21 +182,80 @@
         .modal-content input{width:100%;padding:12px;border:3px solid #eee;border-radius:12px;font-size:1rem;font-family:'Nunito',sans-serif;text-align:center;margin-bottom:12px;outline:none}
         .modal-content input:focus{border-color:var(--purple)}
         .modal-content button{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;border:none;padding:10px 25px;border-radius:14px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif}
-        /* Confetti */
         .confetti-container{position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:99}
         .confetti{position:absolute;width:10px;height:10px;border-radius:2px;animation:confettiFall 3s forwards}
         @keyframes confettiFall{0%{transform:translateY(-10vh) rotate(0);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+        .grade-selector-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:20px}
+        .grade-card{background:#fff;border-radius:16px;padding:18px;text-align:center;cursor:pointer;transition:all .3s;border:3px solid #eee;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+        .grade-card:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,.12)}
+        .grade-card.active{border-color:var(--purple);background:#F3E8FF}
+        .grade-card.locked{opacity:.6;cursor:not-allowed}
+        .grade-card .g-icon{font-size:2rem;margin-bottom:6px}
+        .grade-card .g-name{font-family:'Fredoka One',cursive;font-size:.95rem}
+        .grade-card .g-desc{font-size:.75rem;color:#888;margin-top:3px}
         @media(max-width:600px){
             .header h1{font-size:1.3rem}.modules-grid{grid-template-columns:1fr 1fr;gap:10px}.module-card{padding:16px}
             .module-card .icon{font-size:2.2rem}.module-card h3{font-size:.95rem}.welcome-banner h2{font-size:1.4rem}
             .level-cards{grid-template-columns:1fr}.month-grid{grid-template-columns:repeat(3,1fr)}
             .matching-game{grid-template-columns:repeat(3,1fr)}.student-bar{flex-direction:column;gap:8px}
-            .report-summary{grid-template-columns:1fr}
+            .report-summary{grid-template-columns:1fr}.grade-selector-grid{grid-template-columns:repeat(3,1fr)}
         }
     </style>
 </head>
 <body>
 <div class="floating-shapes" id="floatingShapes"></div>
+
+<!-- ===== LOGIN SCREEN ===== -->
+<div class="app-section" id="loginScreen" style="display:none">
+    <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px">
+        <div style="background:#fff;border-radius:30px;padding:40px;text-align:center;max-width:420px;width:100%;box-shadow:0 10px 40px rgba(0,0,0,.1)">
+            <div style="font-size:4rem;margin-bottom:10px">🎓</div>
+            <h1 style="font-family:'Fredoka One',cursive;font-size:2rem;color:var(--purple);margin-bottom:5px">Fun <span style="color:var(--pink)">English</span> Kids</h1>
+            <p style="color:#888;margin-bottom:25px">Giáo trình tiếng Anh lớp 1-12</p>
+            <button onclick="Auth.loginGoogle()" style="background:linear-gradient(135deg,#4285F4,#34A853);color:#fff;border:none;padding:14px 30px;border-radius:16px;font-size:1.1rem;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;width:100%;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:10px">
+                <span style="font-size:1.3rem">G</span> Đăng nhập bằng Google
+            </button>
+            <button onclick="Auth.loginOffline()" style="background:linear-gradient(135deg,#888,#aaa);color:#fff;border:none;padding:12px 25px;border-radius:14px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;width:100%">
+                Dùng thử không cần đăng nhập
+            </button>
+            <p style="font-size:.8rem;color:#bbb;margin-top:15px">Đăng nhập để lưu tiến trình và đồng bộ dữ liệu</p>
+        </div>
+    </div>
+</div>
+
+<!-- ===== ROLE SELECT SCREEN ===== -->
+<div class="app-section" id="roleSelectScreen" style="display:none">
+    <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px">
+        <div style="background:#fff;border-radius:30px;padding:40px;text-align:center;max-width:500px;width:100%;box-shadow:0 10px 40px rgba(0,0,0,.1)">
+            <h2 style="font-family:'Fredoka One',cursive;font-size:1.8rem;color:var(--purple);margin-bottom:8px">Bạn là ai?</h2>
+            <p style="color:#888;margin-bottom:25px">Chọn vai trò để bắt đầu</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px">
+                <div onclick="Auth.selectRole('student')" style="background:linear-gradient(135deg,#4ECDC4,#22C55E);border-radius:20px;padding:30px;cursor:pointer;color:#fff;transition:all .3s" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size:3.5rem;margin-bottom:10px">👶</div>
+                    <div style="font-family:'Fredoka One',cursive;font-size:1.2rem">Học sinh</div>
+                    <div style="font-size:.85rem;opacity:.8;margin-top:5px">Tôi muốn học tiếng Anh</div>
+                </div>
+                <div onclick="Auth.selectRole('parent')" style="background:linear-gradient(135deg,#667eea,#764ba2);border-radius:20px;padding:30px;cursor:pointer;color:#fff;transition:all .3s" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div style="font-size:3.5rem;margin-bottom:10px">👨‍👩‍👧‍👦</div>
+                    <div style="font-family:'Fredoka One',cursive;font-size:1.2rem">Phụ huynh</div>
+                    <div style="font-size:.85rem;opacity:.8;margin-top:5px">Tôi muốn theo dõi con</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== PARENT APP ===== -->
+<div class="app-section" id="parentApp" style="display:none">
+    <div class="header">
+        <h1>Fun <span>English</span> Kids</h1>
+        <div class="stats-bar"><div class="stat-item">👨‍👩‍👧‍👦 Phụ huynh</div></div>
+    </div>
+    <div class="main-container" id="parentContent"></div>
+</div>
+
+<!-- ===== STUDENT APP ===== -->
+<div class="app-section" id="studentApp" style="display:none">
 <div class="header">
     <h1>Fun <span>English</span> Kids</h1>
     <div class="stats-bar">
@@ -223,7 +269,7 @@
         <h2>Chào bạn nhỏ!</h2>
         <p style="color:#888;margin-bottom:12px">Tên của con là gì nào?</p>
         <input type="text" id="nameInput" placeholder="Nhập tên của con..." maxlength="20">
-        <br><button onclick="saveName()">Bắt đầu học! 🚀</button>
+        <br><button onclick="saveName()">Bắt đầu học!</button>
     </div>
 </div>
 <div class="main-container">
@@ -239,9 +285,11 @@
                 <div><div class="student-name" id="studentNameDisplay">Học sinh</div>
                 <div class="student-level" id="studentLevel">Cấp độ: Mới bắt đầu</div></div>
             </div>
-            <div style="display:flex;gap:8px">
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <button class="btn-report" onclick="showGradeSelect()" style="background:linear-gradient(135deg,#6366F1,#A855F7)">🎓 Chọn lớp</button>
                 <button class="btn-report" onclick="showLevelSelect()" style="background:linear-gradient(135deg,var(--purple),var(--pink))">📚 Giáo trình</button>
                 <button class="btn-report" onclick="showReport()">📊 Bảng điểm</button>
+                <button class="btn-report" onclick="Subscription.renderPricingPage()" style="background:linear-gradient(135deg,#F59E0B,#EF4444)">👑 Nâng cấp</button>
             </div>
         </div>
         <div class="streak-section">
@@ -250,7 +298,7 @@
         </div>
         <div style="background:#fff;border-radius:14px;padding:12px 18px;margin-bottom:15px;box-shadow:0 2px 8px rgba(0,0,0,.05);display:flex;align-items:center;gap:10px">
             <span style="font-size:1.5rem">📚</span>
-            <div><strong id="currentLevelLabel">Cấp 1 - Beginner</strong><br><small style="color:#888" id="currentMonthLabel">Tháng 1: Chào bạn!</small></div>
+            <div><strong id="currentGradeLabel">Lớp 1</strong> — <span id="currentLevelLabel">Cấp 1 - Beginner</span><br><small style="color:#888" id="currentMonthLabel">Tháng 1</small></div>
         </div>
         <div class="modules-grid">
             <div class="module-card c1" onclick="startModule('vocab')"><div class="icon">📖</div><h3>Từ Vựng</h3><p>Học từ mới qua hình ảnh</p><div class="progress-bar"><div class="fill" style="width:0%;background:var(--blue)" id="vocabProgress"></div></div></div>
@@ -262,10 +310,20 @@
             <div class="module-card c7" onclick="startModule('exam')"><div class="icon">📋</div><h3>Kiểm Tra</h3><p>Bài thi tổng hợp</p><div class="progress-bar"><div class="fill" style="width:0%;background:#6366F1" id="examProgress"></div></div></div>
         </div>
     </div>
+    <!-- GRADE SELECT -->
+    <div class="screen" id="gradeScreen">
+        <div class="lesson-header"><button class="btn-back" onclick="goHome()">←</button><div class="lesson-title" style="color:#6366F1">🎓 Chọn Lớp Học</div></div>
+        <div id="gradeContent"></div>
+    </div>
     <!-- LEVEL SELECT -->
     <div class="screen" id="levelScreen">
         <div class="lesson-header"><button class="btn-back" onclick="goHome()">←</button><div class="lesson-title" style="color:var(--purple)">📚 Chọn Giáo Trình</div></div>
         <div class="level-selector" id="levelContent"></div>
+    </div>
+    <!-- SUBSCRIPTION -->
+    <div class="screen" id="subscriptionScreen">
+        <div class="lesson-header"><button class="btn-back" onclick="goHome()">←</button><div class="lesson-title" style="color:var(--purple)">👑 Gói Dịch Vụ</div></div>
+        <div id="subscriptionContent"></div>
     </div>
     <!-- VOCAB --><div class="screen" id="vocabScreen"><div class="lesson-header"><button class="btn-back" onclick="goHome()">←</button><div class="lesson-title" style="color:var(--blue)">📖 Học Từ Vựng</div></div><div class="lesson-progress"><div class="fill" id="vocabLessonProgress" style="width:0%"></div></div><div class="vocab-container" id="vocabContent"></div></div>
     <!-- PHONICS --><div class="screen" id="phonicsScreen"><div class="lesson-header"><button class="btn-back" onclick="goHome()">←</button><div class="lesson-title" style="color:var(--pink)">🎤 Phát Âm</div></div><div class="lesson-progress"><div class="fill" id="phonicsLessonProgress" style="width:0%"></div></div><div id="phonicsContent"></div></div>
@@ -277,54 +335,83 @@
     <!-- RESULT --><div class="screen" id="resultScreen"><div class="result-screen" id="resultContent"></div></div>
     <!-- REPORT --><div class="screen" id="reportScreen"><div class="lesson-header"><button class="btn-back" onclick="goHome()">←</button><div class="lesson-title" style="color:#6366F1">📊 Bảng Điểm</div></div><div class="report-card" id="reportContent"></div></div>
 </div>
+</div><!-- end studentApp -->
+
 <div class="confetti-container" id="confettiContainer"></div>
+
+<!-- Firebase SDK (compat) -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<!-- App Modules -->
+<script src="js/firebase-config.js"></script>
+<script src="data/curriculum.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/db.js"></script>
+<script src="js/subscription.js"></script>
+<script src="js/parent-dashboard.js"></script>
 
 <script>
 // ============================================
-// DATA HELPERS - Kết nối giáo trình từ data.js
+// CURRICULUM LEVELS (cho level selector trong 1 lớp)
 // ============================================
-function getVocabForLevel(lv) {
-    const w = [];
-    Object.values(ALL_VOCAB).forEach(t => { if (t.level <= lv) w.push(...t.words); });
-    return w;
-}
-function getVocabForMonth(m) {
-    const w = [];
-    Object.values(ALL_VOCAB).forEach(t => { if (t.month === m) w.push(...t.words); });
-    return w;
-}
-function getTopicsForMonth(m) {
-    const topics = [];
-    Object.entries(ALL_VOCAB).forEach(([key, t]) => { if (t.month === m) topics.push({ key, name: t.name, count: t.words.length }); });
-    return topics;
-}
-function getLevelFromMonth(m) { return m <= 4 ? 1 : m <= 8 ? 2 : 3; }
-function getLevelKey(lv) { return lv === 1 ? 'level1' : lv === 2 ? 'level2' : 'level3'; }
+const CURRICULUM = {
+    levels: [
+        { id: 1, name: 'Beginner', nameVi: 'Cơ bản', icon: '🌱', months: [1,2,3,4] },
+        { id: 2, name: 'Elementary', nameVi: 'Sơ cấp', icon: '🌿', months: [5,6,7,8] },
+        { id: 3, name: 'Pre-Intermediate', nameVi: 'Trung cấp', icon: '🌳', months: [9,10,11,12] }
+    ],
+    months: [
+        {month:1,title:'Làm quen'},{month:2,title:'Gia đình'},{month:3,title:'Trường học'},
+        {month:4,title:'Thiên nhiên'},{month:5,title:'Hoạt động'},{month:6,title:'Thức ăn'},
+        {month:7,title:'Quần áo'},{month:8,title:'Thành phố'},{month:9,title:'Du lịch'},
+        {month:10,title:'Khoa học'},{month:11,title:'Nghề nghiệp'},{month:12,title:'Tổng ôn'}
+    ]
+};
 
-let VOCAB_DATA, PHONICS_DATA, SENTENCE_DATA, LISTENING_DATA, SPELLING_DATA, EXAM_DATA;
+// ============================================
+// DATA HELPERS
+// ============================================
+let VOCAB_DATA = [], PHONICS_DATA = [], SENTENCE_DATA = [], LISTENING_DATA = [], SPELLING_DATA = [], EXAM_DATA = [];
 
-function applyLevel(lv) {
+function applyGradeData(gradeData) {
+    if (!gradeData) return;
+    const lv = state.selectedLevel || 1;
+    const m = state.selectedMonth || 1;
     const lk = getLevelKey(lv);
-    VOCAB_DATA = getVocabForLevel(lv);
-    SENTENCE_DATA = ALL_SENTENCES[lk] || ALL_SENTENCES.level1;
-    LISTENING_DATA = ALL_LISTENING[lk] || ALL_LISTENING.level1;
-    SPELLING_DATA = ALL_SPELLING[lk] || ALL_SPELLING.level1;
-    PHONICS_DATA = lv === 1 ? ALL_PHONICS.slice(0, 10) : lv === 2 ? ALL_PHONICS.slice(0, 20) : ALL_PHONICS;
+    VOCAB_DATA = getVocabForLevel(lv, gradeData);
+    if (gradeData.sentences) SENTENCE_DATA = gradeData.sentences[lk] || gradeData.sentences.level1 || [];
+    if (gradeData.listening) LISTENING_DATA = gradeData.listening[lk] || gradeData.listening.level1 || [];
+    if (gradeData.spelling) SPELLING_DATA = gradeData.spelling[lk] || gradeData.spelling.level1 || [];
+    if (gradeData.phonics) {
+        const all = gradeData.phonics;
+        PHONICS_DATA = lv === 1 ? all.slice(0, 10) : lv === 2 ? all.slice(0, 20) : all;
+    }
     generateExam();
 }
+
 function applyMonth(m) {
+    const grade = state.selectedGrade || 1;
+    const gradeData = GRADE_DATA[grade];
+    if (!gradeData) return;
     const lv = getLevelFromMonth(m);
-    const monthWords = getVocabForMonth(m);
-    VOCAB_DATA = monthWords.length > 0 ? monthWords : getVocabForLevel(lv);
+    const monthWords = getVocabForMonth(m, gradeData);
+    VOCAB_DATA = monthWords.length > 0 ? monthWords : getVocabForLevel(lv, gradeData);
     const lk = getLevelKey(lv);
-    SENTENCE_DATA = ALL_SENTENCES[lk] || ALL_SENTENCES.level1;
-    LISTENING_DATA = ALL_LISTENING[lk] || ALL_LISTENING.level1;
-    SPELLING_DATA = ALL_SPELLING[lk] || ALL_SPELLING.level1;
-    PHONICS_DATA = lv === 1 ? ALL_PHONICS.slice(0, 10) : lv === 2 ? ALL_PHONICS.slice(0, 20) : ALL_PHONICS;
+    if (gradeData.sentences) SENTENCE_DATA = gradeData.sentences[lk] || gradeData.sentences.level1 || [];
+    if (gradeData.listening) LISTENING_DATA = gradeData.listening[lk] || gradeData.listening.level1 || [];
+    if (gradeData.spelling) SPELLING_DATA = gradeData.spelling[lk] || gradeData.spelling.level1 || [];
+    if (gradeData.phonics) {
+        const all = gradeData.phonics;
+        PHONICS_DATA = lv === 1 ? all.slice(0, 10) : lv === 2 ? all.slice(0, 20) : all;
+    }
     generateExam();
 }
+
 function generateExam() {
     const vocab = VOCAB_DATA.slice();
+    if (vocab.length === 0) { EXAM_DATA = []; return; }
     const qs = [];
     const vs = vocab.sort(() => Math.random() - .5).slice(0, 5);
     vs.forEach(w => {
@@ -338,23 +425,29 @@ function generateExam() {
         const opts = [...wrongs, w.en].sort(() => Math.random() - .5);
         qs.push({ type: 'vocab', question: 'Hình này là từ gì?', emoji: w.emoji, options: opts, correct: opts.indexOf(w.en) });
     });
-    const ps = PHONICS_DATA.slice().sort(() => Math.random() - .5).slice(0, 3);
-    ps.forEach(p => {
-        const wrongs = PHONICS_DATA.filter(x => x.letter !== p.letter).sort(() => Math.random() - .5).slice(0, 3).map(x => x.sound);
-        const opts = [...wrongs, p.sound].sort(() => Math.random() - .5);
-        qs.push({ type: 'phonics', question: `Chữ "${p.letter}" phát âm là gì?`, emoji: '🔤', options: opts, correct: opts.indexOf(p.sound) });
-    });
-    LISTENING_DATA.slice().sort(() => Math.random() - .5).slice(0, 2).forEach(l => {
-        qs.push({ type: 'listening', question: 'Nhấn nghe, chọn đáp án đúng', speakWord: l.word, emoji: '🎧', options: l.options.map(o => o.label), correct: l.correct });
-    });
-    SPELLING_DATA.slice().sort(() => Math.random() - .5).slice(0, 2).forEach(s => {
-        const pos = Math.floor(Math.random() * s.word.length);
-        const display = s.word.split('').map((c, i) => i === pos ? '_' : c).join('');
-        const correct = s.word[pos];
-        const wrongs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').filter(c => c !== correct).sort(() => Math.random() - .5).slice(0, 3);
-        const opts = [...wrongs, correct].sort(() => Math.random() - .5);
-        qs.push({ type: 'spelling', question: `Điền chữ còn thiếu: ${display} (${s.vi})`, emoji: s.emoji, options: opts, correct: opts.indexOf(correct) });
-    });
+    if (PHONICS_DATA.length > 0) {
+        const ps = PHONICS_DATA.slice().sort(() => Math.random() - .5).slice(0, 3);
+        ps.forEach(p => {
+            const wrongs = PHONICS_DATA.filter(x => x.letter !== p.letter).sort(() => Math.random() - .5).slice(0, 3).map(x => x.sound);
+            const opts = [...wrongs, p.sound].sort(() => Math.random() - .5);
+            qs.push({ type: 'phonics', question: `Chữ "${p.letter}" phát âm là gì?`, emoji: '🔤', options: opts, correct: opts.indexOf(p.sound) });
+        });
+    }
+    if (LISTENING_DATA.length > 0) {
+        LISTENING_DATA.slice().sort(() => Math.random() - .5).slice(0, 2).forEach(l => {
+            qs.push({ type: 'listening', question: 'Nhấn nghe, chọn đáp án đúng', speakWord: l.word, emoji: '🎧', options: l.options.map(o => o.label), correct: l.correct });
+        });
+    }
+    if (SPELLING_DATA.length > 0) {
+        SPELLING_DATA.slice().sort(() => Math.random() - .5).slice(0, 2).forEach(s => {
+            const pos = Math.floor(Math.random() * s.word.length);
+            const display = s.word.split('').map((c, i) => i === pos ? '_' : c).join('');
+            const correct = s.word[pos];
+            const wrongs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').filter(c => c !== correct).sort(() => Math.random() - .5).slice(0, 3);
+            const opts = [...wrongs, correct].sort(() => Math.random() - .5);
+            qs.push({ type: 'spelling', question: `Điền chữ còn thiếu: ${display} (${s.vi})`, emoji: s.emoji, options: opts, correct: opts.indexOf(correct) });
+        });
+    }
     EXAM_DATA = qs;
 }
 
@@ -364,7 +457,7 @@ function generateExam() {
 let state = {
     studentName: '', coins: 0, streak: 0,
     streakDays: [false, false, false, false, false, false, false],
-    selectedLevel: 1, selectedMonth: 1,
+    selectedGrade: 1, selectedLevel: 1, selectedMonth: 1,
     moduleProgress: { vocab: 0, phonics: 0, sentences: 0, matching: 0, listening: 0, spelling: 0, exam: 0 },
     examHistory: [],
     moduleHistory: { vocab: [], phonics: [], sentences: [], matching: [], listening: [], spelling: [] },
@@ -372,14 +465,47 @@ let state = {
     currentModule: null, currentIndex: 0, score: 0, totalQuestions: 0,
 };
 
-function loadState() {
-    const s = localStorage.getItem('funEnglishKidsV3');
-    if (s) { const p = JSON.parse(s); state = { ...state, ...p }; }
-    if (!state.studentName) document.getElementById('nameModal').style.display = 'flex';
+async function loadState() {
+    let saved = null;
+    if (firebaseReady && Auth.currentUser) {
+        saved = await DB.loadProgress();
+    } else {
+        const s = localStorage.getItem('funEnglishKidsV4');
+        if (s) saved = JSON.parse(s);
+    }
+    if (saved) state = { ...state, ...saved };
+
+    if (!state.studentName && !Auth.currentUser) {
+        document.getElementById('nameModal').style.display = 'flex';
+    } else if (Auth.currentUser && Auth.userProfile && !state.studentName) {
+        state.studentName = Auth.userProfile.displayName || Auth.currentUser.displayName || '';
+    }
+
+    // Load subscription
+    await Subscription.load();
+
+    // Load grade data
+    try {
+        await loadGradeData(state.selectedGrade || 1);
+    } catch(e) {
+        console.warn('Không tải được giáo trình lớp', state.selectedGrade, '- dùng lớp 1');
+        state.selectedGrade = 1;
+        try { await loadGradeData(1); } catch(e2) { console.error('Không tải được giáo trình:', e2); }
+    }
+
     applyMonth(state.selectedMonth);
     updateUI();
 }
-function saveState() { localStorage.setItem('funEnglishKidsV3', JSON.stringify(state)); }
+
+function saveState() {
+    const data = { ...state, currentModule: null, currentIndex: 0, score: 0 };
+    if (firebaseReady && Auth.currentUser) {
+        DB.saveProgress(data);
+    } else {
+        localStorage.setItem('funEnglishKidsV4', JSON.stringify(data));
+    }
+}
+
 function saveName() {
     const n = document.getElementById('nameInput').value.trim();
     if (!n) return;
@@ -387,6 +513,7 @@ function saveName() {
     document.getElementById('nameModal').style.display = 'none';
     saveState(); updateUI();
 }
+
 function getGrade(p) { return p >= 90 ? 'A' : p >= 75 ? 'B' : p >= 50 ? 'C' : 'D'; }
 function getGradeLabel(g) { return { A: 'Xuất sắc', B: 'Giỏi', C: 'Trung bình', D: 'Cần cố gắng' }[g] || ''; }
 function getLevelLabel() {
@@ -398,16 +525,22 @@ function getLevelLabel() {
     if (t >= 3) return 'Đang học 📖';
     return 'Mới bắt đầu 🌱';
 }
+
 function updateUI() {
     document.getElementById('coins').textContent = state.coins;
     document.getElementById('streakCount').textContent = state.streak;
     document.getElementById('welcomeName').textContent = state.studentName || 'bạn nhỏ';
     document.getElementById('studentNameDisplay').textContent = state.studentName || 'Học sinh';
     document.getElementById('studentLevel').textContent = 'Cấp độ: ' + getLevelLabel();
+
+    const gradeInfo = GRADE_INFO.find(g => g.id === (state.selectedGrade || 1)) || GRADE_INFO[0];
+    document.getElementById('currentGradeLabel').textContent = `${gradeInfo.icon} ${gradeInfo.name}`;
+
     const lvInfo = CURRICULUM.levels.find(l => l.id === state.selectedLevel) || CURRICULUM.levels[0];
     const mInfo = CURRICULUM.months.find(m => m.month === state.selectedMonth) || CURRICULUM.months[0];
-    document.getElementById('currentLevelLabel').textContent = `Cấp ${lvInfo.id} - ${lvInfo.name} (${lvInfo.nameVi})`;
+    document.getElementById('currentLevelLabel').textContent = `Cấp ${lvInfo.id} - ${lvInfo.name}`;
     document.getElementById('currentMonthLabel').textContent = `Tháng ${mInfo.month}: ${mInfo.title}`;
+
     Object.keys(state.moduleProgress).forEach(k => {
         const el = document.getElementById(k + 'Progress');
         if (el) el.style.width = state.moduleProgress[k] + '%';
@@ -420,23 +553,101 @@ function updateUI() {
 // ============================================
 // NAVIGATION
 // ============================================
-function showScreen(id) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); }
+function showScreen(id) { document.querySelectorAll('#studentApp .screen').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); }
 function goHome() { showScreen('homeScreen'); updateUI(); }
-function startModule(m) { state.currentModule = m; state.currentIndex = 0; state.score = 0;
+
+function startModule(m) {
+    // Check subscription access
+    const grade = state.selectedGrade || 1;
+    if (!Subscription.canAccessGrade(grade)) {
+        Subscription.renderPricingPage();
+        return;
+    }
+    if (VOCAB_DATA.length === 0) {
+        alert('Chưa có dữ liệu giáo trình cho lớp này. Vui lòng chọn lớp khác.');
+        return;
+    }
+    state.currentModule = m; state.currentIndex = 0; state.score = 0;
     switch(m) { case 'vocab': startVocab(); break; case 'phonics': startPhonics(); break; case 'sentences': startSentences(); break; case 'matching': startMatching(); break; case 'listening': startListening(); break; case 'spelling': startSpelling(); break; case 'exam': startExam(); break; }
 }
+
 function speak(text, rate = 0.8) {
     if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang = 'en-US'; u.rate = rate; u.pitch = 1.1; window.speechSynthesis.speak(u); }
 }
 
 // ============================================
-// LEVEL SELECTOR
+// GRADE SELECTOR (Lớp 1-12)
+// ============================================
+function showGradeSelect() {
+    showScreen('gradeScreen');
+    renderGradeSelector();
+}
+
+function renderGradeSelector() {
+    const current = state.selectedGrade || 1;
+    const html = `
+        <div style="text-align:center;margin-bottom:20px">
+            <h2 style="font-family:'Fredoka One',cursive;color:var(--purple)">Chọn lớp học</h2>
+            <p style="color:#888">Gói hiện tại: <strong style="color:${Subscription.plans.find(p=>p.id===Subscription.currentPlan.plan)?.color||'#888'}">${Subscription.plans.find(p=>p.id===Subscription.currentPlan.plan)?.name||'Miễn Phí'}</strong></p>
+        </div>
+        <div class="grade-selector-grid">
+            ${GRADE_INFO.map(g => {
+                const accessible = Subscription.canAccessGrade(g.id);
+                return `<div class="grade-card ${current===g.id?'active':''} ${!accessible?'locked':''}"
+                    onclick="${accessible ? `selectGrade(${g.id})` : `Subscription.renderPricingPage()`}"
+                    style="border-color:${current===g.id?g.color:'#eee'}">
+                    <div class="g-icon">${g.icon}</div>
+                    <div class="g-name" style="color:${g.color}">${g.name}</div>
+                    <div class="g-desc">${g.age}<br>${g.desc}</div>
+                    ${!accessible ? '<div style="font-size:.7rem;color:#EF4444;margin-top:4px;font-weight:700">🔒 Cần nâng cấp</div>' : ''}
+                    ${current===g.id ? '<div style="font-size:.7rem;color:var(--green);margin-top:4px;font-weight:700">✅ Đang học</div>' : ''}
+                </div>`;
+            }).join('')}
+        </div>
+        <div style="text-align:center">
+            <button class="btn-next" onclick="goHome()" style="background:linear-gradient(135deg,var(--blue),var(--green))">✅ Xác nhận</button>
+        </div>`;
+    document.getElementById('gradeContent').innerHTML = html;
+}
+
+async function selectGrade(gradeId) {
+    if (!Subscription.canAccessGrade(gradeId)) {
+        Subscription.renderPricingPage();
+        return;
+    }
+    state.selectedGrade = gradeId;
+    state.selectedLevel = 1;
+    state.selectedMonth = 1;
+
+    document.getElementById('gradeContent').innerHTML = '<div style="text-align:center;padding:40px;color:#888">Đang tải giáo trình...</div>';
+
+    try {
+        await loadGradeData(gradeId);
+        applyMonth(1);
+        saveState();
+        renderGradeSelector();
+        updateUI();
+    } catch(e) {
+        document.getElementById('gradeContent').innerHTML = `
+            <div style="text-align:center;padding:40px">
+                <div style="font-size:3rem;margin-bottom:10px">🚧</div>
+                <h3 style="font-family:'Fredoka One',cursive;color:#888">Giáo trình lớp ${gradeId} đang được xây dựng</h3>
+                <p style="color:#888;margin-top:8px">Giáo trình sẽ sớm được cập nhật. Hãy thử lớp khác!</p>
+                <button class="btn-next" onclick="renderGradeSelector()" style="margin-top:15px;background:linear-gradient(135deg,#888,#aaa)">← Quay lại</button>
+            </div>`;
+    }
+}
+
+// ============================================
+// LEVEL SELECTOR (trong 1 lớp)
 // ============================================
 function showLevelSelect() {
     showScreen('levelScreen');
     renderLevelSelector();
 }
+
 function renderLevelSelector() {
+    const gradeData = GRADE_DATA[state.selectedGrade || 1];
     const html = `
         <div class="level-cards">
             ${CURRICULUM.levels.map(lv => `
@@ -459,19 +670,21 @@ function renderLevelSelector() {
         <div style="margin-top:15px;text-align:center">
             <h3 style="font-family:'Fredoka One',cursive;margin-bottom:8px;color:var(--blue)">📝 Chủ đề tháng ${state.selectedMonth}:</h3>
             <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center">
-                ${getTopicsForMonth(state.selectedMonth).map(t => `<span style="background:#E0F7FA;padding:6px 14px;border-radius:20px;font-size:.9rem;font-weight:600">${t.name} (${t.count} từ)</span>`).join('') || '<span style="color:#888">Chưa có chủ đề</span>'}
+                ${gradeData ? getTopicsForMonth(state.selectedMonth, gradeData).map(t => `<span style="background:#E0F7FA;padding:6px 14px;border-radius:20px;font-size:.9rem;font-weight:600">${t.name} (${t.count} từ)</span>`).join('') : '<span style="color:#888">Chưa có chủ đề</span>'}
             </div>
             <p style="margin-top:12px;color:#888;font-size:.9rem">Tổng từ vựng: <strong>${VOCAB_DATA.length} từ</strong> | Phonics: <strong>${PHONICS_DATA.length} bài</strong></p>
             <button class="btn-next" onclick="goHome()" style="margin-top:15px">✅ Bắt đầu học!</button>
         </div>`;
     document.getElementById('levelContent').innerHTML = html;
 }
+
 function selectLevel(lv) {
     state.selectedLevel = lv;
     const m = CURRICULUM.levels.find(l => l.id === lv).months[0];
     state.selectedMonth = m;
     applyMonth(m); saveState(); renderLevelSelector(); updateUI();
 }
+
 function selectMonth(m) {
     state.selectedMonth = m;
     state.selectedLevel = getLevelFromMonth(m);
@@ -492,7 +705,7 @@ function renderVocabQ() {
         <div class="vocab-card-big">
             <div class="word-image">${item.emoji}</div>
             <div class="word-en">${item.en}</div>
-            <div class="word-phonetic">${item.phonetic}</div>
+            <div class="word-phonetic">${item.phonetic || ''}</div>
             <button class="btn-speak" onclick="speak('${item.en}')">🔊 Nghe phát âm</button>
         </div>
         <p style="font-size:1rem;color:#666;font-weight:700">Chọn nghĩa đúng:</p>
@@ -511,7 +724,10 @@ function checkVocab(el, sel, cor) {
 // ============================================
 // PHONICS
 // ============================================
-function startPhonics() { showScreen('phonicsScreen'); state.totalQuestions = Math.min(8, PHONICS_DATA.length); renderPhonicsQ(); }
+function startPhonics() {
+    if (PHONICS_DATA.length === 0) { alert('Chưa có dữ liệu phát âm cho lớp này.'); return; }
+    showScreen('phonicsScreen'); state.totalQuestions = Math.min(8, PHONICS_DATA.length); renderPhonicsQ();
+}
 function renderPhonicsQ() {
     if (state.currentIndex >= state.totalQuestions) { showResult('phonics'); return; }
     document.getElementById('phonicsLessonProgress').style.width = ((state.currentIndex)/state.totalQuestions)*100+'%';
@@ -534,7 +750,10 @@ function nextPhonics() { state.score++; state.coins += 3; state.currentIndex++; 
 // ============================================
 // SENTENCES
 // ============================================
-function startSentences() { showScreen('sentencesScreen'); state.totalQuestions = Math.min(6, SENTENCE_DATA.length); state.sentenceSelected = []; renderSentenceQ(); }
+function startSentences() {
+    if (SENTENCE_DATA.length === 0) { alert('Chưa có dữ liệu đặt câu cho lớp này.'); return; }
+    showScreen('sentencesScreen'); state.totalQuestions = Math.min(6, SENTENCE_DATA.length); state.sentenceSelected = []; renderSentenceQ();
+}
 function renderSentenceQ() {
     if (state.currentIndex >= state.totalQuestions) { showResult('sentences'); return; }
     document.getElementById('sentencesLessonProgress').style.width = ((state.currentIndex)/state.totalQuestions)*100+'%';
@@ -593,7 +812,10 @@ function flipCard(idx) {
 // ============================================
 // LISTENING
 // ============================================
-function startListening() { showScreen('listeningScreen'); state.totalQuestions = Math.min(6, LISTENING_DATA.length); renderListeningQ(); }
+function startListening() {
+    if (LISTENING_DATA.length === 0) { alert('Chưa có dữ liệu nghe hiểu cho lớp này.'); return; }
+    showScreen('listeningScreen'); state.totalQuestions = Math.min(6, LISTENING_DATA.length); renderListeningQ();
+}
 function renderListeningQ() {
     if (state.currentIndex >= state.totalQuestions) { showResult('listening'); return; }
     document.getElementById('listeningLessonProgress').style.width = ((state.currentIndex)/state.totalQuestions)*100+'%';
@@ -615,7 +837,10 @@ function checkListening(el,sel,cor) {
 // ============================================
 // SPELLING
 // ============================================
-function startSpelling() { showScreen('spellingScreen'); state.totalQuestions = Math.min(8, SPELLING_DATA.length); state.spellingInput=[]; renderSpellingQ(); }
+function startSpelling() {
+    if (SPELLING_DATA.length === 0) { alert('Chưa có dữ liệu đánh vần cho lớp này.'); return; }
+    showScreen('spellingScreen'); state.totalQuestions = Math.min(8, SPELLING_DATA.length); state.spellingInput=[]; renderSpellingQ();
+}
 function renderSpellingQ() {
     if (state.currentIndex >= state.totalQuestions) { showResult('spelling'); return; }
     document.getElementById('spellingLessonProgress').style.width = ((state.currentIndex)/state.totalQuestions)*100+'%';
@@ -639,7 +864,10 @@ function checkSpelling() {
 // ============================================
 // EXAM
 // ============================================
-function startExam() { showScreen('examScreen'); generateExam(); state.totalQuestions=EXAM_DATA.length; state.examAnswers=new Array(EXAM_DATA.length).fill(-1); renderExamQ(); }
+function startExam() {
+    if (VOCAB_DATA.length === 0) { alert('Chưa có dữ liệu để tạo đề thi.'); return; }
+    showScreen('examScreen'); generateExam(); state.totalQuestions=EXAM_DATA.length; state.examAnswers=new Array(EXAM_DATA.length).fill(-1); renderExamQ();
+}
 function renderExamQ() {
     if (state.currentIndex>=state.totalQuestions) { submitExam(); return; }
     document.getElementById('examLessonProgress').style.width=((state.currentIndex)/state.totalQuestions)*100+'%';
@@ -681,7 +909,7 @@ function submitExam() {
         <div class="stars"><span class="star ${stars>=1?'earned':''}" style="animation-delay:.2s">⭐</span><span class="star ${stars>=2?'earned':''}" style="animation-delay:.5s">⭐</span><span class="star ${stars>=3?'earned':''}" style="animation-delay:.8s">⭐</span></div>
         <h3 style="margin:12px 0 8px;font-family:'Fredoka One',cursive;font-size:1.1rem">Chi tiết từng phần:</h3>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;max-width:380px;margin:0 auto 15px">
-            ${Object.entries(byType).filter(([,v])=>v.t>0).map(([k,v])=>{const p=Math.round((v.c/v.t)*100);return`<div style="background:#f8f8f8;padding:8px;border-radius:10px;text-align:center"><div style="font-weight:800;font-size:.8rem;color:#666">${tl[k]||k}</div><div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:${p>=75?'var(--green)':p>=50?'var(--orange)':'var(--red)'}">${v.c}/${v.t}</div></div>`;}).join('')}
+            ${Object.entries(byType).filter(([,v])=>v.t>0).map(([k,v])=>{const p=Math.round((v.c/v.t)*100);return`<div style="background:#f8f8f8;padding:8px;border-radius:10px;text-align:center"><div style="font-weight:800;font-size:.8rem;color:#666">${tl[k]||k}</div><div style="font-family:'Fredoka One',cursive;font-size:1.2rem;color:${p>=75?'#22C55E':p>=50?'#FF8C42':'#EF4444'}">${v.c}/${v.t}</div></div>`;}).join('')}
         </div>
         <button class="btn-next" onclick="startModule('exam')" style="margin-right:8px">Thi lại 🔄</button>
         <button class="btn-next" onclick="showReport()" style="background:linear-gradient(135deg,#667eea,#764ba2);margin-right:8px">📊 Bảng điểm</button>
@@ -719,19 +947,26 @@ function showReport() {
     showScreen('reportScreen');
     const op=state.totalQuestionsSeen>0?Math.round((state.totalCorrectAnswers/state.totalQuestionsSeen)*100):0;
     const og=getGrade(op);
+    const gradeInfo = GRADE_INFO.find(g => g.id === (state.selectedGrade || 1)) || GRADE_INFO[0];
     const mn={vocab:'Từ Vựng',phonics:'Phát Âm',sentences:'Đặt Câu',matching:'Trò Chơi',listening:'Nghe Hiểu',spelling:'Đánh Vần'};
-    const mc={vocab:'var(--blue)',phonics:'var(--pink)',sentences:'var(--purple)',matching:'var(--orange)',listening:'var(--green)',spelling:'var(--red)'};
+    const mc={vocab:'#4ECDC4',phonics:'#FF6B9D',sentences:'#A855F7',matching:'#FF8C42',listening:'#22C55E',spelling:'#EF4444'};
     let examHTML='';
     if(state.examHistory.length>0) examHTML=`<h3 style="font-family:'Fredoka One',cursive;margin:20px 0 8px;color:#6366F1">📋 Lịch sử kiểm tra</h3>
         <table class="report-table"><tr><th>Ngày</th><th>Điểm</th><th>%</th><th>Loại</th></tr>
         ${state.examHistory.slice(-10).reverse().map(e=>`<tr><td>${e.date}</td><td>${e.score}/${e.total}</td><td>${e.percent}%</td><td><span class="grade-badge grade-${e.grade}">${e.grade}</span></td></tr>`).join('')}</table>`;
+
+    let userInfoHTML = '';
+    if (Auth.currentUser && Auth.userProfile) {
+        userInfoHTML = `<p style="opacity:.8;margin-top:4px">Mã học sinh: <strong>${Auth.userProfile.studentCode || '---'}</strong></p>`;
+    }
+
     document.getElementById('reportContent').innerHTML = `
-        <div class="report-header"><div style="font-size:2.5rem;margin-bottom:8px">📊</div><h2>Bảng Điểm Học Tập</h2><p style="opacity:.8;margin-top:4px">Học sinh: <strong>${state.studentName||'Chưa đặt tên'}</strong></p></div>
+        <div class="report-header"><div style="font-size:2.5rem;margin-bottom:8px">📊</div><h2>Bảng Điểm Học Tập</h2><p style="opacity:.8;margin-top:4px">Học sinh: <strong>${state.studentName||'Chưa đặt tên'}</strong> | ${gradeInfo.icon} ${gradeInfo.name}</p>${userInfoHTML}</div>
         <div class="report-body">
             <div class="report-summary">
-                <div class="summary-card"><div class="number" style="color:var(--purple)">${state.totalLessonsCompleted}</div><div class="label">Bài hoàn thành</div></div>
-                <div class="summary-card"><div class="number" style="color:var(--green)">${op}%</div><div class="label">Điểm trung bình</div></div>
-                <div class="summary-card"><div class="number" style="color:var(--orange)">${state.coins}</div><div class="label">Sao tích lũy</div></div>
+                <div class="summary-card"><div class="number" style="color:#A855F7">${state.totalLessonsCompleted}</div><div class="label">Bài hoàn thành</div></div>
+                <div class="summary-card"><div class="number" style="color:#22C55E">${op}%</div><div class="label">Điểm trung bình</div></div>
+                <div class="summary-card"><div class="number" style="color:#FF8C42">${state.coins}</div><div class="label">Sao tích lũy</div></div>
             </div>
             <div style="text-align:center;margin-bottom:15px"><span class="grade-badge grade-${og}" style="font-size:1.3rem;padding:8px 20px">Tổng kết: ${og} - ${getGradeLabel(og)}</span></div>
             <h3 style="font-family:'Fredoka One',cursive;margin-bottom:8px">📈 Tiến độ từng môn</h3>
@@ -742,7 +977,7 @@ function showReport() {
             ${examHTML}
             <div style="text-align:center;margin-top:20px">
                 <button class="btn-next" onclick="goHome()" style="background:linear-gradient(135deg,var(--blue),var(--green))">Về trang chủ 🏠</button>
-                <button class="btn-next" onclick="if(confirm('Xóa toàn bộ dữ liệu?')){localStorage.removeItem('funEnglishKidsV3');location.reload()}" style="background:linear-gradient(135deg,#888,#aaa);margin-left:8px;font-size:.85rem;padding:8px 16px">🗑 Xóa dữ liệu</button>
+                ${Auth.currentUser ? `<button class="btn-next" onclick="Auth.logout()" style="background:linear-gradient(135deg,#888,#aaa);margin-left:8px;font-size:.85rem;padding:8px 16px">🚪 Đăng xuất</button>` : `<button class="btn-next" onclick="if(confirm('Xóa toàn bộ dữ liệu?')){localStorage.removeItem('funEnglishKidsV4');location.reload()}" style="background:linear-gradient(135deg,#888,#aaa);margin-left:8px;font-size:.85rem;padding:8px 16px">🗑 Xóa dữ liệu</button>`}
             </div>
         </div>`;
 }
@@ -754,8 +989,11 @@ function playCorrectSound() { try { const c=new(window.AudioContext||window.webk
 function showConfetti() { const c=document.getElementById('confettiContainer');c.innerHTML='';const cols=['#FF6B9D','#4ECDC4','#FFE66D','#A855F7','#22C55E','#FF8C42'];for(let i=0;i<50;i++){const d=document.createElement('div');d.className='confetti';d.style.left=Math.random()*100+'%';d.style.background=cols[Math.floor(Math.random()*cols.length)];d.style.animationDelay=Math.random()*2+'s';d.style.width=(Math.random()*8+5)+'px';d.style.height=(Math.random()*8+5)+'px';c.appendChild(d);}setTimeout(()=>c.innerHTML='',4000); }
 function createFloatingShapes() { const shapes=['⭐','🌟','🌈','💙','💚','💛','🌸','☀️','☁️','🌎'];const c=document.getElementById('floatingShapes');for(let i=0;i<12;i++){const s=document.createElement('span');s.innerHTML=shapes[Math.floor(Math.random()*shapes.length)];s.style.left=Math.random()*100+'%';s.style.animationDelay=Math.random()*15+'s';s.style.fontSize=(Math.random()*1.5+1)+'rem';c.appendChild(s);} }
 
+// ============================================
 // INIT
-loadState();
+// ============================================
+initFirebase();
+Auth.init();
 createFloatingShapes();
 </script>
 </body>
