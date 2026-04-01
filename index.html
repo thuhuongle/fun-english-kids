@@ -1069,15 +1069,23 @@ function renderAdminPanel() {
             <button onclick="adminChangeGrade()" style="width:100%;padding:14px;background:linear-gradient(135deg,#6366F1,#A855F7);color:#fff;border:none;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif">📚 Đổi lớp</button>
         </div>
 
-        <!-- Kiểm tra giáo trình -->
+        <!-- Soạn thảo giáo trình -->
         <div style="background:#fff;border-radius:16px;padding:20px;margin-bottom:15px;box-shadow:0 2px 10px rgba(0,0,0,.06)">
-            <h3 style="font-family:'Fredoka One',cursive;color:var(--purple);margin-bottom:12px">📖 Kiểm tra giáo trình</h3>
+            <h3 style="font-family:'Fredoka One',cursive;color:var(--purple);margin-bottom:12px">📖 Soạn thảo giáo trình</h3>
             <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
-                <select id="adminPreviewGrade" onchange="adminPreviewCurriculum()" style="flex:1;min-width:120px;padding:10px;border:2px solid #eee;border-radius:10px;font-size:.95rem;font-family:'Nunito',sans-serif">
+                <select id="adminEditorGrade" onchange="adminLoadEditor()" style="flex:1;min-width:100px;padding:10px;border:2px solid #eee;border-radius:10px;font-size:.95rem;font-family:'Nunito',sans-serif">
                     ${GRADE_INFO.map(g => `<option value="${g.id}">${g.icon} ${g.name}</option>`).join('')}
                 </select>
+                <select id="adminEditorSection" onchange="adminLoadEditor()" style="flex:1;min-width:100px;padding:10px;border:2px solid #eee;border-radius:10px;font-size:.95rem;font-family:'Nunito',sans-serif">
+                    <option value="overview">📊 Tổng quan</option>
+                    <option value="vocab">📖 Từ vựng</option>
+                    <option value="phonics">🎤 Phonics</option>
+                    <option value="sentences">💬 Đặt câu</option>
+                    <option value="spelling">✏️ Đánh vần</option>
+                    <option value="listening">🎧 Nghe hiểu</option>
+                </select>
             </div>
-            <div id="adminCurriculumPreview" style="max-height:500px;overflow-y:auto;border:2px solid #eee;border-radius:12px;padding:15px;background:#fafafa"></div>
+            <div id="adminEditorContent" style="max-height:600px;overflow-y:auto;border:2px solid #eee;border-radius:12px;padding:15px;background:#fafafa"></div>
         </div>
 
         <!-- Đổi mật khẩu -->
@@ -1105,61 +1113,259 @@ function renderAdminPanel() {
     document.getElementById('adminExpiryDate').value = d.toISOString().split('T')[0];
 }
 
-async function adminPreviewCurriculum() {
-    const gradeId = parseInt(document.getElementById('adminPreviewGrade').value);
-    const preview = document.getElementById('adminCurriculumPreview');
-    preview.innerHTML = '<div style="text-align:center;padding:20px;color:#888">Đang tải...</div>';
+// Lưu thay đổi giáo trình vào localStorage
+function getCustomData(gradeId) {
+    const raw = localStorage.getItem('fekCustomGrade' + gradeId);
+    return raw ? JSON.parse(raw) : null;
+}
+function saveCustomData(gradeId, data) {
+    localStorage.setItem('fekCustomGrade' + gradeId, JSON.stringify(data));
+    // Merge vào GRADE_DATA đang dùng
+    if (GRADE_DATA[gradeId]) Object.assign(GRADE_DATA[gradeId], data);
+}
+function getGradeDataForEdit(gradeId) {
+    const base = GRADE_DATA[gradeId] || {};
+    const custom = getCustomData(gradeId);
+    if (custom) return { ...base, ...custom };
+    return base;
+}
+
+async function adminLoadEditor() {
+    const gradeId = parseInt(document.getElementById('adminEditorGrade').value);
+    const section = document.getElementById('adminEditorSection').value;
+    const el = document.getElementById('adminEditorContent');
+    el.innerHTML = '<div style="text-align:center;padding:20px;color:#888">Đang tải...</div>';
 
     try {
         await loadGradeData(gradeId);
-        const d = GRADE_DATA[gradeId];
-        if (!d) { preview.innerHTML = '<div style="text-align:center;color:#EF4444;padding:20px">Chưa có giáo trình lớp này</div>'; return; }
+    } catch(e) {
+        el.innerHTML = '<div style="text-align:center;color:#EF4444;padding:20px">Chưa có giáo trình lớp ' + gradeId + '</div>';
+        return;
+    }
+    const d = getGradeDataForEdit(gradeId);
+    const gi = GRADE_INFO.find(g => g.id === gradeId);
 
-        const gi = GRADE_INFO.find(g => g.id === gradeId);
-        let vocabCount = 0, topicCount = 0;
-        let topicsHTML = '';
+    if (section === 'overview') renderEditorOverview(el, d, gi, gradeId);
+    else if (section === 'vocab') renderEditorVocab(el, d, gradeId);
+    else if (section === 'phonics') renderEditorPhonics(el, d, gradeId);
+    else if (section === 'sentences') renderEditorSentences(el, d, gradeId);
+    else if (section === 'spelling') renderEditorSpelling(el, d, gradeId);
+    else if (section === 'listening') renderEditorListening(el, d, gradeId);
+}
 
-        if (d.vocab) {
-            Object.entries(d.vocab).forEach(([key, topic]) => {
-                topicCount++;
-                vocabCount += topic.words ? topic.words.length : 0;
-                const sampleWords = topic.words ? topic.words.slice(0, 5).map(w => `${w.emoji} ${w.en} (${w.vi})`).join(', ') : '';
-                topicsHTML += `
-                    <div style="background:#fff;border:1px solid #eee;border-radius:10px;padding:10px;margin-bottom:6px">
-                        <div style="display:flex;justify-content:space-between;align-items:center">
-                            <strong style="color:var(--purple);font-size:.9rem">${topic.name || key}</strong>
-                            <span style="font-size:.75rem;background:#E0F7FA;padding:2px 8px;border-radius:10px">Tháng ${topic.month} | Cấp ${topic.level} | ${topic.words ? topic.words.length : 0} từ</span>
-                        </div>
-                        <div style="font-size:.8rem;color:#888;margin-top:4px">${sampleWords}${topic.words && topic.words.length > 5 ? '...' : ''}</div>
-                    </div>`;
+function renderEditorOverview(el, d, gi, gradeId) {
+    const vocabCount = d.vocab ? Object.values(d.vocab).reduce((s, t) => s + (t.words ? t.words.length : 0), 0) : 0;
+    const topicCount = d.vocab ? Object.keys(d.vocab).length : 0;
+    const phonicsCount = d.phonics ? d.phonics.length : 0;
+    const sentenceCount = d.sentences ? Object.values(d.sentences).reduce((s, a) => s + a.length, 0) : 0;
+    const spellingCount = d.spelling ? Object.values(d.spelling).reduce((s, a) => s + a.length, 0) : 0;
+    const listeningCount = d.listening ? Object.values(d.listening).reduce((s, a) => s + a.length, 0) : 0;
+    el.innerHTML = `
+        <div style="text-align:center;margin-bottom:15px"><div style="font-size:2rem">${gi.icon}</div>
+        <h3 style="font-family:'Fredoka One',cursive;color:${gi.color}">${gi.name} - ${gi.age}</h3></div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:15px;text-align:center">
+            <div style="background:#E0F7FA;padding:12px;border-radius:10px"><div style="font-family:'Fredoka One',cursive;font-size:1.5rem;color:#4ECDC4">${vocabCount}</div><div style="font-size:.8rem">Từ vựng (${topicCount} chủ đề)</div></div>
+            <div style="background:#FCE7F3;padding:12px;border-radius:10px"><div style="font-family:'Fredoka One',cursive;font-size:1.5rem;color:#FF6B9D">${phonicsCount}</div><div style="font-size:.8rem">Phonics</div></div>
+            <div style="background:#F3E8FF;padding:12px;border-radius:10px"><div style="font-family:'Fredoka One',cursive;font-size:1.5rem;color:#A855F7">${sentenceCount}</div><div style="font-size:.8rem">Đặt câu</div></div>
+            <div style="background:#FEF3C7;padding:12px;border-radius:10px"><div style="font-family:'Fredoka One',cursive;font-size:1.5rem;color:#F59E0B">${spellingCount}</div><div style="font-size:.8rem">Đánh vần</div></div>
+            <div style="background:#DCFCE7;padding:12px;border-radius:10px"><div style="font-family:'Fredoka One',cursive;font-size:1.5rem;color:#22C55E">${listeningCount}</div><div style="font-size:.8rem">Nghe hiểu</div></div>
+            <div style="background:#FEE2E2;padding:12px;border-radius:10px"><div style="font-family:'Fredoka One',cursive;font-size:1.5rem;color:#EF4444">${getCustomData(gradeId) ? 'Có' : 'Không'}</div><div style="font-size:.8rem">Tùy chỉnh</div></div>
+        </div>
+        ${getCustomData(gradeId) ? '<button onclick="if(confirm(\'Xóa tùy chỉnh, khôi phục giáo trình gốc?\')){localStorage.removeItem(\'fekCustomGrade'+gradeId+'\');adminLoadEditor()}" style="width:100%;padding:10px;background:#EF4444;color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-family:\'Nunito\',sans-serif">🔄 Khôi phục giáo trình gốc lớp '+gradeId+'</button>' : '<p style="text-align:center;color:#888;font-size:.85rem">Chọn mục bên trên để xem và chỉnh sửa chi tiết</p>'}`;
+}
+
+function renderEditorVocab(el, d, gradeId) {
+    if (!d.vocab) { el.innerHTML = '<p style="color:#888;text-align:center">Chưa có từ vựng</p>'; return; }
+    let html = '<div style="margin-bottom:12px;display:flex;justify-content:space-between;align-items:center"><h4 style="font-family:\'Fredoka One\',cursive;color:var(--purple)">📖 Từ vựng</h4><button onclick="adminAddTopic('+gradeId+')" style="background:#22C55E;color:#fff;border:none;padding:6px 14px;border-radius:8px;font-weight:700;cursor:pointer;font-size:.85rem">+ Thêm chủ đề</button></div>';
+    Object.entries(d.vocab).forEach(([key, topic]) => {
+        html += `<div style="background:#fff;border:2px solid #eee;border-radius:12px;padding:12px;margin-bottom:10px">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                <strong style="color:var(--purple)">${topic.name} <span style="font-size:.75rem;color:#888">(${key})</span></strong>
+                <span style="font-size:.75rem;background:#E0F7FA;padding:2px 8px;border-radius:10px">T${topic.month} | Cấp ${topic.level} | ${topic.words ? topic.words.length : 0} từ</span>
+            </div>`;
+        if (topic.words) {
+            topic.words.forEach((w, i) => {
+                html += `<div style="display:flex;align-items:center;gap:6px;padding:4px 0;border-bottom:1px solid #f5f5f5;font-size:.85rem">
+                    <span style="width:28px;text-align:center">${w.emoji}</span>
+                    <input value="${w.en}" onchange="adminEditWord(${gradeId},'${key}',${i},'en',this.value)" style="flex:1;padding:4px 8px;border:1px solid #eee;border-radius:6px;font-size:.85rem">
+                    <input value="${w.vi}" onchange="adminEditWord(${gradeId},'${key}',${i},'vi',this.value)" style="flex:1;padding:4px 8px;border:1px solid #eee;border-radius:6px;font-size:.85rem">
+                    <input value="${w.emoji}" onchange="adminEditWord(${gradeId},'${key}',${i},'emoji',this.value)" style="width:40px;padding:4px;border:1px solid #eee;border-radius:6px;text-align:center;font-size:.85rem">
+                    <button onclick="adminDeleteWord(${gradeId},'${key}',${i})" style="background:#EF4444;color:#fff;border:none;width:24px;height:24px;border-radius:6px;cursor:pointer;font-size:.7rem">✕</button>
+                </div>`;
             });
         }
+        html += `<button onclick="adminAddWord(${gradeId},'${key}')" style="margin-top:6px;background:#4ECDC4;color:#fff;border:none;padding:4px 12px;border-radius:6px;font-size:.8rem;font-weight:700;cursor:pointer">+ Thêm từ</button></div>`;
+    });
+    el.innerHTML = html;
+}
 
-        const phonicsCount = d.phonics ? d.phonics.length : 0;
-        const sentenceCount = d.sentences ? Object.values(d.sentences).reduce((s, arr) => s + arr.length, 0) : 0;
-        const spellingCount = d.spelling ? Object.values(d.spelling).reduce((s, arr) => s + arr.length, 0) : 0;
-        const listeningCount = d.listening ? Object.values(d.listening).reduce((s, arr) => s + arr.length, 0) : 0;
+function renderEditorPhonics(el, d, gradeId) {
+    if (!d.phonics) { el.innerHTML = '<p style="color:#888;text-align:center">Chưa có phonics</p>'; return; }
+    let html = '<h4 style="font-family:\'Fredoka One\',cursive;color:var(--pink);margin-bottom:10px">🎤 Phonics</h4>';
+    d.phonics.forEach((p, i) => {
+        html += `<div style="background:#fff;border:1px solid #eee;border-radius:10px;padding:10px;margin-bottom:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <input value="${p.letter}" onchange="adminEditPhonics(${gradeId},${i},'letter',this.value)" style="width:60px;padding:6px;border:2px solid #FCE7F3;border-radius:8px;font-weight:800;font-size:1.1rem;text-align:center">
+            <input value="${p.sound}" onchange="adminEditPhonics(${gradeId},${i},'sound',this.value)" style="width:80px;padding:6px;border:1px solid #eee;border-radius:8px;font-size:.9rem">
+            <span style="font-size:.8rem;color:#888">Từ mẫu:</span>
+            ${p.words.map((w, wi) => `<input value="${w.word}" onchange="adminEditPhonicsWord(${gradeId},${i},${wi},'word',this.value)" style="width:70px;padding:4px;border:1px solid #eee;border-radius:6px;font-size:.8rem">`).join('')}
+            <button onclick="adminDeletePhonics(${gradeId},${i})" style="background:#EF4444;color:#fff;border:none;width:24px;height:24px;border-radius:6px;cursor:pointer;font-size:.7rem">✕</button>
+        </div>`;
+    });
+    html += '<button onclick="adminAddPhonics('+gradeId+')" style="width:100%;padding:8px;background:#FF6B9D;color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer">+ Thêm Phonics</button>';
+    el.innerHTML = html;
+}
 
-        preview.innerHTML = `
-            <div style="text-align:center;margin-bottom:15px">
-                <div style="font-size:2rem">${gi.icon}</div>
-                <h3 style="font-family:'Fredoka One',cursive;color:${gi.color}">${gi.name} - ${gi.age}</h3>
-                <p style="color:#888;font-size:.85rem">${gi.desc}</p>
-            </div>
-            <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:15px;text-align:center">
-                <div style="background:#E0F7FA;padding:8px;border-radius:8px"><div style="font-family:'Fredoka One',cursive;color:#4ECDC4">${vocabCount}</div><div style="font-size:.7rem;color:#888">Từ vựng</div></div>
-                <div style="background:#FCE7F3;padding:8px;border-radius:8px"><div style="font-family:'Fredoka One',cursive;color:#FF6B9D">${phonicsCount}</div><div style="font-size:.7rem;color:#888">Phonics</div></div>
-                <div style="background:#F3E8FF;padding:8px;border-radius:8px"><div style="font-family:'Fredoka One',cursive;color:#A855F7">${sentenceCount}</div><div style="font-size:.7rem;color:#888">Đặt câu</div></div>
-                <div style="background:#FEF3C7;padding:8px;border-radius:8px"><div style="font-family:'Fredoka One',cursive;color:#F59E0B">${spellingCount}</div><div style="font-size:.7rem;color:#888">Đánh vần</div></div>
-                <div style="background:#DCFCE7;padding:8px;border-radius:8px"><div style="font-family:'Fredoka One',cursive;color:#22C55E">${listeningCount}</div><div style="font-size:.7rem;color:#888">Nghe</div></div>
-            </div>
-            <h4 style="font-family:'Fredoka One',cursive;color:var(--purple);margin-bottom:8px;font-size:.95rem">📝 ${topicCount} chủ đề từ vựng:</h4>
-            ${topicsHTML}
-            ${d.phonics ? `<h4 style="font-family:'Fredoka One',cursive;color:var(--pink);margin:12px 0 8px;font-size:.95rem">🎤 Phonics:</h4>
-            <div style="display:flex;flex-wrap:wrap;gap:6px">${d.phonics.map(p => `<span style="background:#FCE7F3;padding:4px 10px;border-radius:8px;font-size:.8rem;font-weight:700"><strong style="color:#FF6B9D">${p.letter}</strong> ${p.sound}</span>`).join('')}</div>` : ''}`;
-    } catch(e) {
-        preview.innerHTML = `<div style="text-align:center;color:#EF4444;padding:20px">⚠️ Chưa có giáo trình lớp ${gradeId}<br><span style="font-size:.8rem;color:#888">${e.message}</span></div>`;
-    }
+function renderEditorSentences(el, d, gradeId) {
+    if (!d.sentences) { el.innerHTML = '<p style="color:#888;text-align:center">Chưa có dữ liệu đặt câu</p>'; return; }
+    let html = '<h4 style="font-family:\'Fredoka One\',cursive;color:var(--purple);margin-bottom:10px">💬 Đặt câu</h4>';
+    ['level1','level2','level3'].forEach(lk => {
+        const arr = d.sentences[lk] || [];
+        html += `<h5 style="color:var(--blue);margin:10px 0 6px">${lk === 'level1' ? 'Cấp 1 - Cơ bản' : lk === 'level2' ? 'Cấp 2 - Trung cấp' : 'Cấp 3 - Nâng cao'} (${arr.length} câu)</h5>`;
+        arr.forEach((s, i) => {
+            html += `<div style="background:#fff;border:1px solid #eee;border-radius:8px;padding:8px;margin-bottom:6px;font-size:.85rem">
+                <div><strong>${s.emoji}</strong> ${s.sentence.join(' ')} → <em>"${s.vi}"</em></div>
+                <div style="display:flex;gap:4px;margin-top:4px">
+                    <button onclick="adminDeleteSentence(${gradeId},'${lk}',${i})" style="background:#EF4444;color:#fff;border:none;padding:2px 8px;border-radius:4px;font-size:.75rem;cursor:pointer">Xóa</button>
+                </div>
+            </div>`;
+        });
+    });
+    el.innerHTML = html;
+}
+
+function renderEditorSpelling(el, d, gradeId) {
+    if (!d.spelling) { el.innerHTML = '<p style="color:#888;text-align:center">Chưa có dữ liệu đánh vần</p>'; return; }
+    let html = '<h4 style="font-family:\'Fredoka One\',cursive;color:var(--red);margin-bottom:10px">✏️ Đánh vần</h4>';
+    ['level1','level2','level3'].forEach(lk => {
+        const arr = d.spelling[lk] || [];
+        html += `<h5 style="color:var(--orange);margin:10px 0 6px">${lk === 'level1' ? 'Cấp 1' : lk === 'level2' ? 'Cấp 2' : 'Cấp 3'} (${arr.length} từ)</h5>`;
+        arr.forEach((s, i) => {
+            html += `<div style="display:flex;align-items:center;gap:6px;padding:4px 0;border-bottom:1px solid #f5f5f5;font-size:.85rem">
+                <span>${s.emoji}</span>
+                <input value="${s.word}" onchange="adminEditSpelling(${gradeId},'${lk}',${i},'word',this.value)" style="width:100px;padding:4px;border:1px solid #eee;border-radius:6px">
+                <input value="${s.vi}" onchange="adminEditSpelling(${gradeId},'${lk}',${i},'vi',this.value)" style="flex:1;padding:4px;border:1px solid #eee;border-radius:6px">
+                <input value="${s.emoji}" onchange="adminEditSpelling(${gradeId},'${lk}',${i},'emoji',this.value)" style="width:40px;padding:4px;border:1px solid #eee;border-radius:6px;text-align:center">
+                <button onclick="adminDeleteSpelling(${gradeId},'${lk}',${i})" style="background:#EF4444;color:#fff;border:none;width:22px;height:22px;border-radius:6px;cursor:pointer;font-size:.65rem">✕</button>
+            </div>`;
+        });
+        html += `<button onclick="adminAddSpelling(${gradeId},'${lk}')" style="margin-top:4px;background:#FF8C42;color:#fff;border:none;padding:4px 12px;border-radius:6px;font-size:.8rem;cursor:pointer">+ Thêm</button>`;
+    });
+    el.innerHTML = html;
+}
+
+function renderEditorListening(el, d, gradeId) {
+    if (!d.listening) { el.innerHTML = '<p style="color:#888;text-align:center">Chưa có dữ liệu nghe</p>'; return; }
+    let html = '<h4 style="font-family:\'Fredoka One\',cursive;color:var(--green);margin-bottom:10px">🎧 Nghe hiểu</h4>';
+    ['level1','level2','level3'].forEach(lk => {
+        const arr = d.listening[lk] || [];
+        html += `<h5 style="color:var(--green);margin:10px 0 6px">${lk === 'level1' ? 'Cấp 1' : lk === 'level2' ? 'Cấp 2' : 'Cấp 3'} (${arr.length} câu)</h5>`;
+        arr.forEach((l, i) => {
+            html += `<div style="background:#fff;border:1px solid #eee;border-radius:8px;padding:8px;margin-bottom:6px;font-size:.85rem">
+                <strong>🔊 "${l.word}"</strong> → Đáp án đúng: <strong>${l.options[l.correct]?.label || '?'}</strong>
+                <div style="display:flex;gap:4px;margin-top:4px">${l.options.map((o,oi) => `<span style="background:${oi===l.correct?'#DCFCE7':'#f8f8f8'};padding:2px 8px;border-radius:6px;font-size:.75rem">${o.emoji} ${o.label}</span>`).join('')}</div>
+            </div>`;
+        });
+    });
+    el.innerHTML = html;
+}
+
+// === CRUD Functions ===
+function adminEditWord(gradeId, topicKey, wordIdx, field, value) {
+    const d = getGradeDataForEdit(gradeId);
+    d.vocab[topicKey].words[wordIdx][field] = value;
+    saveCustomData(gradeId, { vocab: d.vocab });
+}
+
+function adminDeleteWord(gradeId, topicKey, wordIdx) {
+    if (!confirm('Xóa từ này?')) return;
+    const d = getGradeDataForEdit(gradeId);
+    d.vocab[topicKey].words.splice(wordIdx, 1);
+    saveCustomData(gradeId, { vocab: d.vocab });
+    adminLoadEditor();
+}
+
+function adminAddWord(gradeId, topicKey) {
+    const en = prompt('Từ tiếng Anh:'); if (!en) return;
+    const vi = prompt('Nghĩa tiếng Việt:'); if (!vi) return;
+    const emoji = prompt('Emoji (vd: 🍎):') || '📝';
+    const d = getGradeDataForEdit(gradeId);
+    d.vocab[topicKey].words.push({ en, vi, emoji, phonetic: '' });
+    saveCustomData(gradeId, { vocab: d.vocab });
+    adminLoadEditor();
+}
+
+function adminAddTopic(gradeId) {
+    const key = prompt('Mã chủ đề (vd: animals):'); if (!key) return;
+    const name = prompt('Tên chủ đề (vd: Động vật):'); if (!name) return;
+    const month = parseInt(prompt('Tháng (1-12):') || '1');
+    const level = parseInt(prompt('Cấp độ (1-3):') || '1');
+    const d = getGradeDataForEdit(gradeId);
+    if (!d.vocab) d.vocab = {};
+    d.vocab[key] = { name, level, month, words: [] };
+    saveCustomData(gradeId, { vocab: d.vocab });
+    adminLoadEditor();
+}
+
+function adminEditPhonics(gradeId, idx, field, value) {
+    const d = getGradeDataForEdit(gradeId);
+    d.phonics[idx][field] = value;
+    saveCustomData(gradeId, { phonics: d.phonics });
+}
+
+function adminEditPhonicsWord(gradeId, pIdx, wIdx, field, value) {
+    const d = getGradeDataForEdit(gradeId);
+    d.phonics[pIdx].words[wIdx][field] = value;
+    saveCustomData(gradeId, { phonics: d.phonics });
+}
+
+function adminDeletePhonics(gradeId, idx) {
+    if (!confirm('Xóa phonics này?')) return;
+    const d = getGradeDataForEdit(gradeId);
+    d.phonics.splice(idx, 1);
+    saveCustomData(gradeId, { phonics: d.phonics });
+    adminLoadEditor();
+}
+
+function adminAddPhonics(gradeId) {
+    const letter = prompt('Chữ cái/Blend (vd: SH):'); if (!letter) return;
+    const sound = prompt('Âm (vd: /ʃ/):'); if (!sound) return;
+    const d = getGradeDataForEdit(gradeId);
+    if (!d.phonics) d.phonics = [];
+    d.phonics.push({ letter, sound, words: [{ word: '', emoji: '📝', highlight: letter }] });
+    saveCustomData(gradeId, { phonics: d.phonics });
+    adminLoadEditor();
+}
+
+function adminEditSpelling(gradeId, levelKey, idx, field, value) {
+    const d = getGradeDataForEdit(gradeId);
+    d.spelling[levelKey][idx][field] = value;
+    saveCustomData(gradeId, { spelling: d.spelling });
+}
+
+function adminDeleteSpelling(gradeId, levelKey, idx) {
+    if (!confirm('Xóa?')) return;
+    const d = getGradeDataForEdit(gradeId);
+    d.spelling[levelKey].splice(idx, 1);
+    saveCustomData(gradeId, { spelling: d.spelling });
+    adminLoadEditor();
+}
+
+function adminAddSpelling(gradeId, levelKey) {
+    const word = prompt('Từ tiếng Anh:'); if (!word) return;
+    const vi = prompt('Nghĩa tiếng Việt:'); if (!vi) return;
+    const emoji = prompt('Emoji:') || '📝';
+    const d = getGradeDataForEdit(gradeId);
+    d.spelling[levelKey].push({ word: word.toUpperCase(), vi, emoji });
+    saveCustomData(gradeId, { spelling: d.spelling });
+    adminLoadEditor();
+}
+
+function adminDeleteSentence(gradeId, levelKey, idx) {
+    if (!confirm('Xóa câu này?')) return;
+    const d = getGradeDataForEdit(gradeId);
+    d.sentences[levelKey].splice(idx, 1);
+    saveCustomData(gradeId, { sentences: d.sentences });
+    adminLoadEditor();
 }
 
 function adminActivatePlan() {
