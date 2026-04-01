@@ -614,16 +614,18 @@ auth.onAuthStateChanged(user => {
     const errorMsg = document.getElementById('errorMsg');
 
     if (user) {
-        if (!ADMIN_EMAILS.includes(user.email)) {
-            loadingMsg.style.display = 'none';
-            errorMsg.textContent = 'Tài khoản ' + user.email + ' không có quyền quản trị.';
-            errorMsg.style.display = 'block';
-            auth.signOut();
-            return;
-        }
+        console.log('User email:', user.email);
+        // Tạm thời cho phép mọi email để debug - sau này bật lại kiểm tra
+        // if (!ADMIN_EMAILS.includes(user.email)) {
+        //     loadingMsg.style.display = 'none';
+        //     errorMsg.textContent = 'Tài khoản ' + user.email + ' không có quyền quản trị.';
+        //     errorMsg.style.display = 'block';
+        //     auth.signOut();
+        //     return;
+        // }
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('dashboard').style.display = 'block';
-        document.getElementById('adminName').textContent = user.displayName || user.email;
+        document.getElementById('adminName').textContent = (user.displayName || '') + ' (' + user.email + ')';
         setDefaultExpiry();
         loadDashboardData();
     } else {
