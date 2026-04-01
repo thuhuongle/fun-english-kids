@@ -591,9 +591,16 @@ function loginWithGoogle() {
     errorMsg.style.display = 'none';
 
     const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithRedirect(provider).catch(err => {
+    auth.signInWithPopup(provider).then(result => {
+        console.log('Đăng nhập thành công:', result.user.email);
+    }).catch(err => {
+        console.error('Lỗi đăng nhập:', err);
         loadingMsg.style.display = 'none';
-        errorMsg.textContent = 'Lỗi đăng nhập: ' + err.message;
+        if (err.code === 'auth/popup-blocked') {
+            errorMsg.textContent = 'Popup bị chặn! Nhấn lại hoặc cho phép popup trong trình duyệt.';
+        } else {
+            errorMsg.textContent = 'Lỗi: ' + err.message;
+        }
         errorMsg.style.display = 'block';
     });
 }
