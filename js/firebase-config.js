@@ -4,12 +4,12 @@
 // Tạo project tại: https://console.firebase.google.com
 // ============================================
 const FIREBASE_CONFIG = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyASB_suEbNhCpOJxR5_zbn1LmlyyQ4G9Nk",
+    authDomain: "fun-english-kids-41608.firebaseapp.com",
+    projectId: "fun-english-kids-41608",
+    storageBucket: "fun-english-kids-41608.firebasestorage.app",
+    messagingSenderId: "440102232936",
+    appId: "1:440102232936:web:95f66f84c29e4844d0ecdd"
 };
 
 // Kiểm tra Firebase đã load chưa
