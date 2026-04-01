@@ -439,6 +439,7 @@
         <h1>Quản trị Fun English Kids</h1>
         <div class="topbar-right">
             <span class="topbar-user" id="adminName"></span>
+            <button class="btn-logout" onclick="showChangePassword()" style="background:#F59E0B;margin-right:8px">🔑 Đổi mật khẩu</button>
             <button class="btn-logout" onclick="logout()">Đăng xuất</button>
         </div>
     </div>
@@ -589,12 +590,23 @@ let allUsers = [];
 let allSubscriptions = [];
 
 // --- Auth ---
-const ADMIN_PASSWORD = 'funeng2024admin';
+function getAdminPassword() {
+    return localStorage.getItem('fekAdminPw') || 'funeng2024admin';
+}
+
+function showChangePassword() {
+    const newPw = prompt('Nhập mật khẩu mới:');
+    if (!newPw || newPw.length < 4) { alert('Mật khẩu phải có ít nhất 4 ký tự!'); return; }
+    const confirm = prompt('Nhập lại mật khẩu mới để xác nhận:');
+    if (newPw !== confirm) { alert('Mật khẩu không khớp!'); return; }
+    localStorage.setItem('fekAdminPw', newPw);
+    alert('Đổi mật khẩu thành công! Mật khẩu mới: ' + newPw);
+}
 
 function loginManual() {
     const pw = document.getElementById('adminPassword').value;
     const errorMsg = document.getElementById('errorMsg');
-    if (pw === ADMIN_PASSWORD) {
+    if (pw === getAdminPassword()) {
         document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('dashboard').style.display = 'block';
         document.getElementById('adminName').textContent = 'Admin (thủ công)';
