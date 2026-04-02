@@ -47,13 +47,15 @@ const Subscription = {
 
     canAccessModule(mod) {
         const plan = this.plans.find(p => p.id === this.currentPlan.plan);
-        if (!plan) return true;
+        if (!plan) return false;
         if (plan.limits.modules === 'all') return true;
-        return plan.limits.modules.includes(mod);
+        if (Array.isArray(plan.limits.modules)) return plan.limits.modules.includes(mod);
+        return false;
     },
 
     isExpired() {
-        if (!this.currentPlan.expiresAt) return this.currentPlan.plan === 'free' ? false : true;
+        if (this.currentPlan.plan === 'free') return false;
+        if (!this.currentPlan.expiresAt) return false;
         return new Date(this.currentPlan.expiresAt) < new Date();
     },
 

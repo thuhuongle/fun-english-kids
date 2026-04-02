@@ -309,6 +309,8 @@
             <div class="module-card c5" onclick="startModule('listening')"><div class="icon">🎧</div><h3>Nghe Hiểu</h3><p>Nghe và chọn đáp án</p><div class="progress-bar"><div class="fill" style="width:0%;background:var(--green)" id="listeningProgress"></div></div></div>
             <div class="module-card c6" onclick="startModule('spelling')"><div class="icon">✏️</div><h3>Đánh Vần</h3><p>Viết đúng từ tiếng Anh</p><div class="progress-bar"><div class="fill" style="width:0%;background:var(--red)" id="spellingProgress"></div></div></div>
             <div class="module-card c7" onclick="startModule('exam')"><div class="icon">📋</div><h3>Kiểm Tra</h3><p>Bài thi tổng hợp</p><div class="progress-bar"><div class="fill" style="width:0%;background:#6366F1" id="examProgress"></div></div></div>
+            <div class="module-card" style="border-color:#8B5CF6" onclick="startModule('grammar')"><div class="icon">📐</div><h3 style="color:#8B5CF6">Ngữ Pháp</h3><p>Học ngữ pháp tiếng Anh</p><div class="progress-bar"><div class="fill" style="width:0%;background:#8B5CF6" id="grammarProgress"></div></div></div>
+            <div class="module-card" style="border-color:#0EA5E9" onclick="startModule('reading')"><div class="icon">📚</div><h3 style="color:#0EA5E9">Đọc Hiểu</h3><p>Đọc bài và trả lời câu hỏi</p><div class="progress-bar"><div class="fill" style="width:0%;background:#0EA5E9" id="readingProgress"></div></div></div>
         </div>
     </div>
     <!-- GRADE SELECT -->
@@ -333,6 +335,8 @@
     <!-- LISTENING --><div class="screen" id="listeningScreen"><div class="lesson-header"><button class="btn-back" onclick="goHome()">←</button><div class="lesson-title" style="color:var(--green)">🎧 Nghe Hiểu</div></div><div class="lesson-progress"><div class="fill" id="listeningLessonProgress" style="width:0%"></div></div><div class="listening-container" id="listeningContent"></div></div>
     <!-- SPELLING --><div class="screen" id="spellingScreen"><div class="lesson-header"><button class="btn-back" onclick="goHome()">←</button><div class="lesson-title" style="color:var(--red)">✏️ Đánh Vần</div></div><div class="lesson-progress"><div class="fill" id="spellingLessonProgress" style="width:0%"></div></div><div class="spelling-container" id="spellingContent"></div></div>
     <!-- EXAM --><div class="screen" id="examScreen"><div class="lesson-header"><button class="btn-back" onclick="goHome()">←</button><div class="lesson-title" style="color:#6366F1">📋 Bài Kiểm Tra</div></div><div class="lesson-progress"><div class="fill" id="examLessonProgress" style="width:0%"></div></div><div class="exam-container" id="examContent"></div></div>
+    <!-- GRAMMAR --><div class="screen" id="grammarScreen"><div class="lesson-header"><button class="btn-back" onclick="goHome()">←</button><div class="lesson-title" style="color:#8B5CF6">📐 Ngữ Pháp</div></div><div class="lesson-progress"><div class="fill" id="grammarLessonProgress" style="width:0%"></div></div><div class="exam-container" id="grammarContent"></div></div>
+    <!-- READING --><div class="screen" id="readingScreen"><div class="lesson-header"><button class="btn-back" onclick="goHome()">←</button><div class="lesson-title" style="color:#0EA5E9">📚 Đọc Hiểu</div></div><div class="lesson-progress"><div class="fill" id="readingLessonProgress" style="width:0%"></div></div><div class="exam-container" id="readingContent"></div></div>
     <!-- RESULT --><div class="screen" id="resultScreen"><div class="result-screen" id="resultContent"></div></div>
     <!-- REPORT --><div class="screen" id="reportScreen"><div class="lesson-header"><button class="btn-back" onclick="goHome()">←</button><div class="lesson-title" style="color:#6366F1">📊 Bảng Điểm</div></div><div class="report-card" id="reportContent"></div></div>
     <!-- ADMIN -->
@@ -341,6 +345,53 @@
         <div id="adminContent" style="max-width:800px;margin:0 auto"></div>
     </div>
 </div>
+<!-- FOOTER -->
+<footer style="background:linear-gradient(135deg,#1e1b4b,#312e81);padding:30px 20px;color:#fff;margin-top:30px">
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px">
+        <div>
+            <h3 style="font-family:'Fredoka One',cursive;font-size:1.2rem;margin-bottom:12px;color:#FFE66D">Fun English Kids</h3>
+            <p style="font-size:.85rem;opacity:.8;line-height:1.6">Nền tảng học tiếng Anh trực tuyến cho học sinh lớp 1-12. Giáo trình chuẩn, phương pháp hiện đại, giúp con yêu thích tiếng Anh mỗi ngày.</p>
+        </div>
+        <div>
+            <h4 style="font-family:'Fredoka One',cursive;font-size:1rem;margin-bottom:12px;color:#4ECDC4">Liên hệ & Hỗ trợ</h4>
+            <div style="display:flex;flex-direction:column;gap:8px;font-size:.9rem">
+                <a href="mailto:huy281082@gmail.com" style="color:#fff;text-decoration:none;opacity:.85;display:flex;align-items:center;gap:8px">
+                    <span style="font-size:1.1rem">📧</span> huy281082@gmail.com
+                </a>
+                <a href="tel:0281082" style="color:#fff;text-decoration:none;opacity:.85;display:flex;align-items:center;gap:8px">
+                    <span style="font-size:1.1rem">📞</span> Hotline: 0xxx.xxx.xxx
+                </a>
+                <div style="opacity:.85;display:flex;align-items:center;gap:8px">
+                    <span style="font-size:1.1rem">💬</span> Zalo: 0xxx.xxx.xxx
+                </div>
+                <div style="opacity:.85;display:flex;align-items:center;gap:8px">
+                    <span style="font-size:1.1rem">🕐</span> Hỗ trợ: 8:00 - 21:00 (T2-CN)
+                </div>
+            </div>
+        </div>
+        <div>
+            <h4 style="font-family:'Fredoka One',cursive;font-size:1rem;margin-bottom:12px;color:#FF6B9D">Dịch vụ</h4>
+            <div style="display:flex;flex-direction:column;gap:6px;font-size:.9rem">
+                <a href="javascript:void(0)" onclick="Subscription.renderPricingPage()" style="color:#fff;text-decoration:none;opacity:.85">👑 Nâng cấp gói học</a>
+                <a href="javascript:void(0)" onclick="showReport()" style="color:#fff;text-decoration:none;opacity:.85">📊 Bảng điểm học tập</a>
+                <a href="javascript:void(0)" onclick="showGradeSelect()" style="color:#fff;text-decoration:none;opacity:.85">🎓 Chọn lớp học</a>
+                <a href="javascript:void(0)" onclick="showLevelSelect()" style="color:#fff;text-decoration:none;opacity:.85">📚 Giáo trình</a>
+            </div>
+        </div>
+        <div>
+            <h4 style="font-family:'Fredoka One',cursive;font-size:1rem;margin-bottom:12px;color:#A855F7">Gửi yêu cầu hỗ trợ</h4>
+            <div style="display:flex;flex-direction:column;gap:8px">
+                <input type="text" id="footerContactName" placeholder="Họ tên phụ huynh" style="padding:8px 12px;border:none;border-radius:8px;font-size:.9rem;font-family:'Nunito',sans-serif;background:rgba(255,255,255,.15);color:#fff;outline:none" onfocus="this.style.background='rgba(255,255,255,.25)'" onblur="this.style.background='rgba(255,255,255,.15)'">
+                <input type="text" id="footerContactPhone" placeholder="Số điện thoại" style="padding:8px 12px;border:none;border-radius:8px;font-size:.9rem;font-family:'Nunito',sans-serif;background:rgba(255,255,255,.15);color:#fff;outline:none" onfocus="this.style.background='rgba(255,255,255,.25)'" onblur="this.style.background='rgba(255,255,255,.15)'">
+                <textarea id="footerContactMsg" placeholder="Nội dung cần hỗ trợ..." rows="2" style="padding:8px 12px;border:none;border-radius:8px;font-size:.9rem;font-family:'Nunito',sans-serif;background:rgba(255,255,255,.15);color:#fff;outline:none;resize:none" onfocus="this.style.background='rgba(255,255,255,.25)'" onblur="this.style.background='rgba(255,255,255,.15)'"></textarea>
+                <button onclick="submitContactForm()" style="background:linear-gradient(135deg,#22C55E,#16A34A);color:#fff;border:none;padding:10px;border-radius:8px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.9rem;transition:all .2s" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">Gửi yêu cầu</button>
+            </div>
+        </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,.15);margin-top:25px;padding-top:15px;text-align:center;font-size:.8rem;opacity:.6">
+        © 2024 Fun English Kids. Bảo lưu mọi quyền. | <a href="javascript:void(0)" style="color:#fff;text-decoration:underline">Chính sách bảo mật</a> | <a href="javascript:void(0)" style="color:#fff;text-decoration:underline">Điều khoản sử dụng</a>
+    </div>
+</footer>
 </div><!-- end studentApp -->
 
 <div class="confetti-container" id="confettiContainer"></div>
@@ -353,6 +404,8 @@
 <!-- App Modules -->
 <script src="js/firebase-config.js"></script>
 <script src="data/curriculum.js"></script>
+<script src="data/grammar.js"></script>
+<script src="data/reading.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/db.js"></script>
 <script src="js/subscription.js"></script>
@@ -464,9 +517,9 @@ let state = {
     studentName: '', coins: 0, streak: 0,
     streakDays: [false, false, false, false, false, false, false],
     selectedGrade: 1, selectedLevel: 1, selectedMonth: 1,
-    moduleProgress: { vocab: 0, phonics: 0, sentences: 0, matching: 0, listening: 0, spelling: 0, exam: 0 },
+    moduleProgress: { vocab: 0, phonics: 0, sentences: 0, matching: 0, listening: 0, spelling: 0, exam: 0, grammar: 0, reading: 0 },
     examHistory: [],
-    moduleHistory: { vocab: [], phonics: [], sentences: [], matching: [], listening: [], spelling: [] },
+    moduleHistory: { vocab: [], phonics: [], sentences: [], matching: [], listening: [], spelling: [], grammar: [], reading: [] },
     totalLessonsCompleted: 0, totalCorrectAnswers: 0, totalQuestionsSeen: 0,
     currentModule: null, currentIndex: 0, score: 0, totalQuestions: 0,
 };
@@ -518,6 +571,8 @@ function saveName() {
     state.studentName = n;
     document.getElementById('nameModal').style.display = 'none';
     saveState(); updateUI();
+    SoundFX.levelUp();
+    setTimeout(() => speakBoth('Hello ' + n + '! Welcome to Fun English Kids!', 'Xin chào ' + n + '! Chào mừng bạn đến với Fun English Kids!'), 400);
 }
 
 function getGrade(p) { return p >= 90 ? 'A' : p >= 75 ? 'B' : p >= 50 ? 'C' : 'D'; }
@@ -560,7 +615,7 @@ function updateUI() {
 // NAVIGATION
 // ============================================
 function showScreen(id) { document.querySelectorAll('#studentApp .screen').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); }
-function goHome() { showScreen('homeScreen'); updateUI(); }
+function goHome() { showScreen('homeScreen'); updateUI(); speakVi('Chào ' + (state.studentName || 'bạn nhỏ') + '! Hôm nay chúng mình học gì nào?'); }
 
 function startModule(m) {
     // Check subscription access
@@ -569,16 +624,227 @@ function startModule(m) {
         Subscription.renderPricingPage();
         return;
     }
-    if (VOCAB_DATA.length === 0) {
+    if (VOCAB_DATA.length === 0 && m !== 'grammar' && m !== 'reading') {
         alert('Chưa có dữ liệu giáo trình cho lớp này. Vui lòng chọn lớp khác.');
         return;
     }
+    SoundFX.start();
     state.currentModule = m; state.currentIndex = 0; state.score = 0;
-    switch(m) { case 'vocab': startVocab(); break; case 'phonics': startPhonics(); break; case 'sentences': startSentences(); break; case 'matching': startMatching(); break; case 'listening': startListening(); break; case 'spelling': startSpelling(); break; case 'exam': startExam(); break; }
+    const moduleNames = { vocab:'Vocabulary. Từ vựng', phonics:'Phonics. Phát âm', sentences:'Sentences. Đặt câu', matching:'Matching game. Trò chơi nhớ', listening:'Listening. Nghe hiểu', spelling:'Spelling. Đánh vần', exam:'Exam. Kiểm tra', grammar:'Grammar. Ngữ pháp', reading:'Reading. Đọc hiểu' };
+    setTimeout(() => speakBoth(moduleNames[m]?.split('.')[0] || m, moduleNames[m]?.split('.')[1] || ''), 300);
+    switch(m) { case 'vocab': startVocab(); break; case 'phonics': startPhonics(); break; case 'sentences': startSentences(); break; case 'matching': startMatching(); break; case 'listening': startListening(); break; case 'spelling': startSpelling(); break; case 'exam': startExam(); break; case 'grammar': startGrammar(); break; case 'reading': startReading(); break; }
 }
 
+// ============================================
+// AUDIO & SOUND SYSTEM
+// ============================================
+const SoundFX = {
+    ctx: null,
+    enabled: true,
+    voices: [],
+    voiceReady: false,
+
+    init() {
+        // Preload voices
+        if ('speechSynthesis' in window) {
+            const loadVoices = () => {
+                this.voices = speechSynthesis.getVoices();
+                this.voiceReady = this.voices.length > 0;
+            };
+            loadVoices();
+            speechSynthesis.onvoiceschanged = loadVoices;
+        }
+        // Enable audio on first user interaction (bypass autoplay policy)
+        const unlock = () => {
+            if (!this.ctx) {
+                this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+            }
+            // Warm up speech synthesis
+            if ('speechSynthesis' in window) {
+                const warmup = new SpeechSynthesisUtterance('');
+                warmup.volume = 0;
+                speechSynthesis.speak(warmup);
+            }
+            document.removeEventListener('click', unlock);
+            document.removeEventListener('touchstart', unlock);
+        };
+        document.addEventListener('click', unlock, { once: true });
+        document.addEventListener('touchstart', unlock, { once: true });
+    },
+
+    getCtx() {
+        if (!this.ctx) {
+            this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (this.ctx.state === 'suspended') this.ctx.resume();
+        return this.ctx;
+    },
+
+    // Play a sequence of notes
+    playNotes(notes, volume = 0.3) {
+        if (!this.enabled) return;
+        try {
+            const c = this.getCtx();
+            const g = c.createGain();
+            g.connect(c.destination);
+            g.gain.setValueAtTime(volume, c.currentTime);
+            const totalDuration = notes.reduce((s, n) => s + n.dur, 0);
+            g.gain.exponentialRampToValueAtTime(0.01, c.currentTime + totalDuration + 0.1);
+
+            let t = c.currentTime;
+            notes.forEach(n => {
+                const o = c.createOscillator();
+                o.type = n.type || 'sine';
+                o.frequency.setValueAtTime(n.freq, t);
+                o.connect(g);
+                o.start(t);
+                o.stop(t + n.dur);
+                t += n.dur;
+            });
+        } catch(e) {}
+    },
+
+    correct() {
+        this.playNotes([
+            { freq: 523, dur: 0.1 },
+            { freq: 659, dur: 0.1 },
+            { freq: 784, dur: 0.15 }
+        ], 0.3);
+    },
+
+    wrong() {
+        this.playNotes([
+            { freq: 330, dur: 0.15, type: 'square' },
+            { freq: 277, dur: 0.2, type: 'square' }
+        ], 0.15);
+    },
+
+    click() {
+        this.playNotes([{ freq: 800, dur: 0.05 }], 0.1);
+    },
+
+    flip() {
+        this.playNotes([{ freq: 600, dur: 0.06 }, { freq: 900, dur: 0.06 }], 0.12);
+    },
+
+    matched() {
+        this.playNotes([
+            { freq: 523, dur: 0.08 },
+            { freq: 659, dur: 0.08 },
+            { freq: 784, dur: 0.08 },
+            { freq: 1047, dur: 0.15 }
+        ], 0.25);
+    },
+
+    complete() {
+        this.playNotes([
+            { freq: 523, dur: 0.1 },
+            { freq: 659, dur: 0.1 },
+            { freq: 784, dur: 0.1 },
+            { freq: 1047, dur: 0.12 },
+            { freq: 784, dur: 0.08 },
+            { freq: 1047, dur: 0.2 }
+        ], 0.3);
+    },
+
+    levelUp() {
+        setTimeout(() => this.playNotes([
+            { freq: 392, dur: 0.1 }, { freq: 523, dur: 0.1 },
+            { freq: 659, dur: 0.1 }, { freq: 784, dur: 0.1 },
+            { freq: 1047, dur: 0.25 }
+        ], 0.35), 200);
+    },
+
+    countdown() {
+        this.playNotes([{ freq: 440, dur: 0.08 }], 0.15);
+    },
+
+    start() {
+        this.playNotes([
+            { freq: 523, dur: 0.12 },
+            { freq: 784, dur: 0.18 }
+        ], 0.2);
+    }
+};
+
 function speak(text, rate = 0.8) {
-    if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang = 'en-US'; u.rate = rate; u.pitch = 1.1; window.speechSynthesis.speak(u); }
+    if (!text || !('speechSynthesis' in window)) return;
+    try {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'en-US';
+        u.rate = rate;
+        u.pitch = 1.1;
+        u.volume = 1;
+        // Prefer natural-sounding English voice
+        if (SoundFX.voices.length > 0) {
+            const preferred = SoundFX.voices.find(v => v.lang === 'en-US' && v.name.includes('Google')) ||
+                              SoundFX.voices.find(v => v.lang === 'en-US' && v.localService === false) ||
+                              SoundFX.voices.find(v => v.lang.startsWith('en-'));
+            if (preferred) u.voice = preferred;
+        }
+        window.speechSynthesis.speak(u);
+    } catch(e) {}
+}
+
+function speakSlow(text) { speak(text, 0.55); }
+function speakNormal(text) { speak(text, 0.85); }
+
+// Phát âm tiếng Việt
+function speakVi(text, rate = 0.9) {
+    if (!text || !('speechSynthesis' in window)) return;
+    try {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'vi-VN';
+        u.rate = rate;
+        u.pitch = 1.0;
+        u.volume = 1;
+        if (SoundFX.voices.length > 0) {
+            const preferred = SoundFX.voices.find(v => v.lang === 'vi-VN') ||
+                              SoundFX.voices.find(v => v.lang.startsWith('vi'));
+            if (preferred) u.voice = preferred;
+        }
+        window.speechSynthesis.speak(u);
+    } catch(e) {}
+}
+
+// Phát âm tiếng Anh trước, rồi tiếng Việt sau
+function speakBoth(enText, viText, enRate = 0.8) {
+    if (!('speechSynthesis' in window)) return;
+    try {
+        window.speechSynthesis.cancel();
+        // English first
+        const uEn = new SpeechSynthesisUtterance(enText);
+        uEn.lang = 'en-US';
+        uEn.rate = enRate;
+        uEn.pitch = 1.1;
+        uEn.volume = 1;
+        if (SoundFX.voices.length > 0) {
+            const pref = SoundFX.voices.find(v => v.lang === 'en-US' && v.name.includes('Google')) ||
+                         SoundFX.voices.find(v => v.lang === 'en-US' && v.localService === false) ||
+                         SoundFX.voices.find(v => v.lang.startsWith('en-'));
+            if (pref) uEn.voice = pref;
+        }
+        // Vietnamese after English finishes
+        uEn.onend = () => {
+            setTimeout(() => {
+                const uVi = new SpeechSynthesisUtterance(viText);
+                uVi.lang = 'vi-VN';
+                uVi.rate = 0.9;
+                uVi.pitch = 1.0;
+                uVi.volume = 1;
+                if (SoundFX.voices.length > 0) {
+                    const prefVi = SoundFX.voices.find(v => v.lang === 'vi-VN') ||
+                                   SoundFX.voices.find(v => v.lang.startsWith('vi'));
+                    if (prefVi) uVi.voice = prefVi;
+                }
+                window.speechSynthesis.speak(uVi);
+            }, 300);
+        };
+        window.speechSynthesis.speak(uEn);
+    } catch(e) {}
 }
 
 // ============================================
@@ -586,6 +852,7 @@ function speak(text, rate = 0.8) {
 // ============================================
 function showGradeSelect() {
     showScreen('gradeScreen');
+    speakVi('Chọn lớp học');
     renderGradeSelector();
 }
 
@@ -621,6 +888,9 @@ async function selectGrade(gradeId) {
         Subscription.renderPricingPage();
         return;
     }
+    SoundFX.click();
+    const gi = GRADE_INFO.find(g => g.id === gradeId);
+    speakBoth('Grade ' + gradeId, gi ? gi.name : 'Lớp ' + gradeId);
     state.selectedGrade = gradeId;
     state.selectedLevel = 1;
     state.selectedMonth = 1;
@@ -649,6 +919,7 @@ async function selectGrade(gradeId) {
 // ============================================
 function showLevelSelect() {
     showScreen('levelScreen');
+    speakVi('Chọn giáo trình');
     renderLevelSelector();
 }
 
@@ -685,13 +956,19 @@ function renderLevelSelector() {
 }
 
 function selectLevel(lv) {
+    SoundFX.click();
+    const lvInfo = CURRICULUM.levels.find(l => l.id === lv);
+    speakBoth(lvInfo.name, lvInfo.nameVi);
     state.selectedLevel = lv;
-    const m = CURRICULUM.levels.find(l => l.id === lv).months[0];
+    const m = lvInfo.months[0];
     state.selectedMonth = m;
     applyMonth(m); saveState(); renderLevelSelector(); updateUI();
 }
 
 function selectMonth(m) {
+    SoundFX.click();
+    const mInfo = CURRICULUM.months.find(x => x.month === m);
+    speakVi('Tháng ' + m + '. ' + (mInfo ? mInfo.title : ''));
     state.selectedMonth = m;
     state.selectedLevel = getLevelFromMonth(m);
     applyMonth(m); saveState(); renderLevelSelector(); updateUI();
@@ -712,19 +989,24 @@ function renderVocabQ() {
             <div class="word-image">${item.emoji}</div>
             <div class="word-en">${item.en}</div>
             <div class="word-phonetic">${item.phonetic || ''}</div>
-            <button class="btn-speak" onclick="speak('${item.en}')">🔊 Nghe phát âm</button>
+            <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+                <button class="btn-speak" onclick="speak('${item.en}')">🔊 Tiếng Anh</button>
+                <button class="btn-speak" onclick="speakVi('${item.vi.replace(/'/g,"\\'")}')" style="background:linear-gradient(135deg,#F59E0B,#EF4444)">🔊 Tiếng Việt</button>
+                <button class="btn-speak" onclick="speakBoth('${item.en}','${item.vi.replace(/'/g,"\\'")}')" style="background:linear-gradient(135deg,#8B5CF6,#EC4899)">🔊 Cả hai</button>
+            </div>
         </div>
         <p style="font-size:1rem;color:#666;font-weight:700">Chọn nghĩa đúng:</p>
         <div class="vocab-options">
             ${opts.map(o => `<div class="vocab-option" onclick="checkVocab(this,'${o.replace(/'/g,"\\'")}','${item.vi.replace(/'/g,"\\'")}')">${o}</div>`).join('')}
         </div>`;
-    speak(item.en);
+    speakBoth(item.en, item.vi);
 }
 function checkVocab(el, sel, cor) {
     if (document.querySelector('.vocab-option.correct')) return;
-    if (sel === cor) { el.classList.add('correct'); state.score++; state.coins += 5; playCorrectSound(); }
-    else { el.classList.add('wrong'); document.querySelectorAll('.vocab-option').forEach(o => { if(o.textContent===cor) o.classList.add('correct'); }); }
-    updateUI(); setTimeout(() => { state.currentIndex++; renderVocabQ(); }, 1200);
+    const item = VOCAB_DATA[state.currentIndex];
+    if (sel === cor) { el.classList.add('correct'); state.score++; state.coins += 5; SoundFX.correct(); speakBoth(item.en, item.vi, 0.7); }
+    else { el.classList.add('wrong'); SoundFX.wrong(); document.querySelectorAll('.vocab-option').forEach(o => { if(o.textContent===cor) o.classList.add('correct'); }); setTimeout(() => speakBoth(item.en, item.vi, 0.7), 400); }
+    updateUI(); setTimeout(() => { state.currentIndex++; renderVocabQ(); }, 2500);
 }
 
 // ============================================
@@ -742,16 +1024,75 @@ function renderPhonicsQ() {
         <div class="phonics-card">
             <div class="phonics-letter">${item.letter} ${item.letter.toLowerCase()}</div>
             <div class="phonics-sound">Âm: <strong>${item.sound}</strong></div>
-            <button class="btn-speak" onclick="speak('${item.letter}',0.6)" style="margin-bottom:12px">🔊 Nghe âm "${item.letter}"</button>
-            <p style="color:#888;margin-bottom:8px">Các từ bắt đầu bằng "${item.letter}":</p>
+            <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:12px">
+                <button class="btn-speak" onclick="speak('${item.letter}',0.6)">🔊 Nghe âm</button>
+                <button class="btn-speak" onclick="speakPhonicsAll(${state.currentIndex})" style="background:linear-gradient(135deg,#8B5CF6,#EC4899)">🔊 Nghe tất cả</button>
+            </div>
+            <p style="color:#888;margin-bottom:8px">Các từ có âm "${item.letter}":</p>
             <div class="phonics-words">
-                ${item.words.map(w => `<div class="phonics-word-item" onclick="speak('${w.word}')"><div class="emoji">${w.emoji}</div><div class="word"><span class="highlight">${w.highlight}</span>${w.word.slice(w.highlight.length)}</div></div>`).join('')}
+                ${item.words.map(w => `<div class="phonics-word-item" onclick="speakBoth('${w.word}','${(w.vi||w.word).replace(/'/g,"\\'")}')"><div class="emoji">${w.emoji}</div><div class="word"><span class="highlight">${w.highlight}</span>${w.word.slice(w.highlight.length)}</div>${w.vi ? `<div style="font-size:.75rem;color:#888;margin-top:2px">${w.vi}</div>` : ''}</div>`).join('')}
             </div>
         </div>
-        <div style="text-align:center"><button class="btn-next" onclick="nextPhonics()">Tiếp theo ➡️</button></div>`;
+        <div style="text-align:center;margin-top:12px">
+            <p style="font-size:.9rem;color:#666;margin-bottom:8px;font-weight:700">Chọn từ có âm "${item.letter}" đúng:</p>
+            <div id="phonicsQuiz"></div>
+        </div>`;
     speak(item.letter, 0.6);
+    renderPhonicsQuiz();
 }
-function nextPhonics() { state.score++; state.coins += 3; state.currentIndex++; updateUI(); renderPhonicsQ(); }
+
+// Đọc tất cả từ trong phonics: âm → từ 1 (Anh+Việt) → từ 2 → từ 3
+function speakPhonicsAll(idx) {
+    const item = PHONICS_DATA[idx];
+    if (!item) return;
+    speak(item.letter, 0.5);
+    let delay = 1200;
+    item.words.forEach(w => {
+        setTimeout(() => speak(w.word, 0.7), delay);
+        delay += 1500;
+    });
+}
+
+function renderPhonicsQuiz() {
+    const item = PHONICS_DATA[state.currentIndex];
+    if (!item) return;
+    // Tạo quiz: chọn từ có chứa âm đúng
+    const correctWord = item.words[Math.floor(Math.random() * item.words.length)];
+    // Lấy từ sai từ các phonics khác
+    const otherPhonics = PHONICS_DATA.filter((p, i) => i !== state.currentIndex);
+    const wrongWords = [];
+    for (let i = 0; i < Math.min(3, otherPhonics.length); i++) {
+        const wp = otherPhonics[Math.floor(Math.random() * otherPhonics.length)];
+        if (wp && wp.words.length > 0) {
+            const ww = wp.words[Math.floor(Math.random() * wp.words.length)];
+            if (!wrongWords.find(x => x.word === ww.word) && ww.word !== correctWord.word) wrongWords.push(ww);
+        }
+    }
+    while (wrongWords.length < 3) wrongWords.push({ word: 'example', emoji: '📝' });
+    const opts = [...wrongWords.map(w => ({ word: w.word, emoji: w.emoji, correct: false })), { word: correctWord.word, emoji: correctWord.emoji, correct: true }].sort(() => Math.random() - 0.5);
+    document.getElementById('phonicsQuiz').innerHTML = `
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:400px;margin:0 auto">
+            ${opts.map(o => `<div class="vocab-option" style="display:flex;align-items:center;gap:6px;justify-content:center" onclick="checkPhonicsQuiz(this,${o.correct},'${correctWord.word}')">
+                <span>${o.emoji}</span> ${o.word}
+            </div>`).join('')}
+        </div>`;
+}
+
+function checkPhonicsQuiz(el, isCorrect, correctWord) {
+    if (document.querySelector('#phonicsQuiz .vocab-option.correct')) return;
+    if (isCorrect) {
+        el.classList.add('correct'); state.score++; state.coins += 5; SoundFX.correct();
+        speakBoth(correctWord, '', 0.7);
+    } else {
+        el.classList.add('wrong'); SoundFX.wrong();
+        document.querySelectorAll('#phonicsQuiz .vocab-option').forEach(o => {
+            if (o.textContent.includes(correctWord)) o.classList.add('correct');
+        });
+        setTimeout(() => speak(correctWord, 0.7), 400);
+    }
+    updateUI();
+    setTimeout(() => { state.currentIndex++; renderPhonicsQ(); }, 2000);
+}
 
 // ============================================
 // SENTENCES
@@ -769,11 +1110,16 @@ function renderSentenceQ() {
     document.getElementById('sentencesContent').innerHTML = `
         <div class="sentence-image">${item.emoji}</div>
         <div class="sentence-hint">"${item.vi}"</div>
+        <div style="text-align:center;margin-bottom:10px">
+            <button class="btn-speak" onclick="speakVi('${item.vi.replace(/'/g,"\\'")}')" style="background:linear-gradient(135deg,#F59E0B,#EF4444);font-size:.85rem;padding:6px 14px">🔊 Nghe nghĩa tiếng Việt</button>
+        </div>
         <div class="sentence-slots" id="sentenceSlots"></div>
         <div class="word-bank" id="wordBank">${allW.map((w,i) => `<div class="word-chip" id="chip-${i}" onclick="selectWord('${w}',${i})">${w}</div>`).join('')}</div>
         <div style="text-align:center;margin-top:12px"><button class="btn-next" id="checkSentenceBtn" onclick="checkSentence()" disabled>Kiểm tra ✓</button></div>`;
+    speakVi(item.vi);
 }
 function selectWord(w, idx) {
+    SoundFX.click(); speak(w, 0.85);
     state.sentenceSelected.push(w); document.getElementById(`chip-${idx}`).classList.add('used');
     const sl = document.createElement('div'); sl.className='sentence-slot'; sl.textContent=w;
     sl.onclick = () => { state.sentenceSelected = state.sentenceSelected.filter(x=>x!==w); document.getElementById(`chip-${idx}`).classList.remove('used'); sl.remove(); document.getElementById('checkSentenceBtn').disabled = state.sentenceSelected.length===0; };
@@ -782,10 +1128,12 @@ function selectWord(w, idx) {
 }
 function checkSentence() {
     const ok = JSON.stringify(state.sentenceSelected) === JSON.stringify(state.sentenceCorrect);
-    if (ok) { state.score++; state.coins += 10; playCorrectSound(); document.querySelectorAll('.sentence-slot').forEach(s => s.style.background='var(--green)'); }
-    else { document.querySelectorAll('.sentence-slot').forEach(s => s.style.background='var(--red)');
-        setTimeout(() => { document.getElementById('sentenceSlots').innerHTML = state.sentenceCorrect.map(w => `<div class="sentence-slot" style="background:var(--green)">${w}</div>`).join(''); }, 800); }
-    updateUI(); setTimeout(() => { state.currentIndex++; renderSentenceQ(); }, 2000);
+    const sentenceEn = state.sentenceCorrect.join(' ');
+    const sentenceVi = SENTENCE_DATA[state.currentIndex].vi;
+    if (ok) { state.score++; state.coins += 10; SoundFX.correct(); speakBoth(sentenceEn, sentenceVi, 0.75); document.querySelectorAll('.sentence-slot').forEach(s => s.style.background='var(--green)'); }
+    else { SoundFX.wrong(); document.querySelectorAll('.sentence-slot').forEach(s => s.style.background='var(--red)');
+        setTimeout(() => { document.getElementById('sentenceSlots').innerHTML = state.sentenceCorrect.map(w => `<div class="sentence-slot" style="background:var(--green)">${w}</div>`).join(''); speakBoth(sentenceEn, sentenceVi, 0.7); }, 800); }
+    updateUI(); setTimeout(() => { state.currentIndex++; renderSentenceQ(); }, 3500);
 }
 
 // ============================================
@@ -794,7 +1142,7 @@ function checkSentence() {
 function startMatching() {
     showScreen('matchingScreen');
     const pairs = VOCAB_DATA.slice().sort(() => Math.random()-.5).slice(0, 6);
-    const cards = []; pairs.forEach(p => { cards.push({type:'emoji',value:p.emoji,match:p.en}); cards.push({type:'text',value:p.en,match:p.en}); });
+    const cards = []; pairs.forEach(p => { cards.push({type:'emoji',value:p.emoji,match:p.en,vi:p.vi}); cards.push({type:'text',value:p.en,match:p.en,vi:p.vi}); });
     cards.sort(() => Math.random()-.5);
     state.matchCards = cards; state.matchFlipped = []; state.matchMatched = []; state.matchMoves = 0; state.totalQuestions = 6;
     renderMatchingGame();
@@ -806,12 +1154,17 @@ function renderMatchingGame() {
 }
 function flipCard(idx) {
     if (state.matchFlipped.length>=2||state.matchFlipped.includes(idx)||state.matchMatched.includes(state.matchCards[idx].match)) return;
-    state.matchFlipped.push(idx); renderMatchingGame();
+    SoundFX.flip();
+    state.matchFlipped.push(idx);
+    // Speak the word when card is flipped
+    const card = state.matchCards[idx];
+    if (card.type === 'text') speak(card.value, 0.85);
+    renderMatchingGame();
     if (state.matchFlipped.length===2) { state.matchMoves++;
         const [a,b] = state.matchFlipped;
-        if (state.matchCards[a].match===state.matchCards[b].match&&a!==b) { state.matchMatched.push(state.matchCards[a].match); state.matchFlipped=[]; state.coins+=5; playCorrectSound(); updateUI(); renderMatchingGame();
-            if (state.matchMatched.length===6) { state.score=6; setTimeout(()=>showResult('matching'),500); }
-        } else { setTimeout(()=>{state.matchFlipped=[];renderMatchingGame();},800); }
+        if (state.matchCards[a].match===state.matchCards[b].match&&a!==b) { state.matchMatched.push(state.matchCards[a].match); state.matchFlipped=[]; state.coins+=5; SoundFX.matched(); speakBoth(state.matchCards[a].match, state.matchCards[a].vi || '', 0.8); updateUI(); renderMatchingGame();
+            if (state.matchMatched.length===6) { state.score=6; SoundFX.complete(); setTimeout(()=>showResult('matching'),800); }
+        } else { SoundFX.wrong(); setTimeout(()=>{state.matchFlipped=[];renderMatchingGame();},800); }
     }
 }
 
@@ -828,16 +1181,23 @@ function renderListeningQ() {
     const item = LISTENING_DATA[state.currentIndex];
     document.getElementById('listeningContent').innerHTML = `
         <p class="listen-prompt">Nghe và chọn hình đúng!</p>
-        <button class="btn-listen-big" id="listenBtn" onclick="playListening('${item.word}')">🔊</button>
+        <button class="btn-listen-big" id="listenBtn" onclick="playListening('${item.word}',0.7)">🔊</button>
+        <div style="display:flex;gap:8px;justify-content:center;margin-bottom:15px;flex-wrap:wrap">
+            <button class="btn-speak" onclick="playListening('${item.word}',0.45)" style="font-size:.8rem;padding:5px 12px;background:linear-gradient(135deg,#F59E0B,#EF4444)">🐢 Nghe chậm</button>
+            <button class="btn-speak" onclick="playListening('${item.word}',0.7)" style="font-size:.8rem;padding:5px 12px">🔊 Nghe thường</button>
+            <button class="btn-speak" onclick="playListening('${item.word}',1.0)" style="font-size:.8rem;padding:5px 12px;background:linear-gradient(135deg,#8B5CF6,#EC4899)">🐇 Nghe nhanh</button>
+        </div>
         <div class="listening-options">${item.options.map((o,i) => `<div class="listen-option" onclick="checkListening(this,${i},${item.correct})">${o.emoji}<div class="label">${o.label}</div></div>`).join('')}</div>`;
-    setTimeout(() => playListening(item.word), 500);
+    setTimeout(() => playListening(item.word, 0.7), 500);
 }
-function playListening(w) { const b=document.getElementById('listenBtn'); b.classList.add('playing'); speak(w,0.7); setTimeout(()=>b.classList.remove('playing'),1500); }
+function playListening(w, rate) { const b=document.getElementById('listenBtn'); if(b) b.classList.add('playing'); speak(w, rate || 0.7); setTimeout(()=>{ if(b) b.classList.remove('playing'); },1500); }
 function checkListening(el,sel,cor) {
     if (document.querySelector('.listen-option.correct')) return;
-    if (sel===cor) { el.classList.add('correct'); state.score++; state.coins+=5; playCorrectSound(); }
-    else { el.classList.add('wrong'); document.querySelectorAll('.listen-option')[cor].classList.add('correct'); }
-    updateUI(); setTimeout(()=>{state.currentIndex++;renderListeningQ();},1500);
+    const lItem = LISTENING_DATA[state.currentIndex];
+    const lViLabel = lItem.options[lItem.correct] ? lItem.options[lItem.correct].label : lItem.word;
+    if (sel===cor) { el.classList.add('correct'); state.score++; state.coins+=5; SoundFX.correct(); speakBoth(lItem.word, lViLabel, 0.8); }
+    else { el.classList.add('wrong'); SoundFX.wrong(); document.querySelectorAll('.listen-option')[cor].classList.add('correct'); setTimeout(() => speakBoth(lItem.word, lViLabel, 0.7), 500); }
+    updateUI(); setTimeout(()=>{state.currentIndex++;renderListeningQ();},2500);
 }
 
 // ============================================
@@ -853,18 +1213,23 @@ function renderSpellingQ() {
     const item = SPELLING_DATA[state.currentIndex]; state.spellingInput=[]; state.spellingWord=item.word;
     document.getElementById('spellingContent').innerHTML = `
         <div class="spelling-image">${item.emoji}</div><div class="spelling-word">${item.vi}</div>
-        <button class="btn-speak" onclick="speak('${item.word}')" style="margin-bottom:15px">🔊 Nghe</button>
+        <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:15px">
+            <button class="btn-speak" onclick="speak('${item.word}')">🔊 Tiếng Anh</button>
+            <button class="btn-speak" onclick="speakVi('${item.vi.replace(/'/g,"\\'")}')" style="background:linear-gradient(135deg,#F59E0B,#EF4444)">🔊 Tiếng Việt</button>
+            <button class="btn-speak" onclick="speakBoth('${item.word}','${item.vi.replace(/'/g,"\\'")}')" style="background:linear-gradient(135deg,#8B5CF6,#EC4899)">🔊 Cả hai</button>
+        </div>
         <div class="letter-slots" id="letterSlots">${item.word.split('').map((_,i)=>`<div class="letter-slot" id="slot-${i}"></div>`).join('')}</div>
         <div class="letter-keyboard">${'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(l=>`<button class="key-btn" onclick="typeLetter('${l}')">${l}</button>`).join('')}<button class="key-btn backspace" onclick="deleteLetter()">⌫ Xóa</button></div>`;
-    speak(item.word);
+    speakBoth(item.word, item.vi);
 }
-function typeLetter(l) { if(state.spellingInput.length>=state.spellingWord.length) return; state.spellingInput.push(l); const i=state.spellingInput.length-1; const s=document.getElementById(`slot-${i}`); s.textContent=l; s.classList.add('filled'); if(state.spellingInput.length===state.spellingWord.length) checkSpelling(); }
+function typeLetter(l) { if(state.spellingInput.length>=state.spellingWord.length) return; SoundFX.click(); state.spellingInput.push(l); const i=state.spellingInput.length-1; const s=document.getElementById(`slot-${i}`); s.textContent=l; s.classList.add('filled'); if(state.spellingInput.length===state.spellingWord.length) checkSpelling(); }
 function deleteLetter() { if(!state.spellingInput.length) return; state.spellingInput.pop(); const i=state.spellingInput.length; const s=document.getElementById(`slot-${i}`); s.textContent=''; s.classList.remove('filled','correct-letter','wrong-letter'); }
 function checkSpelling() {
     const cor = state.spellingWord; let ok = true;
     for (let i=0;i<cor.length;i++) { const s=document.getElementById(`slot-${i}`); if(state.spellingInput[i]===cor[i]) s.classList.add('correct-letter'); else { s.classList.add('wrong-letter'); ok=false; } }
-    if (ok) { state.score++; state.coins+=8; playCorrectSound(); updateUI(); setTimeout(()=>{state.currentIndex++;renderSpellingQ();},1500); }
-    else { setTimeout(()=>{ state.spellingInput=[]; for(let i=0;i<cor.length;i++){const s=document.getElementById(`slot-${i}`);s.textContent=cor[i];s.classList.remove('wrong-letter');s.classList.add('correct-letter');} setTimeout(()=>{for(let i=0;i<cor.length;i++){const s=document.getElementById(`slot-${i}`);s.textContent='';s.classList.remove('correct-letter');}},1500); },1000); }
+    const viWord = SPELLING_DATA[state.currentIndex].vi;
+    if (ok) { state.score++; state.coins+=8; SoundFX.correct(); speakBoth(cor, viWord, 0.8); updateUI(); setTimeout(()=>{state.currentIndex++;renderSpellingQ();},2500); }
+    else { SoundFX.wrong(); setTimeout(()=>{ state.spellingInput=[]; for(let i=0;i<cor.length;i++){const s=document.getElementById(`slot-${i}`);s.textContent=cor[i];s.classList.remove('wrong-letter');s.classList.add('correct-letter');} speakBoth(cor, viWord, 0.65); setTimeout(()=>{for(let i=0;i<cor.length;i++){const s=document.getElementById(`slot-${i}`);s.textContent='';s.classList.remove('correct-letter');}},2000); },1000); }
 }
 
 // ============================================
@@ -884,16 +1249,26 @@ function renderExamQ() {
             <div class="exam-q-number">Câu ${state.currentIndex+1}/${state.totalQuestions} — ${tl[item.type]||item.type}</div>
             <div class="exam-q-emoji">${item.emoji}</div>
             <div class="exam-q-text">${item.question}</div>
-            ${item.speakWord?`<button class="btn-speak" onclick="speak('${item.speakWord}')" style="margin-bottom:12px">🔊 Nghe từ</button>`:''}
-            <div class="exam-options">${item.options.map((o,i)=>`<div class="exam-opt" onclick="selectExamAns(this,${i})"><div class="exam-opt-letter">${'ABCD'[i]}</div><span>${o}</span></div>`).join('')}</div>
+            <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:12px">
+                ${item.speakWord?`<button class="btn-speak" onclick="speak('${item.speakWord}')" style="font-size:.85rem;padding:6px 14px">🔊 Nghe từ</button>`:''}
+                <button class="btn-speak" onclick="speakVi('${item.question.replace(/'/g,"\\'")}')" style="background:linear-gradient(135deg,#F59E0B,#EF4444);font-size:.85rem;padding:6px 14px">🔊 Nghe câu hỏi</button>
+            </div>
+            <div class="exam-options">${item.options.map((o,i)=>`<div class="exam-opt" onclick="selectExamAns(this,${i},'${String(o).replace(/'/g,"\\'")}')"><div class="exam-opt-letter">${'ABCD'[i]}</div><span>${o}</span></div>`).join('')}</div>
         </div>
         <div style="text-align:center;margin-top:8px">
             ${state.currentIndex>0?`<button class="btn-next" onclick="state.currentIndex--;renderExamQ()" style="background:linear-gradient(135deg,#888,#aaa);margin-right:8px">← Quay lại</button>`:''}
             <button class="btn-next" id="examNextBtn" onclick="state.currentIndex++;renderExamQ()" disabled>Câu tiếp ➡️</button>
         </div>`;
-    if(item.speakWord) setTimeout(()=>speak(item.speakWord),500);
+    // Auto-read question
+    if(item.speakWord) { setTimeout(()=>speak(item.speakWord),300); }
+    else { setTimeout(()=>speakVi(item.question),300); }
 }
-function selectExamAns(el,idx) { document.querySelectorAll('.exam-opt').forEach(o=>o.classList.remove('selected')); el.classList.add('selected'); state.examAnswers[state.currentIndex]=idx; document.getElementById('examNextBtn').disabled=false; }
+function selectExamAns(el,idx,optText) {
+    SoundFX.click();
+    // Đọc đáp án khi chọn
+    speak(optText || '', 0.85);
+    document.querySelectorAll('.exam-opt').forEach(o=>o.classList.remove('selected')); el.classList.add('selected'); state.examAnswers[state.currentIndex]=idx; document.getElementById('examNextBtn').disabled=false;
+}
 function submitExam() {
     let score=0; const byType={vocab:{c:0,t:0},phonics:{c:0,t:0},sentence:{c:0,t:0},listening:{c:0,t:0},spelling:{c:0,t:0}};
     EXAM_DATA.forEach((item,i)=>{ if(!byType[item.type]) byType[item.type]={c:0,t:0}; byType[item.type].t++; if(state.examAnswers[i]===item.correct){score++;byType[item.type].c++;} });
@@ -906,6 +1281,8 @@ function submitExam() {
     saveState();
     const stars=pct>=90?3:pct>=60?2:pct>=30?1:0;
     let emoji,title; if(pct>=90){emoji='🏆';title='Xuất sắc!';}else if(pct>=75){emoji='🎉';title='Giỏi lắm!';}else if(pct>=50){emoji='💪';title='Khá tốt!';}else{emoji='😊';title='Cố gắng thêm nhé!';}
+    if(pct>=60) SoundFX.complete(); else SoundFX.wrong();
+    setTimeout(() => speakBoth(title, `${score} trên ${state.totalQuestions} câu đúng. ${pct} phần trăm.`), 500);
     showScreen('resultScreen');
     const tl={vocab:'Từ vựng',phonics:'Phát âm',sentence:'Ngữ pháp',listening:'Nghe',spelling:'Đánh vần'};
     document.getElementById('resultContent').innerHTML = `
@@ -935,6 +1312,8 @@ function showResult(mod) {
     const today=new Date().getDay(); state.streakDays[today===0?6:today-1]=true; state.streak=state.streakDays.filter(Boolean).length;
     saveState();
     let emoji,title; if(pct>=90){emoji='🏆';title='Xuất sắc!';}else if(pct>=60){emoji='🎉';title='Giỏi lắm!';}else if(pct>=30){emoji='💪';title='Cố gắng thêm!';}else{emoji='😊';title='Cũng ổn!';}
+    if(pct>=60) SoundFX.complete(); else SoundFX.wrong();
+    setTimeout(() => speakBoth(title, `${state.score} trên ${state.totalQuestions} câu đúng. ${pct} phần trăm.`), 500);
     document.getElementById('resultContent').innerHTML = `
         <div class="result-emoji">${emoji}</div><div class="result-title">${title}</div>
         <div class="result-score">${state.score}/${state.totalQuestions} câu đúng (${pct}%)</div>
@@ -947,6 +1326,240 @@ function showResult(mod) {
 }
 
 // ============================================
+// GRAMMAR MODULE
+// ============================================
+let GRAMMAR_ITEMS = [];
+function startGrammar() {
+    showScreen('grammarScreen');
+    const grade = state.selectedGrade || 1;
+    const lk = getLevelKey(state.selectedLevel || 1);
+    if (typeof GRAMMAR_DATA !== 'undefined' && GRAMMAR_DATA[grade]) {
+        GRAMMAR_ITEMS = GRAMMAR_DATA[grade][lk] || GRAMMAR_DATA[grade].level1 || [];
+    } else {
+        GRAMMAR_ITEMS = [];
+    }
+    if (GRAMMAR_ITEMS.length === 0) {
+        document.getElementById('grammarContent').innerHTML = '<div style="text-align:center;padding:40px"><div style="font-size:3rem;margin-bottom:10px">📐</div><h3 style="font-family:\'Fredoka One\',cursive;color:#888">Giáo trình Ngữ pháp đang được cập nhật</h3><p style="color:#888;margin-top:8px">Vui lòng quay lại sau.</p><button class="btn-next" onclick="goHome()" style="margin-top:15px">Về trang chủ</button></div>';
+        return;
+    }
+    state.grammarLesson = 0;
+    state.grammarExIdx = 0;
+    state.totalQuestions = 0;
+    GRAMMAR_ITEMS.forEach(g => state.totalQuestions += (g.exercises ? g.exercises.length : 0));
+    state.grammarCorrect = 0;
+    renderGrammarLesson();
+}
+
+function renderGrammarLesson() {
+    if (state.grammarLesson >= GRAMMAR_ITEMS.length) {
+        state.score = state.grammarCorrect;
+        showResult('grammar');
+        return;
+    }
+    const lesson = GRAMMAR_ITEMS[state.grammarLesson];
+    const doneEx = GRAMMAR_ITEMS.slice(0, state.grammarLesson).reduce((s, g) => s + (g.exercises ? g.exercises.length : 0), 0);
+    const totalEx = state.totalQuestions;
+    document.getElementById('grammarLessonProgress').style.width = (doneEx / totalEx * 100) + '%';
+
+    document.getElementById('grammarContent').innerHTML = `
+        <div style="background:#fff;border-radius:20px;padding:25px;box-shadow:0 4px 15px rgba(0,0,0,.08);margin-bottom:15px">
+            <div style="text-align:center;margin-bottom:15px">
+                <div style="font-size:2.5rem">${lesson.emoji || '📐'}</div>
+                <h3 style="font-family:'Fredoka One',cursive;color:#8B5CF6;margin:8px 0">${lesson.title}</h3>
+                <p style="color:#888;font-size:.9rem">${lesson.titleVi}</p>
+                <div style="display:flex;gap:6px;justify-content:center;margin-top:8px">
+                    <button class="btn-speak" onclick="speak('${lesson.title.replace(/'/g,"\\'")}',0.7)" style="font-size:.8rem;padding:5px 12px">🔊 English</button>
+                    <button class="btn-speak" onclick="speakVi('${lesson.titleVi.replace(/'/g,"\\'")}',0.9)" style="font-size:.8rem;padding:5px 12px;background:linear-gradient(135deg,#F59E0B,#EF4444)">🔊 Tiếng Việt</button>
+                </div>
+            </div>
+            <div style="background:#F3E8FF;border-radius:14px;padding:15px;margin-bottom:15px">
+                <h4 style="color:#8B5CF6;margin-bottom:8px">📝 Giải thích:</h4>
+                <p style="font-size:.9rem;line-height:1.6;color:#555">${lesson.explanation}</p>
+                <button class="btn-speak" onclick="speakVi('${lesson.explanation.replace(/'/g,"\\'").replace(/\n/g,' ')}',0.85)" style="margin-top:8px;font-size:.8rem;padding:5px 12px;background:linear-gradient(135deg,#F59E0B,#EF4444)">🔊 Nghe giải thích</button>
+            </div>
+            <h4 style="color:#8B5CF6;margin-bottom:10px">💡 Ví dụ:</h4>
+            ${lesson.examples.map(ex => `
+                <div style="background:#f8f8f8;border-radius:10px;padding:10px 14px;margin-bottom:8px;cursor:pointer" onclick="speakBoth('${ex.en.replace(/'/g,"\\'")}','${ex.vi.replace(/'/g,"\\'")}')">
+                    <div style="font-weight:700;color:#333">${ex.en}${ex.highlight ? ` <span style="background:#FFE66D;padding:1px 6px;border-radius:4px;font-size:.85rem">${ex.highlight}</span>` : ''}</div>
+                    <div style="font-size:.85rem;color:#888;margin-top:2px">${ex.vi}</div>
+                    <div style="font-size:.75rem;color:#8B5CF6;margin-top:2px">🔊 Nhấn để nghe</div>
+                </div>
+            `).join('')}
+        </div>
+        <div style="text-align:center">
+            <button class="btn-next" onclick="startGrammarExercises()" style="background:linear-gradient(135deg,#8B5CF6,#EC4899)">Làm bài tập ✏️</button>
+        </div>`;
+    speakBoth(lesson.title, lesson.titleVi);
+}
+
+function startGrammarExercises() {
+    state.grammarExIdx = 0;
+    renderGrammarEx();
+}
+
+function renderGrammarEx() {
+    const lesson = GRAMMAR_ITEMS[state.grammarLesson];
+    if (!lesson || !lesson.exercises || state.grammarExIdx >= lesson.exercises.length) {
+        state.grammarLesson++;
+        renderGrammarLesson();
+        return;
+    }
+    const ex = lesson.exercises[state.grammarExIdx];
+    const doneEx = GRAMMAR_ITEMS.slice(0, state.grammarLesson).reduce((s, g) => s + (g.exercises ? g.exercises.length : 0), 0) + state.grammarExIdx;
+    document.getElementById('grammarLessonProgress').style.width = (doneEx / state.totalQuestions * 100) + '%';
+
+    document.getElementById('grammarContent').innerHTML = `
+        <div class="exam-question">
+            <div class="exam-q-number">Bài ${state.grammarLesson + 1} — Câu ${state.grammarExIdx + 1}/${lesson.exercises.length}</div>
+            <div class="exam-q-text">${ex.question}</div>
+            <div style="display:flex;gap:6px;justify-content:center;margin-bottom:10px">
+                <button class="btn-speak" onclick="speakVi('${ex.question.replace(/'/g,"\\'")}',0.85)" style="font-size:.8rem;padding:5px 12px;background:linear-gradient(135deg,#F59E0B,#EF4444)">🔊 Nghe câu hỏi</button>
+            </div>
+            <div class="exam-options">${ex.options.map((o,i)=>`<div class="exam-opt" onclick="checkGrammarAns(this,${i},${ex.correct})"><div class="exam-opt-letter">${'ABCD'[i]}</div><span>${o}</span></div>`).join('')}</div>
+        </div>`;
+    speakVi(ex.question, 0.85);
+}
+
+function checkGrammarAns(el, sel, cor) {
+    if (document.querySelector('#grammarContent .exam-opt.correct')) return;
+    const lesson = GRAMMAR_ITEMS[state.grammarLesson];
+    const ex = lesson.exercises[state.grammarExIdx];
+    if (sel === cor) {
+        el.classList.add('correct'); state.grammarCorrect++; state.coins += 5; SoundFX.correct();
+        speak(ex.options[cor], 0.8);
+    } else {
+        el.classList.add('wrong'); SoundFX.wrong();
+        document.querySelectorAll('#grammarContent .exam-opt')[cor].classList.add('correct');
+    }
+    // Show explanation
+    if (ex.explanation) {
+        const expDiv = document.createElement('div');
+        expDiv.style.cssText = 'background:#FEF3C7;border-radius:10px;padding:12px;margin-top:12px;font-size:.85rem;color:#92400E';
+        expDiv.innerHTML = '💡 ' + ex.explanation;
+        document.querySelector('#grammarContent .exam-question').appendChild(expDiv);
+        setTimeout(() => speakVi(ex.explanation, 0.85), 800);
+    }
+    updateUI();
+    setTimeout(() => { state.grammarExIdx++; renderGrammarEx(); }, 3000);
+}
+
+// ============================================
+// READING MODULE
+// ============================================
+let READING_ITEMS = [];
+function startReading() {
+    showScreen('readingScreen');
+    const grade = state.selectedGrade || 1;
+    const lk = getLevelKey(state.selectedLevel || 1);
+    if (typeof READING_DATA !== 'undefined' && READING_DATA[grade]) {
+        READING_ITEMS = READING_DATA[grade][lk] || READING_DATA[grade].level1 || [];
+    } else {
+        READING_ITEMS = [];
+    }
+    if (READING_ITEMS.length === 0) {
+        document.getElementById('readingContent').innerHTML = '<div style="text-align:center;padding:40px"><div style="font-size:3rem;margin-bottom:10px">📚</div><h3 style="font-family:\'Fredoka One\',cursive;color:#888">Giáo trình Đọc hiểu đang được cập nhật</h3><p style="color:#888;margin-top:8px">Vui lòng quay lại sau.</p><button class="btn-next" onclick="goHome()" style="margin-top:15px">Về trang chủ</button></div>';
+        return;
+    }
+    state.readingIdx = 0;
+    state.readingQIdx = 0;
+    state.totalQuestions = 0;
+    READING_ITEMS.forEach(r => state.totalQuestions += (r.questions ? r.questions.length : 0));
+    state.readingCorrect = 0;
+    renderReadingPassage();
+}
+
+function renderReadingPassage() {
+    if (state.readingIdx >= READING_ITEMS.length) {
+        state.score = state.readingCorrect;
+        showResult('reading');
+        return;
+    }
+    const item = READING_ITEMS[state.readingIdx];
+    const doneQ = READING_ITEMS.slice(0, state.readingIdx).reduce((s, r) => s + (r.questions ? r.questions.length : 0), 0);
+    document.getElementById('readingLessonProgress').style.width = (doneQ / state.totalQuestions * 100) + '%';
+
+    document.getElementById('readingContent').innerHTML = `
+        <div style="background:#fff;border-radius:20px;padding:25px;box-shadow:0 4px 15px rgba(0,0,0,.08);margin-bottom:15px">
+            <div style="text-align:center;margin-bottom:15px">
+                <div style="font-size:2.5rem">${item.emoji || '📚'}</div>
+                <h3 style="font-family:'Fredoka One',cursive;color:#0EA5E9;margin:8px 0">${item.title}</h3>
+                <p style="color:#888;font-size:.85rem">${item.titleVi}</p>
+                <div style="display:flex;gap:6px;justify-content:center;margin-top:8px">
+                    <button class="btn-speak" onclick="speak('${item.title.replace(/'/g,"\\'")}',0.7)" style="font-size:.8rem;padding:5px 12px">🔊 English</button>
+                    <button class="btn-speak" onclick="speakVi('${item.titleVi.replace(/'/g,"\\'")}',0.9)" style="font-size:.8rem;padding:5px 12px;background:linear-gradient(135deg,#F59E0B,#EF4444)">🔊 Tiếng Việt</button>
+                </div>
+            </div>
+            <div style="background:#F0F9FF;border-radius:14px;padding:18px;margin-bottom:15px;line-height:1.8;font-size:.95rem;color:#333">
+                ${item.passage}
+            </div>
+            <div style="display:flex;gap:6px;justify-content:center;margin-bottom:15px">
+                <button class="btn-speak" onclick="readPassageAloud(${state.readingIdx})" style="background:linear-gradient(135deg,#0EA5E9,#06B6D4)">🔊 Đọc bài (Tiếng Anh)</button>
+                <button class="btn-speak" onclick="readPassageAloud(${state.readingIdx},true)" style="background:linear-gradient(135deg,#8B5CF6,#EC4899);font-size:.85rem">🐢 Đọc chậm</button>
+            </div>
+            ${item.vocabulary ? `
+                <h4 style="color:#0EA5E9;margin-bottom:8px">📝 Từ vựng chính:</h4>
+                <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:15px">
+                    ${item.vocabulary.map(v => `<div style="background:#E0F7FA;padding:6px 12px;border-radius:20px;font-size:.85rem;cursor:pointer" onclick="speakBoth('${v.word.replace(/'/g,"\\'")}','${v.meaning.replace(/'/g,"\\'")}')"><strong>${v.word}</strong> ${v.phonetic || ''} — ${v.meaning} 🔊</div>`).join('')}
+                </div>
+            ` : ''}
+        </div>
+        <div style="text-align:center">
+            <button class="btn-next" onclick="startReadingQuestions()" style="background:linear-gradient(135deg,#0EA5E9,#06B6D4)">Trả lời câu hỏi ✏️</button>
+        </div>`;
+    speak(item.title, 0.7);
+}
+
+function readPassageAloud(idx, slow) {
+    const item = READING_ITEMS[idx];
+    if (!item) return;
+    // Strip HTML tags for speech
+    const text = item.passage.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+    speak(text, slow ? 0.5 : 0.75);
+}
+
+function startReadingQuestions() {
+    state.readingQIdx = 0;
+    renderReadingQ();
+}
+
+function renderReadingQ() {
+    const item = READING_ITEMS[state.readingIdx];
+    if (!item || !item.questions || state.readingQIdx >= item.questions.length) {
+        state.readingIdx++;
+        renderReadingPassage();
+        return;
+    }
+    const q = item.questions[state.readingQIdx];
+    const doneQ = READING_ITEMS.slice(0, state.readingIdx).reduce((s, r) => s + (r.questions ? r.questions.length : 0), 0) + state.readingQIdx;
+    document.getElementById('readingLessonProgress').style.width = (doneQ / state.totalQuestions * 100) + '%';
+
+    document.getElementById('readingContent').innerHTML = `
+        <div class="exam-question">
+            <div class="exam-q-number">Bài ${state.readingIdx + 1} — Câu ${state.readingQIdx + 1}/${item.questions.length}</div>
+            <div class="exam-q-text">${q.question}</div>
+            <div style="display:flex;gap:6px;justify-content:center;margin-bottom:10px">
+                <button class="btn-speak" onclick="speak('${q.question.replace(/'/g,"\\'")}',0.75)" style="font-size:.8rem;padding:5px 12px">🔊 English</button>
+                <button class="btn-speak" onclick="speakVi('${q.question.replace(/'/g,"\\'")}',0.85)" style="font-size:.8rem;padding:5px 12px;background:linear-gradient(135deg,#F59E0B,#EF4444)">🔊 Tiếng Việt</button>
+            </div>
+            <div class="exam-options">${q.options.map((o,i)=>`<div class="exam-opt" onclick="checkReadingAns(this,${i},${q.correct},'${String(o).replace(/'/g,"\\'")}')"><div class="exam-opt-letter">${'ABCD'[i]}</div><span>${o}</span></div>`).join('')}</div>
+        </div>`;
+    speak(q.question, 0.75);
+}
+
+function checkReadingAns(el, sel, cor, optText) {
+    if (document.querySelector('#readingContent .exam-opt.correct')) return;
+    if (sel === cor) {
+        el.classList.add('correct'); state.readingCorrect++; state.coins += 5; SoundFX.correct();
+        speak(optText, 0.8);
+    } else {
+        el.classList.add('wrong'); SoundFX.wrong();
+        document.querySelectorAll('#readingContent .exam-opt')[cor].classList.add('correct');
+    }
+    updateUI();
+    setTimeout(() => { state.readingQIdx++; renderReadingQ(); }, 2000);
+}
+
+// ============================================
 // REPORT
 // ============================================
 function showReport() {
@@ -954,8 +1567,8 @@ function showReport() {
     const op=state.totalQuestionsSeen>0?Math.round((state.totalCorrectAnswers/state.totalQuestionsSeen)*100):0;
     const og=getGrade(op);
     const gradeInfo = GRADE_INFO.find(g => g.id === (state.selectedGrade || 1)) || GRADE_INFO[0];
-    const mn={vocab:'Từ Vựng',phonics:'Phát Âm',sentences:'Đặt Câu',matching:'Trò Chơi',listening:'Nghe Hiểu',spelling:'Đánh Vần'};
-    const mc={vocab:'#4ECDC4',phonics:'#FF6B9D',sentences:'#A855F7',matching:'#FF8C42',listening:'#22C55E',spelling:'#EF4444'};
+    const mn={vocab:'Từ Vựng',phonics:'Phát Âm',sentences:'Đặt Câu',matching:'Trò Chơi',listening:'Nghe Hiểu',spelling:'Đánh Vần',grammar:'Ngữ Pháp',reading:'Đọc Hiểu'};
+    const mc={vocab:'#4ECDC4',phonics:'#FF6B9D',sentences:'#A855F7',matching:'#FF8C42',listening:'#22C55E',spelling:'#EF4444',grammar:'#8B5CF6',reading:'#0EA5E9'};
     let examHTML='';
     if(state.examHistory.length>0) examHTML=`<h3 style="font-family:'Fredoka One',cursive;margin:20px 0 8px;color:#6366F1">📋 Lịch sử kiểm tra</h3>
         <table class="report-table"><tr><th>Ngày</th><th>Điểm</th><th>%</th><th>Loại</th></tr>
@@ -991,8 +1604,31 @@ function showReport() {
 // ============================================
 // EFFECTS
 // ============================================
-function playCorrectSound() { try { const c=new(window.AudioContext||window.webkitAudioContext)();const o=c.createOscillator();const g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.setValueAtTime(523,c.currentTime);o.frequency.setValueAtTime(659,c.currentTime+.1);o.frequency.setValueAtTime(784,c.currentTime+.2);g.gain.setValueAtTime(.3,c.currentTime);g.gain.exponentialRampToValueAtTime(.01,c.currentTime+.4);o.start(c.currentTime);o.stop(c.currentTime+.4);}catch(e){} }
+function SoundFX.correct() { try { const c=new(window.AudioContext||window.webkitAudioContext)();const o=c.createOscillator();const g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.setValueAtTime(523,c.currentTime);o.frequency.setValueAtTime(659,c.currentTime+.1);o.frequency.setValueAtTime(784,c.currentTime+.2);g.gain.setValueAtTime(.3,c.currentTime);g.gain.exponentialRampToValueAtTime(.01,c.currentTime+.4);o.start(c.currentTime);o.stop(c.currentTime+.4);}catch(e){} }
 function showConfetti() { const c=document.getElementById('confettiContainer');c.innerHTML='';const cols=['#FF6B9D','#4ECDC4','#FFE66D','#A855F7','#22C55E','#FF8C42'];for(let i=0;i<50;i++){const d=document.createElement('div');d.className='confetti';d.style.left=Math.random()*100+'%';d.style.background=cols[Math.floor(Math.random()*cols.length)];d.style.animationDelay=Math.random()*2+'s';d.style.width=(Math.random()*8+5)+'px';d.style.height=(Math.random()*8+5)+'px';c.appendChild(d);}setTimeout(()=>c.innerHTML='',4000); }
+function submitContactForm() {
+    const name = document.getElementById('footerContactName').value.trim();
+    const phone = document.getElementById('footerContactPhone').value.trim();
+    const msg = document.getElementById('footerContactMsg').value.trim();
+    if (!name || !phone || !msg) { alert('Vui lòng điền đầy đủ thông tin.'); return; }
+    if (firebaseReady) {
+        try {
+            firebase.firestore().collection('support_requests').add({
+                name, phone, message: msg,
+                userId: Auth.currentUser?.uid || 'anonymous',
+                grade: state.selectedGrade || 1,
+                plan: Subscription.currentPlan?.plan || 'free',
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+        } catch(e) { console.warn('Lưu Firestore lỗi:', e); }
+    }
+    localStorage.setItem('fekLastSupport', JSON.stringify({ name, phone, message: msg, date: new Date().toISOString() }));
+    document.getElementById('footerContactName').value = '';
+    document.getElementById('footerContactPhone').value = '';
+    document.getElementById('footerContactMsg').value = '';
+    alert('Cảm ơn bạn! Yêu cầu hỗ trợ đã được gửi. Chúng tôi sẽ liên hệ trong vòng 24 giờ.');
+}
+
 function createFloatingShapes() { const shapes=['⭐','🌟','🌈','💙','💚','💛','🌸','☀️','☁️','🌎'];const c=document.getElementById('floatingShapes');for(let i=0;i<12;i++){const s=document.createElement('span');s.innerHTML=shapes[Math.floor(Math.random()*shapes.length)];s.style.left=Math.random()*100+'%';s.style.animationDelay=Math.random()*15+'s';s.style.fontSize=(Math.random()*1.5+1)+'rem';c.appendChild(s);} }
 
 // ============================================
@@ -1428,6 +2064,7 @@ function adminResetProgress() {
 // ============================================
 initFirebase();
 Auth.init();
+SoundFX.init();
 createFloatingShapes();
 </script>
 </body>
