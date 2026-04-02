@@ -331,7 +331,7 @@
                 <button class="btn-report" onclick="showGradeSelect()" style="background:linear-gradient(135deg,#6366F1,#A855F7)">🎓 Chọn lớp</button>
                 <button class="btn-report" onclick="showLevelSelect()" style="background:linear-gradient(135deg,var(--purple),var(--pink))">📚 Giáo trình</button>
                 <button class="btn-report" onclick="showReport()">📊 Bảng điểm</button>
-                <button class="btn-report" onclick="Subscription.renderPricingPage()" style="background:linear-gradient(135deg,#F59E0B,#EF4444)">👑 Nâng cấp</button>
+                <button class="btn-report" onclick="Subscription.renderPricingPage()" style="background:linear-gradient(135deg,#F59E0B,#EF4444)" id="upgradeBtn">👑 Nâng cấp</button>
                 <button class="btn-report" onclick="showAdminLogin()" style="background:linear-gradient(135deg,#EF4444,#DC2626)">⚙️ Admin</button>
             </div>
         </div>
@@ -870,6 +870,18 @@ function updateUI() {
     const dn = ['T2','T3','T4','T5','T6','T7','CN'];
     streakEl.innerHTML = dn.map((d, i) => `<div class="streak-day ${state.streakDays[i]?'completed':''}">${state.streakDays[i]?'✓':d}</div>`).join('');
 
+    // Update upgrade button
+    const upgradeBtn = document.getElementById('upgradeBtn');
+    if (upgradeBtn) {
+        if (Subscription.isTrialActive()) {
+            upgradeBtn.textContent = '🎁 Trial: ' + Subscription.getTrialDaysLeft() + ' ngày';
+            upgradeBtn.style.background = 'linear-gradient(135deg,#22C55E,#16A34A)';
+        } else if (Subscription.currentPlan.plan !== 'free') {
+            upgradeBtn.textContent = '👑 ' + (Subscription.plans.find(p => p.id === Subscription.currentPlan.plan)?.name || 'Premium');
+            upgradeBtn.style.background = 'linear-gradient(135deg,#A855F7,#6366F1)';
+        }
+    }
+
     // XP bar on home
     const hlNum = document.getElementById('homeLevelNum');
     const hlTitle = document.getElementById('homeLevelTitle');
@@ -893,7 +905,7 @@ function startModule(m) {
     // Check subscription access
     const grade = state.selectedGrade || 1;
     if (!Subscription.canAccessGrade(grade)) {
-        Subscription.renderPricingPage();
+        Subscription.showPaywallCTA();
         return;
     }
     if (VOCAB_DATA.length === 0 && m !== 'grammar' && m !== 'reading') {
@@ -1437,7 +1449,7 @@ function renderGradeSelector() {
             ${GRADE_INFO.map(g => {
                 const accessible = Subscription.canAccessGrade(g.id);
                 return `<div class="grade-card ${current===g.id?'active':''} ${!accessible?'locked':''}"
-                    onclick="${accessible ? `selectGrade(${g.id})` : `Subscription.renderPricingPage()`}"
+                    onclick="${accessible ? `selectGrade(${g.id})` : `Subscription.showPaywallCTA()`}"
                     style="border-color:${current===g.id?g.color:'#eee'}">
                     <div class="g-icon">${g.icon}</div>
                     <div class="g-name" style="color:${g.color}">${g.name}</div>
@@ -1455,7 +1467,7 @@ function renderGradeSelector() {
 
 async function selectGrade(gradeId) {
     if (!Subscription.canAccessGrade(gradeId)) {
-        Subscription.renderPricingPage();
+        Subscription.showPaywallCTA();
         return;
     }
     SoundFX.click();
@@ -1931,6 +1943,7 @@ function submitExam() {
         <button class="btn-next" onclick="showBadges()" style="background:linear-gradient(135deg,#A855F7,#6366F1);margin-right:8px">🏅 Huy chương</button>
         <button class="btn-next" onclick="goHome()" style="background:linear-gradient(135deg,var(--blue),var(--green))">Về trang chủ 🏠</button>`;
     if(pct>=60) showConfetti(); updateUI();
+    Subscription.showPostLessonCTA(document.getElementById('resultContent'), score, state.totalQuestions);
 }
 
 // ============================================
@@ -1974,6 +1987,8 @@ function showResult(mod) {
         <button class="btn-next" onclick="showBadges()" style="background:linear-gradient(135deg,#A855F7,#6366F1);margin-right:8px">🏅 Huy chương</button>
         <button class="btn-next" onclick="goHome()" style="background:linear-gradient(135deg,var(--blue),var(--green))">Về trang chủ 🏠</button>`;
     if(pct>=60) showConfetti(); updateUI();
+    // Smart CTA for free users
+    Subscription.showPostLessonCTA(document.getElementById('resultContent'), state.score, state.totalQuestions);
 }
 
 // ============================================
