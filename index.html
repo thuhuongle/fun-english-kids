@@ -193,12 +193,52 @@
         .grade-card .g-icon{font-size:2rem;margin-bottom:6px}
         .grade-card .g-name{font-family:'Fredoka One',cursive;font-size:.95rem}
         .grade-card .g-desc{font-size:.75rem;color:#888;margin-top:3px}
+        /* ROADMAP */
+        .roadmap-container{max-width:700px;margin:0 auto}
+        .roadmap-phase{margin-bottom:30px;position:relative}
+        .roadmap-phase-header{display:flex;align-items:center;gap:12px;margin-bottom:15px}
+        .roadmap-phase-icon{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:#fff;font-weight:800;box-shadow:0 4px 15px rgba(0,0,0,.15)}
+        .roadmap-phase-title{font-family:'Fredoka One',cursive;font-size:1.3rem}
+        .roadmap-phase-desc{font-size:.85rem;color:#888}
+        .roadmap-steps{position:relative;padding-left:28px}
+        .roadmap-steps::before{content:'';position:absolute;left:13px;top:0;bottom:0;width:3px;background:#e0e0e0;border-radius:2px}
+        .roadmap-step{position:relative;margin-bottom:12px;display:flex;align-items:flex-start;gap:14px}
+        .roadmap-dot{width:28px;height:28px;border-radius:50%;border:3px solid #ddd;background:#fff;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;z-index:2;flex-shrink:0;transition:all .3s}
+        .roadmap-dot.done{background:var(--green);border-color:var(--green);color:#fff}
+        .roadmap-dot.current{background:var(--purple);border-color:var(--purple);color:#fff;animation:pulse 2s infinite}
+        .roadmap-dot.locked{background:#f0f0f0;border-color:#ddd;color:#ccc}
+        .roadmap-step-card{background:#fff;border-radius:14px;padding:14px 18px;flex:1;box-shadow:0 2px 8px rgba(0,0,0,.06);border:2px solid #eee;transition:all .3s;cursor:pointer}
+        .roadmap-step-card:hover{transform:translateX(4px);box-shadow:0 4px 15px rgba(0,0,0,.1)}
+        .roadmap-step-card.done{border-color:#DCFCE7;background:#F0FDF4}
+        .roadmap-step-card.current{border-color:var(--purple);background:#FAF5FF}
+        .roadmap-step-card.locked{opacity:.6;cursor:not-allowed}
+        .roadmap-step-title{font-weight:800;font-size:.95rem;margin-bottom:2px}
+        .roadmap-step-meta{font-size:.8rem;color:#888;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+        .roadmap-step-modules{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
+        .roadmap-module-tag{font-size:.7rem;padding:2px 8px;border-radius:10px;font-weight:700}
+        .roadmap-milestone{background:linear-gradient(135deg,#FFE66D,#FF8C42);border-radius:16px;padding:16px 20px;margin:10px 0 20px 28px;display:flex;align-items:center;gap:12px;color:#fff;box-shadow:0 4px 15px rgba(255,140,66,.3)}
+        .roadmap-milestone .rm-icon{font-size:2rem}
+        .roadmap-milestone .rm-text{font-family:'Fredoka One',cursive;font-size:1rem}
+        .roadmap-milestone .rm-desc{font-size:.8rem;opacity:.9}
+        .roadmap-legend{display:flex;gap:15px;justify-content:center;margin-bottom:20px;flex-wrap:wrap}
+        .roadmap-legend-item{display:flex;align-items:center;gap:6px;font-size:.8rem;font-weight:600;color:#666}
+        .roadmap-legend-dot{width:14px;height:14px;border-radius:50%}
+        .roadmap-overview{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:25px}
+        .roadmap-overview-card{background:#fff;border-radius:16px;padding:18px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.06);border:3px solid #eee;cursor:pointer;transition:all .3s}
+        .roadmap-overview-card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.12)}
+        .roadmap-overview-card.active{border-color:var(--purple);background:#FAF5FF}
+        .roadmap-overview-card .ro-icon{font-size:2.5rem}
+        .roadmap-overview-card .ro-name{font-family:'Fredoka One',cursive;font-size:1rem;margin-top:6px}
+        .roadmap-overview-card .ro-level{font-size:.8rem;color:#888;margin-top:2px}
+        .roadmap-overview-card .ro-bar{width:100%;height:8px;background:#eee;border-radius:4px;margin-top:8px;overflow:hidden}
+        .roadmap-overview-card .ro-bar-fill{height:100%;border-radius:4px;transition:width .5s}
         @media(max-width:600px){
             .header h1{font-size:1.3rem}.modules-grid{grid-template-columns:1fr 1fr;gap:10px}.module-card{padding:16px}
             .module-card .icon{font-size:2.2rem}.module-card h3{font-size:.95rem}.welcome-banner h2{font-size:1.4rem}
             .level-cards{grid-template-columns:1fr}.month-grid{grid-template-columns:repeat(3,1fr)}
             .matching-game{grid-template-columns:repeat(3,1fr)}.student-bar{flex-direction:column;gap:8px}
             .report-summary{grid-template-columns:1fr}.grade-selector-grid{grid-template-columns:repeat(3,1fr)}
+            .roadmap-overview{grid-template-columns:1fr}
         }
     </style>
 </head>
@@ -286,6 +326,7 @@
                 <div class="student-level" id="studentLevel">Cấp độ: Mới bắt đầu</div></div>
             </div>
             <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <button class="btn-report" onclick="showRoadmap()" style="background:linear-gradient(135deg,#F59E0B,#22C55E)">🗺️ Lộ trình</button>
                 <button class="btn-report" onclick="showGradeSelect()" style="background:linear-gradient(135deg,#6366F1,#A855F7)">🎓 Chọn lớp</button>
                 <button class="btn-report" onclick="showLevelSelect()" style="background:linear-gradient(135deg,var(--purple),var(--pink))">📚 Giáo trình</button>
                 <button class="btn-report" onclick="showReport()">📊 Bảng điểm</button>
@@ -337,6 +378,11 @@
     <!-- EXAM --><div class="screen" id="examScreen"><div class="lesson-header"><button class="btn-back" onclick="goHome()">←</button><div class="lesson-title" style="color:#6366F1">📋 Bài Kiểm Tra</div></div><div class="lesson-progress"><div class="fill" id="examLessonProgress" style="width:0%"></div></div><div class="exam-container" id="examContent"></div></div>
     <!-- GRAMMAR --><div class="screen" id="grammarScreen"><div class="lesson-header"><button class="btn-back" onclick="goHome()">←</button><div class="lesson-title" style="color:#8B5CF6">📐 Ngữ Pháp</div></div><div class="lesson-progress"><div class="fill" id="grammarLessonProgress" style="width:0%"></div></div><div class="exam-container" id="grammarContent"></div></div>
     <!-- READING --><div class="screen" id="readingScreen"><div class="lesson-header"><button class="btn-back" onclick="goHome()">←</button><div class="lesson-title" style="color:#0EA5E9">📚 Đọc Hiểu</div></div><div class="lesson-progress"><div class="fill" id="readingLessonProgress" style="width:0%"></div></div><div class="exam-container" id="readingContent"></div></div>
+    <!-- ROADMAP -->
+    <div class="screen" id="roadmapScreen">
+        <div class="lesson-header"><button class="btn-back" onclick="goHome()">←</button><div class="lesson-title" style="color:#F59E0B">🗺️ Lộ Trình Học Tập</div></div>
+        <div class="roadmap-container" id="roadmapContent"></div>
+    </div>
     <!-- RESULT --><div class="screen" id="resultScreen"><div class="result-screen" id="resultContent"></div></div>
     <!-- REPORT --><div class="screen" id="reportScreen"><div class="lesson-header"><button class="btn-back" onclick="goHome()">←</button><div class="lesson-title" style="color:#6366F1">📊 Bảng Điểm</div></div><div class="report-card" id="reportContent"></div></div>
     <!-- ADMIN -->
@@ -845,6 +891,236 @@ function speakBoth(enText, viText, enRate = 0.8) {
         };
         window.speechSynthesis.speak(uEn);
     } catch(e) {}
+}
+
+// ============================================
+// ROADMAP - LỘ TRÌNH HỌC TẬP
+// ============================================
+function showRoadmap() {
+    showScreen('roadmapScreen');
+    SoundFX.click();
+    speakVi('Lộ trình học tập');
+    renderRoadmap();
+}
+
+function renderRoadmap() {
+    const grade = state.selectedGrade || 1;
+    const gi = GRADE_INFO.find(g => g.id === grade);
+    const currentLevel = state.selectedLevel || 1;
+    const currentMonth = state.selectedMonth || 1;
+
+    // Define the roadmap phases for the current grade
+    const phases = [
+        {
+            level: 1, name: 'Beginner', nameVi: 'Cơ bản', icon: '🌱',
+            color: '#4ECDC4', gradient: 'linear-gradient(135deg, #4ECDC4, #44B09E)',
+            desc: 'Làm quen và xây dựng nền tảng',
+            months: [
+                { m: 1, title: 'Làm quen', focus: 'Học từ vựng cơ bản, làm quen phát âm', modules: ['vocab', 'phonics'] },
+                { m: 2, title: 'Gia đình', focus: 'Mở rộng từ vựng, bắt đầu ghép câu', modules: ['vocab', 'phonics', 'sentences'] },
+                { m: 3, title: 'Trường học', focus: 'Luyện nghe hiểu, trò chơi ghi nhớ', modules: ['vocab', 'listening', 'matching'] },
+                { m: 4, title: 'Thiên nhiên', focus: 'Đánh vần, ngữ pháp cơ bản, kiểm tra', modules: ['spelling', 'grammar', 'exam'] }
+            ],
+            milestone: { icon: '🎖️', text: 'Hoàn thành Beginner!', desc: 'Nắm vững từ vựng cơ bản và phát âm' }
+        },
+        {
+            level: 2, name: 'Elementary', nameVi: 'Sơ cấp', icon: '🌿',
+            color: '#A855F7', gradient: 'linear-gradient(135deg, #A855F7, #7C3AED)',
+            desc: 'Phát triển kỹ năng nghe nói đọc viết',
+            months: [
+                { m: 5, title: 'Hoạt động', focus: 'Từ vựng nâng cao, câu phức tạp hơn', modules: ['vocab', 'sentences', 'phonics'] },
+                { m: 6, title: 'Thức ăn', focus: 'Nghe hiểu nâng cao, đọc đoạn văn', modules: ['listening', 'reading', 'vocab'] },
+                { m: 7, title: 'Quần áo', focus: 'Ngữ pháp trung cấp, viết câu', modules: ['grammar', 'spelling', 'matching'] },
+                { m: 8, title: 'Thành phố', focus: 'Ôn tập tổng hợp, kiểm tra giữa kỳ', modules: ['reading', 'exam', 'grammar'] }
+            ],
+            milestone: { icon: '🏅', text: 'Hoàn thành Elementary!', desc: 'Giao tiếp cơ bản và đọc hiểu đơn giản' }
+        },
+        {
+            level: 3, name: 'Pre-Intermediate', nameVi: 'Trung cấp', icon: '🌳',
+            color: '#F59E0B', gradient: 'linear-gradient(135deg, #F59E0B, #D97706)',
+            desc: 'Thành thạo và tự tin sử dụng tiếng Anh',
+            months: [
+                { m: 9, title: 'Du lịch', focus: 'Từ vựng chuyên sâu, đọc hiểu dài', modules: ['vocab', 'reading', 'listening'] },
+                { m: 10, title: 'Khoa học', focus: 'Ngữ pháp nâng cao, viết đoạn văn', modules: ['grammar', 'spelling', 'sentences'] },
+                { m: 11, title: 'Nghề nghiệp', focus: 'Luyện tập tổng hợp tất cả kỹ năng', modules: ['listening', 'reading', 'matching'] },
+                { m: 12, title: 'Tổng ôn', focus: 'Kiểm tra cuối kỳ, đánh giá năng lực', modules: ['exam', 'grammar', 'reading'] }
+            ],
+            milestone: { icon: '🏆', text: 'Hoàn thành lớp ' + grade + '!', desc: 'Sẵn sàng lên lớp tiếp theo' }
+        }
+    ];
+
+    const moduleNames = {
+        vocab: '📖 Từ vựng', phonics: '🎤 Phát âm', sentences: '💬 Đặt câu',
+        matching: '🎲 Trò chơi', listening: '🎧 Nghe', spelling: '✏️ Đánh vần',
+        exam: '📋 Kiểm tra', grammar: '📐 Ngữ pháp', reading: '📚 Đọc hiểu'
+    };
+    const moduleColors = {
+        vocab: '#4ECDC4', phonics: '#FF6B9D', sentences: '#A855F7',
+        matching: '#FF8C42', listening: '#22C55E', spelling: '#EF4444',
+        exam: '#6366F1', grammar: '#8B5CF6', reading: '#0EA5E9'
+    };
+
+    // Calculate progress for each level
+    function getLevelProgress(level) {
+        const mp = state.moduleProgress || {};
+        const total = Object.values(mp).reduce((a, b) => a + (b || 0), 0);
+        const count = Object.keys(mp).length || 1;
+        const avg = total / count;
+        if (level < currentLevel) return 100;
+        if (level === currentLevel) return Math.round(avg);
+        return 0;
+    }
+
+    let html = '';
+
+    // Grade header
+    html += `
+        <div style="text-align:center;margin-bottom:20px">
+            <div style="font-size:3rem">${gi ? gi.icon : '📚'}</div>
+            <h2 style="font-family:'Fredoka One',cursive;color:${gi ? gi.color : '#A855F7'};font-size:1.5rem">${gi ? gi.name : 'Lớp ' + grade}</h2>
+            <p style="color:#888;font-size:.9rem">${gi ? gi.desc : ''} • ${gi ? gi.age : ''}</p>
+        </div>`;
+
+    // Overview cards (3 levels)
+    html += '<div class="roadmap-overview">';
+    phases.forEach(phase => {
+        const prog = getLevelProgress(phase.level);
+        const isActive = currentLevel === phase.level;
+        html += `
+            <div class="roadmap-overview-card ${isActive ? 'active' : ''}" onclick="selectLevelFromRoadmap(${phase.level})" style="${isActive ? 'border-color:' + phase.color : ''}">
+                <div class="ro-icon">${phase.icon}</div>
+                <div class="ro-name" style="color:${phase.color}">${phase.name}</div>
+                <div class="ro-level">${phase.nameVi}</div>
+                <div class="ro-bar"><div class="ro-bar-fill" style="width:${prog}%;background:${phase.color}"></div></div>
+                <div style="font-size:.75rem;color:#888;margin-top:4px">${prog}%</div>
+            </div>`;
+    });
+    html += '</div>';
+
+    // Legend
+    html += `
+        <div class="roadmap-legend">
+            <div class="roadmap-legend-item"><div class="roadmap-legend-dot" style="background:var(--green)"></div> Hoàn thành</div>
+            <div class="roadmap-legend-item"><div class="roadmap-legend-dot" style="background:var(--purple)"></div> Đang học</div>
+            <div class="roadmap-legend-item"><div class="roadmap-legend-dot" style="background:#e0e0e0"></div> Chưa mở</div>
+        </div>`;
+
+    // Detailed phases
+    phases.forEach(phase => {
+        const isCurrentPhase = currentLevel === phase.level;
+        const isPast = currentLevel > phase.level;
+        const isFuture = currentLevel < phase.level;
+
+        html += `
+            <div class="roadmap-phase">
+                <div class="roadmap-phase-header">
+                    <div class="roadmap-phase-icon" style="background:${phase.gradient}">${phase.icon}</div>
+                    <div>
+                        <div class="roadmap-phase-title" style="color:${phase.color}">
+                            ${phase.name} — ${phase.nameVi}
+                            ${isPast ? ' ✅' : isCurrentPhase ? ' 📍' : ' 🔒'}
+                        </div>
+                        <div class="roadmap-phase-desc">${phase.desc} • Tháng ${phase.months[0].m}-${phase.months[phase.months.length-1].m}</div>
+                    </div>
+                </div>
+                <div class="roadmap-steps">`;
+
+        phase.months.forEach(month => {
+            let stepStatus = 'locked';
+            if (isPast || (isCurrentPhase && month.m < currentMonth)) stepStatus = 'done';
+            else if (isCurrentPhase && month.m === currentMonth) stepStatus = 'current';
+
+            const canClick = stepStatus !== 'locked';
+
+            html += `
+                <div class="roadmap-step">
+                    <div class="roadmap-dot ${stepStatus}">${stepStatus === 'done' ? '✓' : stepStatus === 'current' ? '▶' : month.m}</div>
+                    <div class="roadmap-step-card ${stepStatus}" ${canClick ? `onclick="jumpToMonth(${month.m})"` : ''}>
+                        <div class="roadmap-step-title">Tháng ${month.m}: ${month.title}</div>
+                        <div class="roadmap-step-meta">
+                            <span>${month.focus}</span>
+                        </div>
+                        <div class="roadmap-step-modules">
+                            ${month.modules.map(mod => `<span class="roadmap-module-tag" style="background:${moduleColors[mod]}20;color:${moduleColors[mod]}">${moduleNames[mod]}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>`;
+        });
+
+        html += '</div>'; // close roadmap-steps
+
+        // Milestone
+        if (isPast) {
+            html += `
+                <div class="roadmap-milestone" style="background:${phase.gradient}">
+                    <div class="rm-icon">${phase.milestone.icon}</div>
+                    <div><div class="rm-text">${phase.milestone.text}</div><div class="rm-desc">${phase.milestone.desc}</div></div>
+                </div>`;
+        } else if (isCurrentPhase) {
+            html += `
+                <div class="roadmap-milestone" style="background:linear-gradient(135deg,#ddd,#bbb)">
+                    <div class="rm-icon">🎯</div>
+                    <div><div class="rm-text">Mục tiêu: ${phase.milestone.text}</div><div class="rm-desc">${phase.milestone.desc}</div></div>
+                </div>`;
+        }
+
+        html += '</div>'; // close roadmap-phase
+    });
+
+    // Next grade preview
+    if (grade < 12) {
+        const nextGi = GRADE_INFO.find(g => g.id === grade + 1);
+        if (nextGi) {
+            html += `
+                <div style="text-align:center;margin-top:20px;padding:20px;background:linear-gradient(135deg,#f0f0f0,#e8e8e8);border-radius:20px;border:2px dashed #ccc">
+                    <div style="font-size:2rem;margin-bottom:8px">🚀</div>
+                    <div style="font-family:'Fredoka One',cursive;color:#888;font-size:1.1rem">Tiếp theo: ${nextGi.name}</div>
+                    <div style="color:#aaa;font-size:.85rem;margin-top:4px">${nextGi.desc} • ${nextGi.age}</div>
+                    <div style="color:#bbb;font-size:.8rem;margin-top:8px">Hoàn thành lộ trình hiện tại để mở khóa!</div>
+                </div>`;
+        }
+    } else {
+        html += `
+            <div style="text-align:center;margin-top:20px;padding:20px;background:linear-gradient(135deg,#FFE66D,#FF8C42);border-radius:20px;color:#fff">
+                <div style="font-size:2.5rem;margin-bottom:8px">🎓</div>
+                <div style="font-family:'Fredoka One',cursive;font-size:1.2rem">Tốt nghiệp!</div>
+                <div style="font-size:.85rem;opacity:.9;margin-top:4px">Hoàn thành toàn bộ chương trình tiếng Anh K1-12</div>
+            </div>`;
+    }
+
+    // Action button
+    html += `
+        <div style="text-align:center;margin-top:25px;margin-bottom:20px">
+            <button class="btn-next" onclick="goHome()" style="background:linear-gradient(135deg,var(--blue),var(--green))">📚 Bắt đầu học ngay!</button>
+        </div>`;
+
+    document.getElementById('roadmapContent').innerHTML = html;
+}
+
+function selectLevelFromRoadmap(lv) {
+    SoundFX.click();
+    const lvInfo = CURRICULUM.levels.find(l => l.id === lv);
+    if (lvInfo) {
+        speakBoth(lvInfo.name, lvInfo.nameVi);
+        state.selectedLevel = lv;
+        state.selectedMonth = lvInfo.months[0];
+        applyMonth(state.selectedMonth);
+        saveState();
+        updateUI();
+    }
+    renderRoadmap();
+}
+
+function jumpToMonth(m) {
+    SoundFX.click();
+    const mInfo = CURRICULUM.months.find(x => x.month === m);
+    speakVi('Tháng ' + m + '. ' + (mInfo ? mInfo.title : ''));
+    state.selectedMonth = m;
+    state.selectedLevel = getLevelFromMonth(m);
+    applyMonth(m);
+    saveState();
+    updateUI();
+    goHome();
 }
 
 // ============================================
