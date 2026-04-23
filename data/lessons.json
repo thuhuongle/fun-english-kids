@@ -1,0 +1,229 @@
+[
+  {
+    "level": 1,
+    "title": "Chào hỏi & Gia đình",
+    "titleEn": "Greetings & Family",
+    "icon": "👋",
+    "color": "#4ECDC4",
+    "lessons": [
+      { "word": "Hello", "meaning": "Xin chào", "phonetic": "/həˈloʊ/", "emoji": "👋", "image": "https://em-content.zobj.net/source/apple/391/waving-hand_1f44b.png", "audio": "", "example": "Hello, my name is An!", "exampleVi": "Xin chào, mình tên là An!" },
+      { "word": "Hi", "meaning": "Chào", "phonetic": "/haɪ/", "emoji": "🙋", "image": "https://em-content.zobj.net/source/apple/391/person-raising-hand_1f64b.png", "audio": "", "example": "Hi, how are you?", "exampleVi": "Chào, bạn khỏe không?" },
+      { "word": "Mom", "meaning": "Mẹ", "phonetic": "/mɒm/", "emoji": "👩", "image": "https://em-content.zobj.net/source/apple/391/woman_1f469.png", "audio": "", "example": "I love my mom.", "exampleVi": "Con yêu mẹ." },
+      { "word": "Dad", "meaning": "Bố", "phonetic": "/dæd/", "emoji": "👨", "image": "https://em-content.zobj.net/source/apple/391/man_1f468.png", "audio": "", "example": "My dad is tall.", "exampleVi": "Bố con cao." },
+      { "word": "Friend", "meaning": "Bạn bè", "phonetic": "/frend/", "emoji": "🤝", "image": "https://em-content.zobj.net/source/apple/391/handshake_1f91d.png", "audio": "", "example": "She is my friend.", "exampleVi": "Cô ấy là bạn của mình." },
+      { "word": "Thank you", "meaning": "Cảm ơn", "phonetic": "/θæŋk juː/", "emoji": "🙏", "image": "https://em-content.zobj.net/source/apple/391/folded-hands_1f64f.png", "audio": "", "example": "Thank you, teacher!", "exampleVi": "Cảm ơn cô ạ!" }
+    ]
+  },
+  {
+    "level": 2,
+    "title": "Màu sắc & Số đếm",
+    "titleEn": "Colors & Numbers",
+    "icon": "🌈",
+    "color": "#A855F7",
+    "lessons": [
+      { "word": "Red", "meaning": "Màu đỏ", "phonetic": "/red/", "emoji": "🔴", "image": "https://em-content.zobj.net/source/apple/391/red-circle_1f534.png", "audio": "", "example": "The apple is red.", "exampleVi": "Quả táo màu đỏ." },
+      { "word": "Blue", "meaning": "Màu xanh dương", "phonetic": "/bluː/", "emoji": "🔵", "image": "https://em-content.zobj.net/source/apple/391/blue-circle_1f535.png", "audio": "", "example": "The sky is blue.", "exampleVi": "Bầu trời màu xanh." },
+      { "word": "Green", "meaning": "Màu xanh lá", "phonetic": "/ɡriːn/", "emoji": "🟢", "image": "https://em-content.zobj.net/source/apple/391/green-circle_1f7e2.png", "audio": "", "example": "The tree is green.", "exampleVi": "Cái cây màu xanh lá." },
+      { "word": "Yellow", "meaning": "Màu vàng", "phonetic": "/ˈjeloʊ/", "emoji": "🟡", "image": "https://em-content.zobj.net/source/apple/391/yellow-circle_1f7e1.png", "audio": "", "example": "The sun is yellow.", "exampleVi": "Mặt trời màu vàng." },
+      { "word": "One", "meaning": "Số một", "phonetic": "/wʌn/", "emoji": "1️⃣", "image": "https://em-content.zobj.net/source/apple/391/keycap-1_31-fe0f-20e3.png", "audio": "", "example": "I have one cat.", "exampleVi": "Mình có một con mèo." },
+      { "word": "Two", "meaning": "Số hai", "phonetic": "/tuː/", "emoji": "2️⃣", "image": "https://em-content.zobj.net/source/apple/391/keycap-2_32-fe0f-20e3.png", "audio": "", "example": "I have two dogs.", "exampleVi": "Mình có hai con chó." },
+      { "word": "Three", "meaning": "Số ba", "phonetic": "/θriː/", "emoji": "3️⃣", "image": "https://em-content.zobj.net/source/apple/391/keycap-3_33-fe0f-20e3.png", "audio": "", "example": "I have three pens.", "exampleVi": "Mình có ba cây bút." }
+    ]
+  },
+  {
+    "level": 3,
+    "title": "Động vật & Trái cây",
+    "titleEn": "Animals & Fruits",
+    "icon": "🐾",
+    "color": "#22C55E",
+    "lessons": [
+      { "word": "Cat", "meaning": "Con mèo", "phonetic": "/kæt/", "emoji": "🐱", "image": "https://em-content.zobj.net/source/apple/391/cat-face_1f431.png", "audio": "", "example": "The cat is small.", "exampleVi": "Con mèo nhỏ." },
+      { "word": "Dog", "meaning": "Con chó", "phonetic": "/dɒɡ/", "emoji": "🐶", "image": "https://em-content.zobj.net/source/apple/391/dog-face_1f436.png", "audio": "", "example": "The dog is big.", "exampleVi": "Con chó to." },
+      { "word": "Bird", "meaning": "Con chim", "phonetic": "/bɜːrd/", "emoji": "🐦", "image": "https://em-content.zobj.net/source/apple/391/bird_1f426.png", "audio": "", "example": "The bird can fly.", "exampleVi": "Con chim biết bay." },
+      { "word": "Fish", "meaning": "Con cá", "phonetic": "/fɪʃ/", "emoji": "🐟", "image": "https://em-content.zobj.net/source/apple/391/fish_1f41f.png", "audio": "", "example": "The fish swims fast.", "exampleVi": "Con cá bơi nhanh." },
+      { "word": "Apple", "meaning": "Quả táo", "phonetic": "/ˈæpəl/", "emoji": "🍎", "image": "https://em-content.zobj.net/source/apple/391/red-apple_1f34e.png", "audio": "", "example": "I eat an apple.", "exampleVi": "Mình ăn một quả táo." },
+      { "word": "Banana", "meaning": "Quả chuối", "phonetic": "/bəˈnænə/", "emoji": "🍌", "image": "https://em-content.zobj.net/source/apple/391/banana_1f34c.png", "audio": "", "example": "The banana is yellow.", "exampleVi": "Quả chuối màu vàng." },
+      { "word": "Orange", "meaning": "Quả cam", "phonetic": "/ˈɔːrɪndʒ/", "emoji": "🍊", "image": "https://em-content.zobj.net/source/apple/391/tangerine_1f34a.png", "audio": "", "example": "Orange is sweet.", "exampleVi": "Quả cam ngọt." }
+    ]
+  },
+  {
+    "level": 4,
+    "title": "Trường học & Cơ thể",
+    "titleEn": "School & Body",
+    "icon": "🏫",
+    "color": "#F59E0B",
+    "lessons": [
+      { "word": "Book", "meaning": "Quyển sách", "phonetic": "/bʊk/", "emoji": "📖", "image": "https://em-content.zobj.net/source/apple/391/open-book_1f4d6.png", "audio": "", "example": "I read a book.", "exampleVi": "Mình đọc một quyển sách." },
+      { "word": "Pen", "meaning": "Cây bút", "phonetic": "/pen/", "emoji": "🖊️", "image": "https://em-content.zobj.net/source/apple/391/pen_1f58a-fe0f.png", "audio": "", "example": "This is my pen.", "exampleVi": "Đây là cây bút của mình." },
+      { "word": "Bag", "meaning": "Cặp sách", "phonetic": "/bæɡ/", "emoji": "🎒", "image": "https://em-content.zobj.net/source/apple/391/backpack_1f392.png", "audio": "", "example": "My bag is new.", "exampleVi": "Cặp của mình mới." },
+      { "word": "Hand", "meaning": "Bàn tay", "phonetic": "/hænd/", "emoji": "✋", "image": "https://em-content.zobj.net/source/apple/391/raised-hand_270b.png", "audio": "", "example": "Raise your hand!", "exampleVi": "Giơ tay lên!" },
+      { "word": "Eye", "meaning": "Mắt", "phonetic": "/aɪ/", "emoji": "👁️", "image": "https://em-content.zobj.net/source/apple/391/eye_1f441-fe0f.png", "audio": "", "example": "I have two eyes.", "exampleVi": "Mình có hai mắt." },
+      { "word": "Star", "meaning": "Ngôi sao", "phonetic": "/stɑːr/", "emoji": "⭐", "image": "https://em-content.zobj.net/source/apple/391/star_2b50.png", "audio": "", "example": "You are a star!", "exampleVi": "Bạn là ngôi sao!" }
+    ]
+  },
+  {
+    "level": 5,
+    "title": "Đồ ăn & Hoạt động",
+    "titleEn": "Food & Actions",
+    "icon": "🍕",
+    "color": "#EC4899",
+    "lessons": [
+      { "word": "Water", "meaning": "Nước", "phonetic": "/ˈwɔːtər/", "emoji": "💧", "image": "https://em-content.zobj.net/source/apple/391/droplet_1f4a7.png", "audio": "", "example": "I drink water.", "exampleVi": "Mình uống nước." },
+      { "word": "Rice", "meaning": "Cơm / Gạo", "phonetic": "/raɪs/", "emoji": "🍚", "image": "https://em-content.zobj.net/source/apple/391/cooked-rice_1f35a.png", "audio": "", "example": "I eat rice every day.", "exampleVi": "Mình ăn cơm mỗi ngày." },
+      { "word": "Milk", "meaning": "Sữa", "phonetic": "/mɪlk/", "emoji": "🥛", "image": "https://em-content.zobj.net/source/apple/391/glass-of-milk_1f95b.png", "audio": "", "example": "I drink milk every morning.", "exampleVi": "Mình uống sữa mỗi sáng." },
+      { "word": "Run", "meaning": "Chạy", "phonetic": "/rʌn/", "emoji": "🏃", "image": "https://em-content.zobj.net/source/apple/391/person-running_1f3c3.png", "audio": "", "example": "I can run fast.", "exampleVi": "Mình chạy nhanh lắm." },
+      { "word": "Happy", "meaning": "Vui vẻ", "phonetic": "/ˈhæpi/", "emoji": "😊", "image": "https://em-content.zobj.net/source/apple/391/smiling-face-with-smiling-eyes_1f60a.png", "audio": "", "example": "I am happy!", "exampleVi": "Mình rất vui!" },
+      { "word": "Love", "meaning": "Yêu thương", "phonetic": "/lʌv/", "emoji": "❤️", "image": "https://em-content.zobj.net/source/apple/391/red-heart_2764-fe0f.png", "audio": "", "example": "I love English!", "exampleVi": "Mình yêu tiếng Anh!" }
+    ]
+  },
+  {
+    "level": 6,
+    "title": "Quần áo & Phụ kiện",
+    "titleEn": "Clothes & Accessories",
+    "icon": "👕",
+    "color": "#3B82F6",
+    "lessons": [
+      { "word": "Shirt", "meaning": "Áo sơ mi", "phonetic": "/ʃɜːrt/", "emoji": "👕", "image": "https://em-content.zobj.net/source/apple/391/t-shirt_1f455.png", "audio": "", "example": "My shirt is white.", "exampleVi": "Áo của mình màu trắng." },
+      { "word": "Pants", "meaning": "Quần dài", "phonetic": "/pænts/", "emoji": "👖", "image": "https://em-content.zobj.net/source/apple/391/jeans_1f456.png", "audio": "", "example": "I wear blue pants.", "exampleVi": "Mình mặc quần xanh." },
+      { "word": "Shoes", "meaning": "Giày", "phonetic": "/ʃuːz/", "emoji": "👟", "image": "https://em-content.zobj.net/source/apple/391/running-shoe_1f45f.png", "audio": "", "example": "These shoes are new.", "exampleVi": "Đôi giày này mới." },
+      { "word": "Hat", "meaning": "Mũ / Nón", "phonetic": "/hæt/", "emoji": "🎩", "image": "https://em-content.zobj.net/source/apple/391/top-hat_1f3a9.png", "audio": "", "example": "He wears a hat.", "exampleVi": "Anh ấy đội mũ." },
+      { "word": "Socks", "meaning": "Vớ / Tất", "phonetic": "/sɒks/", "emoji": "🧦", "image": "https://em-content.zobj.net/source/apple/391/socks_1f9e6.png", "audio": "", "example": "My socks are warm.", "exampleVi": "Tất của mình ấm." },
+      { "word": "Glasses", "meaning": "Kính mắt", "phonetic": "/ˈɡlæsɪz/", "emoji": "👓", "image": "https://em-content.zobj.net/source/apple/391/glasses_1f453.png", "audio": "", "example": "She wears glasses.", "exampleVi": "Cô ấy đeo kính." }
+    ]
+  },
+  {
+    "level": 7,
+    "title": "Đồ vật trong nhà",
+    "titleEn": "Home Objects",
+    "icon": "🏠",
+    "color": "#8B5CF6",
+    "lessons": [
+      { "word": "House", "meaning": "Ngôi nhà", "phonetic": "/haʊs/", "emoji": "🏠", "image": "https://em-content.zobj.net/source/apple/391/house_1f3e0.png", "audio": "", "example": "My house is big.", "exampleVi": "Nhà mình rất to." },
+      { "word": "Bed", "meaning": "Giường", "phonetic": "/bed/", "emoji": "🛏️", "image": "https://em-content.zobj.net/source/apple/391/bed_1f6cf-fe0f.png", "audio": "", "example": "I sleep in my bed.", "exampleVi": "Mình ngủ trên giường." },
+      { "word": "Chair", "meaning": "Ghế", "phonetic": "/tʃer/", "emoji": "🪑", "image": "https://em-content.zobj.net/source/apple/391/chair_1fa91.png", "audio": "", "example": "Sit on the chair.", "exampleVi": "Ngồi xuống ghế." },
+      { "word": "Door", "meaning": "Cửa", "phonetic": "/dɔːr/", "emoji": "🚪", "image": "https://em-content.zobj.net/source/apple/391/door_1f6aa.png", "audio": "", "example": "Open the door, please.", "exampleVi": "Hãy mở cửa." },
+      { "word": "Lamp", "meaning": "Đèn", "phonetic": "/læmp/", "emoji": "💡", "image": "https://em-content.zobj.net/source/apple/391/light-bulb_1f4a1.png", "audio": "", "example": "Turn on the lamp.", "exampleVi": "Bật đèn lên." },
+      { "word": "Clock", "meaning": "Đồng hồ", "phonetic": "/klɒk/", "emoji": "🕐", "image": "https://em-content.zobj.net/source/apple/391/one-oclock_1f550.png", "audio": "", "example": "The clock is round.", "exampleVi": "Đồng hồ hình tròn." }
+    ]
+  },
+  {
+    "level": 8,
+    "title": "Phương tiện giao thông",
+    "titleEn": "Transport",
+    "icon": "🚗",
+    "color": "#EF4444",
+    "lessons": [
+      { "word": "Car", "meaning": "Xe hơi", "phonetic": "/kɑːr/", "emoji": "🚗", "image": "https://em-content.zobj.net/source/apple/391/automobile_1f697.png", "audio": "", "example": "My dad has a car.", "exampleVi": "Bố mình có xe hơi." },
+      { "word": "Bike", "meaning": "Xe đạp", "phonetic": "/baɪk/", "emoji": "🚲", "image": "https://em-content.zobj.net/source/apple/391/bicycle_1f6b2.png", "audio": "", "example": "I ride a bike.", "exampleVi": "Mình đi xe đạp." },
+      { "word": "Bus", "meaning": "Xe buýt", "phonetic": "/bʌs/", "emoji": "🚌", "image": "https://em-content.zobj.net/source/apple/391/bus_1f68c.png", "audio": "", "example": "Take the bus to school.", "exampleVi": "Đi xe buýt đến trường." },
+      { "word": "Plane", "meaning": "Máy bay", "phonetic": "/pleɪn/", "emoji": "✈️", "image": "https://em-content.zobj.net/source/apple/391/airplane_2708-fe0f.png", "audio": "", "example": "The plane is fast.", "exampleVi": "Máy bay rất nhanh." },
+      { "word": "Boat", "meaning": "Thuyền", "phonetic": "/boʊt/", "emoji": "⛵", "image": "https://em-content.zobj.net/source/apple/391/sailboat_26f5.png", "audio": "", "example": "The boat is on the river.", "exampleVi": "Thuyền đang ở trên sông." },
+      { "word": "Train", "meaning": "Tàu hỏa", "phonetic": "/treɪn/", "emoji": "🚂", "image": "https://em-content.zobj.net/source/apple/391/locomotive_1f682.png", "audio": "", "example": "I love trains.", "exampleVi": "Mình yêu tàu hỏa." }
+    ]
+  },
+  {
+    "level": 9,
+    "title": "Thời tiết & Mùa",
+    "titleEn": "Weather & Seasons",
+    "icon": "☀️",
+    "color": "#F97316",
+    "lessons": [
+      { "word": "Sun", "meaning": "Mặt trời", "phonetic": "/sʌn/", "emoji": "☀️", "image": "https://em-content.zobj.net/source/apple/391/sun_2600-fe0f.png", "audio": "", "example": "The sun is bright.", "exampleVi": "Mặt trời rất sáng." },
+      { "word": "Rain", "meaning": "Mưa", "phonetic": "/reɪn/", "emoji": "🌧️", "image": "https://em-content.zobj.net/source/apple/391/cloud-with-rain_1f327-fe0f.png", "audio": "", "example": "It is raining today.", "exampleVi": "Hôm nay trời mưa." },
+      { "word": "Snow", "meaning": "Tuyết", "phonetic": "/snoʊ/", "emoji": "❄️", "image": "https://em-content.zobj.net/source/apple/391/snowflake_2744-fe0f.png", "audio": "", "example": "I love snow!", "exampleVi": "Mình thích tuyết!" },
+      { "word": "Cloud", "meaning": "Mây", "phonetic": "/klaʊd/", "emoji": "☁️", "image": "https://em-content.zobj.net/source/apple/391/cloud_2601-fe0f.png", "audio": "", "example": "The cloud is white.", "exampleVi": "Đám mây màu trắng." },
+      { "word": "Hot", "meaning": "Nóng", "phonetic": "/hɒt/", "emoji": "🥵", "image": "https://em-content.zobj.net/source/apple/391/hot-face_1f975.png", "audio": "", "example": "Today is so hot.", "exampleVi": "Hôm nay nóng quá." },
+      { "word": "Cold", "meaning": "Lạnh", "phonetic": "/koʊld/", "emoji": "🥶", "image": "https://em-content.zobj.net/source/apple/391/cold-face_1f976.png", "audio": "", "example": "Winter is cold.", "exampleVi": "Mùa đông thì lạnh." }
+    ]
+  },
+  {
+    "level": 10,
+    "title": "Đồ ăn vặt & Thức uống",
+    "titleEn": "Snacks & Drinks",
+    "icon": "🍔",
+    "color": "#FBBF24",
+    "lessons": [
+      { "word": "Pizza", "meaning": "Bánh pizza", "phonetic": "/ˈpiːtsə/", "emoji": "🍕", "image": "https://em-content.zobj.net/source/apple/391/pizza_1f355.png", "audio": "", "example": "I love pizza!", "exampleVi": "Mình yêu pizza!" },
+      { "word": "Burger", "meaning": "Bánh hamburger", "phonetic": "/ˈbɜːrɡər/", "emoji": "🍔", "image": "https://em-content.zobj.net/source/apple/391/hamburger_1f354.png", "audio": "", "example": "The burger is tasty.", "exampleVi": "Bánh burger ngon lắm." },
+      { "word": "Cake", "meaning": "Bánh ngọt", "phonetic": "/keɪk/", "emoji": "🍰", "image": "https://em-content.zobj.net/source/apple/391/shortcake_1f370.png", "audio": "", "example": "Happy birthday cake!", "exampleVi": "Bánh sinh nhật vui vẻ!" },
+      { "word": "Ice cream", "meaning": "Kem", "phonetic": "/aɪs kriːm/", "emoji": "🍦", "image": "https://em-content.zobj.net/source/apple/391/soft-ice-cream_1f366.png", "audio": "", "example": "I want ice cream.", "exampleVi": "Mình muốn ăn kem." },
+      { "word": "Juice", "meaning": "Nước trái cây", "phonetic": "/dʒuːs/", "emoji": "🧃", "image": "https://em-content.zobj.net/source/apple/391/beverage-box_1f9c3.png", "audio": "", "example": "Apple juice is good.", "exampleVi": "Nước táo ngon." },
+      { "word": "Tea", "meaning": "Trà", "phonetic": "/tiː/", "emoji": "🍵", "image": "https://em-content.zobj.net/source/apple/391/teacup-without-handle_1f375.png", "audio": "", "example": "Mom drinks tea.", "exampleVi": "Mẹ uống trà." }
+    ]
+  },
+  {
+    "level": 11,
+    "title": "Cảm xúc",
+    "titleEn": "Emotions",
+    "icon": "😊",
+    "color": "#EC4899",
+    "lessons": [
+      { "word": "Sad", "meaning": "Buồn", "phonetic": "/sæd/", "emoji": "😢", "image": "https://em-content.zobj.net/source/apple/391/crying-face_1f622.png", "audio": "", "example": "Why are you sad?", "exampleVi": "Sao bạn buồn vậy?" },
+      { "word": "Angry", "meaning": "Giận dữ", "phonetic": "/ˈæŋɡri/", "emoji": "😠", "image": "https://em-content.zobj.net/source/apple/391/angry-face_1f620.png", "audio": "", "example": "Don't be angry.", "exampleVi": "Đừng giận nhé." },
+      { "word": "Tired", "meaning": "Mệt", "phonetic": "/ˈtaɪərd/", "emoji": "😴", "image": "https://em-content.zobj.net/source/apple/391/sleeping-face_1f634.png", "audio": "", "example": "I am tired.", "exampleVi": "Mình mệt rồi." },
+      { "word": "Excited", "meaning": "Hào hứng", "phonetic": "/ɪkˈsaɪtɪd/", "emoji": "🤩", "image": "https://em-content.zobj.net/source/apple/391/star-struck_1f929.png", "audio": "", "example": "I am excited!", "exampleVi": "Mình hào hứng lắm!" },
+      { "word": "Surprised", "meaning": "Ngạc nhiên", "phonetic": "/sərˈpraɪzd/", "emoji": "😲", "image": "https://em-content.zobj.net/source/apple/391/astonished-face_1f632.png", "audio": "", "example": "She is surprised.", "exampleVi": "Cô ấy ngạc nhiên." },
+      { "word": "Scared", "meaning": "Sợ hãi", "phonetic": "/skerd/", "emoji": "😨", "image": "https://em-content.zobj.net/source/apple/391/fearful-face_1f628.png", "audio": "", "example": "Don't be scared.", "exampleVi": "Đừng sợ nhé." }
+    ]
+  },
+  {
+    "level": 12,
+    "title": "Hoạt động hàng ngày",
+    "titleEn": "Daily Activities",
+    "icon": "🌅",
+    "color": "#06B6D4",
+    "lessons": [
+      { "word": "Sleep", "meaning": "Ngủ", "phonetic": "/sliːp/", "emoji": "😴", "image": "https://em-content.zobj.net/source/apple/391/sleeping-face_1f634.png", "audio": "", "example": "I sleep at night.", "exampleVi": "Mình ngủ vào ban đêm." },
+      { "word": "Wake up", "meaning": "Thức dậy", "phonetic": "/weɪk ʌp/", "emoji": "⏰", "image": "https://em-content.zobj.net/source/apple/391/alarm-clock_23f0.png", "audio": "", "example": "I wake up at 6.", "exampleVi": "Mình thức dậy lúc 6 giờ." },
+      { "word": "Eat", "meaning": "Ăn", "phonetic": "/iːt/", "emoji": "🍽️", "image": "https://em-content.zobj.net/source/apple/391/fork-and-knife-with-plate_1f37d-fe0f.png", "audio": "", "example": "Let's eat lunch.", "exampleVi": "Mình ăn trưa nào." },
+      { "word": "Brush teeth", "meaning": "Đánh răng", "phonetic": "/brʌʃ tiːθ/", "emoji": "🪥", "image": "https://em-content.zobj.net/source/apple/391/toothbrush_1faa5.png", "audio": "", "example": "Brush your teeth.", "exampleVi": "Đánh răng đi nào." },
+      { "word": "Study", "meaning": "Học bài", "phonetic": "/ˈstʌdi/", "emoji": "📚", "image": "https://em-content.zobj.net/source/apple/391/books_1f4da.png", "audio": "", "example": "I study English.", "exampleVi": "Mình học tiếng Anh." },
+      { "word": "Play", "meaning": "Chơi", "phonetic": "/pleɪ/", "emoji": "🎮", "image": "https://em-content.zobj.net/source/apple/391/video-game_1f3ae.png", "audio": "", "example": "Let's play together!", "exampleVi": "Cùng chơi nào!" }
+    ]
+  },
+  {
+    "level": 13,
+    "title": "Thể thao & Trò chơi",
+    "titleEn": "Sports & Games",
+    "icon": "⚽",
+    "color": "#10B981",
+    "lessons": [
+      { "word": "Soccer", "meaning": "Bóng đá", "phonetic": "/ˈsɒkər/", "emoji": "⚽", "image": "https://em-content.zobj.net/source/apple/391/soccer-ball_26bd.png", "audio": "", "example": "I play soccer.", "exampleVi": "Mình chơi bóng đá." },
+      { "word": "Basketball", "meaning": "Bóng rổ", "phonetic": "/ˈbɑːskɪtbɔːl/", "emoji": "🏀", "image": "https://em-content.zobj.net/source/apple/391/basketball_1f3c0.png", "audio": "", "example": "Basketball is fun.", "exampleVi": "Bóng rổ vui lắm." },
+      { "word": "Swim", "meaning": "Bơi lội", "phonetic": "/swɪm/", "emoji": "🏊", "image": "https://em-content.zobj.net/source/apple/391/person-swimming_1f3ca.png", "audio": "", "example": "I can swim.", "exampleVi": "Mình biết bơi." },
+      { "word": "Dance", "meaning": "Nhảy múa", "phonetic": "/dæns/", "emoji": "💃", "image": "https://em-content.zobj.net/source/apple/391/woman-dancing_1f483.png", "audio": "", "example": "Let's dance!", "exampleVi": "Cùng nhảy nào!" },
+      { "word": "Sing", "meaning": "Hát", "phonetic": "/sɪŋ/", "emoji": "🎤", "image": "https://em-content.zobj.net/source/apple/391/microphone_1f3a4.png", "audio": "", "example": "I love to sing.", "exampleVi": "Mình thích hát." },
+      { "word": "Draw", "meaning": "Vẽ", "phonetic": "/drɔː/", "emoji": "🎨", "image": "https://em-content.zobj.net/source/apple/391/artist-palette_1f3a8.png", "audio": "", "example": "I draw a flower.", "exampleVi": "Mình vẽ một bông hoa." }
+    ]
+  },
+  {
+    "level": 14,
+    "title": "Nghề nghiệp",
+    "titleEn": "Jobs",
+    "icon": "👨‍🏫",
+    "color": "#7C3AED",
+    "lessons": [
+      { "word": "Teacher", "meaning": "Giáo viên", "phonetic": "/ˈtiːtʃər/", "emoji": "👩‍🏫", "image": "https://em-content.zobj.net/source/apple/391/woman-teacher_1f469-200d-1f3eb.png", "audio": "", "example": "My teacher is kind.", "exampleVi": "Cô giáo của mình tốt bụng." },
+      { "word": "Doctor", "meaning": "Bác sĩ", "phonetic": "/ˈdɒktər/", "emoji": "👨‍⚕️", "image": "https://em-content.zobj.net/source/apple/391/man-health-worker_1f468-200d-2695-fe0f.png", "audio": "", "example": "The doctor helps people.", "exampleVi": "Bác sĩ giúp đỡ mọi người." },
+      { "word": "Farmer", "meaning": "Nông dân", "phonetic": "/ˈfɑːrmər/", "emoji": "👨‍🌾", "image": "https://em-content.zobj.net/source/apple/391/man-farmer_1f468-200d-1f33e.png", "audio": "", "example": "The farmer grows rice.", "exampleVi": "Nông dân trồng lúa." },
+      { "word": "Police", "meaning": "Cảnh sát", "phonetic": "/pəˈliːs/", "emoji": "👮", "image": "https://em-content.zobj.net/source/apple/391/police-officer_1f46e.png", "audio": "", "example": "The police are brave.", "exampleVi": "Cảnh sát rất dũng cảm." },
+      { "word": "Chef", "meaning": "Đầu bếp", "phonetic": "/ʃef/", "emoji": "👨‍🍳", "image": "https://em-content.zobj.net/source/apple/391/man-cook_1f468-200d-1f373.png", "audio": "", "example": "The chef cooks well.", "exampleVi": "Đầu bếp nấu giỏi." },
+      { "word": "Pilot", "meaning": "Phi công", "phonetic": "/ˈpaɪlət/", "emoji": "👨‍✈️", "image": "https://em-content.zobj.net/source/apple/391/man-pilot_1f468-200d-2708-fe0f.png", "audio": "", "example": "I want to be a pilot.", "exampleVi": "Mình muốn làm phi công." }
+    ]
+  },
+  {
+    "level": 15,
+    "title": "Thế giới tự nhiên",
+    "titleEn": "Nature",
+    "icon": "🌳",
+    "color": "#16A34A",
+    "lessons": [
+      { "word": "Tree", "meaning": "Cây", "phonetic": "/triː/", "emoji": "🌳", "image": "https://em-content.zobj.net/source/apple/391/deciduous-tree_1f333.png", "audio": "", "example": "The tree is tall.", "exampleVi": "Cái cây rất cao." },
+      { "word": "Flower", "meaning": "Hoa", "phonetic": "/ˈflaʊər/", "emoji": "🌸", "image": "https://em-content.zobj.net/source/apple/391/cherry-blossom_1f338.png", "audio": "", "example": "The flower is beautiful.", "exampleVi": "Bông hoa thật đẹp." },
+      { "word": "Mountain", "meaning": "Núi", "phonetic": "/ˈmaʊntən/", "emoji": "⛰️", "image": "https://em-content.zobj.net/source/apple/391/mountain_26f0-fe0f.png", "audio": "", "example": "The mountain is high.", "exampleVi": "Ngọn núi rất cao." },
+      { "word": "River", "meaning": "Sông", "phonetic": "/ˈrɪvər/", "emoji": "🏞️", "image": "https://em-content.zobj.net/source/apple/391/national-park_1f3de-fe0f.png", "audio": "", "example": "The river is long.", "exampleVi": "Con sông rất dài." },
+      { "word": "Sea", "meaning": "Biển", "phonetic": "/siː/", "emoji": "🌊", "image": "https://em-content.zobj.net/source/apple/391/water-wave_1f30a.png", "audio": "", "example": "The sea is blue.", "exampleVi": "Biển xanh thẳm." },
+      { "word": "Moon", "meaning": "Mặt trăng", "phonetic": "/muːn/", "emoji": "🌙", "image": "https://em-content.zobj.net/source/apple/391/crescent-moon_1f319.png", "audio": "", "example": "The moon is bright.", "exampleVi": "Mặt trăng rất sáng." }
+    ]
+  }
+]

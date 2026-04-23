@@ -10,22 +10,32 @@ const DB = {
         // Luôn lưu localStorage trước (instant)
         localStorage.setItem('funEnglishKidsV4', JSON.stringify(data));
 
-        if (!firebaseReady || !Auth.currentUser) return;
-
         // Debounce cloud save 1 giây
         clearTimeout(DB.saveTimeout);
         DB.saveTimeout = setTimeout(async () => {
+            if (!firebaseReady) return;
+            const cleanData = {
+                ...data,
+                lastUpdated: firebase.firestore.FieldValue.serverTimestamp(),
+                currentModule: null, currentIndex: 0, score: 0,
+            };
             try {
-                const progressRef = firebase.firestore()
-                    .collection('progress').doc(Auth.currentUser.uid);
-                await progressRef.set({
-                    ...data,
-                    lastUpdated: firebase.firestore.FieldValue.serverTimestamp(),
-                    // Không lưu transient state lên cloud
-                    currentModule: null,
-                    currentIndex: 0,
-                    score: 0,
-                }, { merge: true });
+                // Save by Google UID if logged in
+                if (Auth.currentUser) {
+                    await firebase.firestore().collection('progress').doc(Auth.currentUser.uid).set(cleanData, { merge: true });
+                }
+                // Also save by phone number (for phone-based restore)
+                if (data.studentPhone) {
+                    await firebase.firestore().collection('progress_phone').doc(data.studentPhone).set(cleanData, { merge: true });
+                    // Update user lastActive
+                    await firebase.firestore().collection('users_phone').doc(data.studentPhone).set({
+                        lastActive: firebase.firestore.FieldValue.serverTimestamp(),
+                        grade: data.selectedGrade || 1,
+                        totalLessonsCompleted: data.totalLessonsCompleted || 0,
+                        level: data.level || 1,
+                        wordsCount: (data.wordsLearned || []).length,
+                    }, { merge: true });
+                }
             } catch (e) { console.error('Lỗi lưu cloud:', e); }
         }, 1000);
     },
@@ -35,16 +45,27 @@ const DB = {
         const local = localStorage.getItem('funEnglishKidsV4');
         let localData = local ? JSON.parse(local) : null;
 
-        if (!firebaseReady || !Auth.currentUser) return localData;
+        if (!firebaseReady) return localData;
 
         try {
-            const doc = await firebase.firestore()
-                .collection('progress').doc(Auth.currentUser.uid).get();
-            if (doc.exists) {
-                const cloudData = doc.data();
-                // Ưu tiên cloud nếu có dữ liệu mới hơn
-                if (!localData || (cloudData.totalLessonsCompleted || 0) >= (localData.totalLessonsCompleted || 0)) {
-                    return cloudData;
+            // Try Google UID first
+            if (Auth.currentUser) {
+                const doc = await firebase.firestore().collection('progress').doc(Auth.currentUser.uid).get();
+                if (doc.exists) {
+                    const cloudData = doc.data();
+                    if (!localData || (cloudData.totalLessonsCompleted || 0) >= (localData.totalLessonsCompleted || 0)) {
+                        return cloudData;
+                    }
+                }
+            }
+            // Try phone-based lookup
+            if (localData && localData.studentPhone) {
+                const phoneDoc = await firebase.firestore().collection('progress_phone').doc(localData.studentPhone).get();
+                if (phoneDoc.exists) {
+                    const phoneData = phoneDoc.data();
+                    if (!localData || (phoneData.totalLessonsCompleted || 0) >= (localData.totalLessonsCompleted || 0)) {
+                        return phoneData;
+                    }
                 }
             }
         } catch (e) { console.error('Lỗi load cloud:', e); }
