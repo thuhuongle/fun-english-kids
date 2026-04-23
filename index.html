@@ -560,6 +560,7 @@
             </div>
             <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
                 <span style="background:linear-gradient(135deg,#22C55E,#16A34A);color:#fff;padding:6px 12px;border-radius:20px;font-size:.8rem;font-weight:700">🎁 100% Miễn phí</span>
+                <button class="btn-report" onclick="showGradeSelect()" style="background:linear-gradient(135deg,#6366F1,#A855F7)">🎓 Chọn lớp</button>
                 <button class="btn-report" onclick="showReport()">📊 Bảng điểm</button>
             </div>
         </div>
@@ -609,18 +610,33 @@
                 ⭐ <span id="homeStarsCount">0</span> sao · 🏅 <span id="homeBadgesCount">0</span> huy chương — Nhấn xem →
             </div>
         </div>
-        <div style="background:#fff;border-radius:14px;padding:12px 18px;margin-bottom:15px;box-shadow:0 2px 8px rgba(0,0,0,.05);display:flex;align-items:center;gap:10px">
-            <span style="font-size:1.5rem">📚</span>
-            <div><strong id="currentGradeLabel">Lớp 1</strong> — <span id="currentLevelLabel">Cấp 1 - Beginner</span><br><small style="color:#888" id="currentMonthLabel">Tháng 1</small></div>
-        </div>
-        <div class="modules-grid">
-            <div class="module-card" style="border-color:#667eea;background:linear-gradient(135deg,#f0f4ff,#fff);position:relative" onclick="startModule('lessons')">
-                <span style="position:absolute;top:8px;right:8px;background:linear-gradient(135deg,#22C55E,#16A34A);color:#fff;font-size:.65rem;font-weight:800;padding:3px 8px;border-radius:10px">🎁 FREE</span>
-                <div class="icon">📚</div>
-                <h3 style="color:#667eea">Bài Học</h3>
-                <p>15 cấp độ · 92 từ vựng vui nhộn</p>
-                <div class="progress-bar"><div class="fill" style="width:0%;background:#667eea" id="lessonsProgress"></div></div>
+        <!-- Current grade card — CLICKABLE để đổi lớp -->
+        <div onclick="showGradeSelect()" style="background:#fff;border-radius:14px;padding:14px 18px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.05);display:flex;align-items:center;gap:12px;cursor:pointer;border:2px solid #e5e7eb;transition:all .2s" onmouseover="this.style.borderColor='#6366F1';this.style.transform='translateY(-1px)'" onmouseout="this.style.borderColor='#e5e7eb';this.style.transform='translateY(0)'">
+            <span style="font-size:1.6rem">🎓</span>
+            <div style="flex:1">
+                <div style="font-weight:800;color:#1e1b4b;font-size:.95rem">Đang học: <span id="currentGradeLabel">Lớp 1</span></div>
+                <div style="font-size:.8rem;color:#888">Bấm để đổi lớp khác (1-12)</div>
             </div>
+            <span style="color:#6366F1;font-size:1.2rem">›</span>
+        </div>
+
+        <!-- BIG CTA — bắt đầu học ngay -->
+        <div onclick="startModule('lessons')" style="background:linear-gradient(135deg,#667eea,#764ba2);border-radius:18px;padding:20px;color:#fff;cursor:pointer;margin-bottom:12px;box-shadow:0 6px 20px rgba(102,126,234,.3);position:relative;overflow:hidden" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+            <span style="position:absolute;top:10px;right:12px;background:#FFE66D;color:#1e1b4b;font-size:.7rem;font-weight:800;padding:4px 10px;border-radius:10px">🎁 FREE</span>
+            <div style="display:flex;align-items:center;gap:14px">
+                <div style="font-size:3rem">📚</div>
+                <div style="flex:1">
+                    <div style="font-family:'Fredoka One',cursive;font-size:1.3rem;line-height:1.1">Bài Học Tiếng Anh</div>
+                    <div style="font-size:.85rem;opacity:.9;margin-top:3px">15 cấp độ · 92 từ vựng vui nhộn</div>
+                    <div style="background:rgba(255,255,255,.25);border-radius:6px;height:6px;overflow:hidden;margin-top:8px"><div style="height:100%;background:#FFE66D;border-radius:6px;width:0%" id="lessonsProgress"></div></div>
+                </div>
+                <div style="font-size:1.5rem;background:rgba(255,255,255,.2);padding:8px 12px;border-radius:12px">▶</div>
+            </div>
+        </div>
+
+        <div class="modules-grid" style="display:none">
+            <!-- Old grid hidden — replaced by big CTA above -->
+            <div class="module-card" onclick="startModule('lessons')"><div class="icon">📚</div><h3>Bài Học</h3></div>
             <!-- DISABLED: other modules hidden, focus on core lesson loop only
             <div class="module-card c1" onclick="startModule('vocab')"><div class="icon">📖</div><h3>Từ Vựng</h3><p>Học từ mới qua hình ảnh</p><div class="progress-bar"><div class="fill" style="width:0%;background:var(--blue)" id="vocabProgress"></div></div></div>
             <div class="module-card c2" onclick="startModule('phonics')"><div class="icon">🎤</div><h3>Phát Âm</h3><p>Học phát âm chữ cái</p><div class="progress-bar"><div class="fill" style="width:0%;background:var(--pink)" id="phonicsProgress"></div></div></div>
@@ -1789,12 +1805,15 @@ function updateUI() {
     document.getElementById('studentLevel').textContent = `Level ${state.level || 1} — ${GAMIFICATION.getLevelTitle(state.level || 1)}`;
 
     const gradeInfo = GRADE_INFO.find(g => g.id === (state.selectedGrade || 1)) || GRADE_INFO[0];
-    document.getElementById('currentGradeLabel').textContent = `${gradeInfo.icon} ${gradeInfo.name}`;
+    const gradeEl = document.getElementById('currentGradeLabel');
+    if (gradeEl) gradeEl.textContent = `${gradeInfo.icon} ${gradeInfo.name}`;
 
     const lvInfo = CURRICULUM.levels.find(l => l.id === state.selectedLevel) || CURRICULUM.levels[0];
     const mInfo = CURRICULUM.months.find(m => m.month === state.selectedMonth) || CURRICULUM.months[0];
-    document.getElementById('currentLevelLabel').textContent = `Cấp ${lvInfo.id} - ${lvInfo.name}`;
-    document.getElementById('currentMonthLabel').textContent = `Tháng ${mInfo.month}: ${mInfo.title}`;
+    const lvEl = document.getElementById('currentLevelLabel');
+    if (lvEl) lvEl.textContent = `Cấp ${lvInfo.id} - ${lvInfo.name}`;
+    const mEl = document.getElementById('currentMonthLabel');
+    if (mEl) mEl.textContent = `Tháng ${mInfo.month}: ${mInfo.title}`;
 
     Object.keys(state.moduleProgress).forEach(k => {
         const el = document.getElementById(k + 'Progress');
@@ -2399,7 +2418,8 @@ function renderGradeSelector() {
     const html = `
         <div style="text-align:center;margin-bottom:20px">
             <h2 style="font-family:'Fredoka One',cursive;color:var(--purple)">Chọn lớp học</h2>
-            <p style="color:#22C55E;font-weight:700">🎁 Tất cả lớp đều MIỄN PHÍ — học thoải mái nhé!</p>
+            <p style="color:#22C55E;font-weight:700;margin-bottom:6px">🎁 Tất cả lớp đều MIỄN PHÍ</p>
+            <p style="color:#666;font-size:.85rem;max-width:480px;margin:0 auto">Bài học từ vựng (15 cấp độ · 92 từ) phù hợp cho tất cả các lớp. Lớp khác nhau giúp ứng dụng đề xuất nội dung phù hợp độ tuổi.</p>
         </div>
         <div class="grade-selector-grid">
             ${GRADE_INFO.map(g => {
@@ -2413,8 +2433,8 @@ function renderGradeSelector() {
                 </div>`;
             }).join('')}
         </div>
-        <div style="text-align:center">
-            <button class="btn-next" onclick="goHome()" style="background:linear-gradient(135deg,var(--blue),var(--green))">✅ Xác nhận</button>
+        <div style="text-align:center;margin-top:15px">
+            <button class="btn-next" onclick="goHome()" style="background:linear-gradient(135deg,var(--blue),var(--green))">✅ Xong, về trang chủ</button>
         </div>`;
     document.getElementById('gradeContent').innerHTML = html;
 }
