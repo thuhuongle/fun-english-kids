@@ -186,6 +186,28 @@
         @keyframes popIn{0%{transform:scale(.5);opacity:0}100%{transform:scale(1);opacity:1}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
         @keyframes wiggle{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+        @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+        @keyframes pulseGlow{0%,100%{box-shadow:0 4px 14px rgba(34,197,94,.3)}50%{box-shadow:0 4px 22px rgba(34,197,94,.6),0 0 30px rgba(34,197,94,.25)}}
+        @keyframes cardEnter{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+        @keyframes pageEnter{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-12px) rotate(5deg)}}
+        @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+        @keyframes ctaShine{0%,100%{box-shadow:0 6px 20px rgba(102,126,234,.3)}50%{box-shadow:0 8px 28px rgba(102,126,234,.55),0 0 40px rgba(168,85,247,.25)}}
+        .lesson-page-enter{animation:pageEnter .5s cubic-bezier(.4,.2,.2,1)}
+        .lesson-card-enter{animation:cardEnter .5s cubic-bezier(.4,.2,.2,1) backwards}
+        .lessons-level-card{transition:transform .25s,box-shadow .25s,border-color .25s}
+        .lessons-level-card:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 10px 24px rgba(0,0,0,.12)}
+        .lessons-level-card:hover .lesson-card-emoji{animation:bounce 1s ease-in-out infinite}
+        .lessons-level-card:active{transform:translateY(-2px) scale(.99)}
+        .module-card{transition:transform .25s,box-shadow .25s}
+        .module-card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.1)}
+        .grade-card{transition:transform .25s,box-shadow .25s,border-color .25s}
+        .grade-card:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 8px 18px rgba(0,0,0,.1)}
+        .grade-card .g-icon{transition:transform .3s}
+        .grade-card:hover .g-icon{animation:bounce 1s ease-in-out infinite}
+        @media (prefers-reduced-motion:reduce){
+            *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+        }
         .modal-content h2{font-family:'Fredoka One',cursive;margin-bottom:12px;color:var(--purple)}
         .modal-content input{width:100%;padding:12px;border:3px solid #eee;border-radius:12px;font-size:1rem;font-family:'Nunito',sans-serif;text-align:center;margin-bottom:12px;outline:none}
         .modal-content input:focus{border-color:var(--purple)}
@@ -374,12 +396,16 @@
                     <div style="color:rgba(255,255,255,.75);font-size:.85rem">Lớp (1-12)</div>
                 </div>
                 <div style="text-align:center">
-                    <div style="font-family:'Fredoka One',cursive;font-size:2rem;color:#FFE66D">15+</div>
+                    <div style="font-family:'Fredoka One',cursive;font-size:2rem;color:#FFE66D">250+</div>
                     <div style="color:rgba(255,255,255,.75);font-size:.85rem">Chủ đề từ vựng</div>
                 </div>
                 <div style="text-align:center">
+                    <div style="font-family:'Fredoka One',cursive;font-size:2rem;color:#FFE66D">2,600+</div>
+                    <div style="color:rgba(255,255,255,.75);font-size:.85rem">Từ vựng</div>
+                </div>
+                <div style="text-align:center">
                     <div style="font-family:'Fredoka One',cursive;font-size:2rem;color:#FFE66D">100%</div>
-                    <div style="color:rgba(255,255,255,.75);font-size:.85rem">Miễn phí mãi mãi</div>
+                    <div style="color:rgba(255,255,255,.75);font-size:.85rem">Miễn phí</div>
                 </div>
             </div>
         </div>
@@ -620,17 +646,18 @@
             <span style="color:#6366F1;font-size:1.2rem">›</span>
         </div>
 
-        <!-- BIG CTA — bắt đầu học ngay -->
-        <div onclick="startModule('lessons')" style="background:linear-gradient(135deg,#667eea,#764ba2);border-radius:18px;padding:20px;color:#fff;cursor:pointer;margin-bottom:12px;box-shadow:0 6px 20px rgba(102,126,234,.3);position:relative;overflow:hidden" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
-            <span style="position:absolute;top:10px;right:12px;background:#FFE66D;color:#1e1b4b;font-size:.7rem;font-weight:800;padding:4px 10px;border-radius:10px">🎁 FREE</span>
-            <div style="display:flex;align-items:center;gap:14px">
-                <div style="font-size:3rem">📚</div>
+        <!-- BIG CTA — bắt đầu học ngay (id để JS update theo grade) -->
+        <div id="bigLessonsCTA" onclick="startModule('lessons')" style="background:linear-gradient(135deg,#667eea,#764ba2);border-radius:18px;padding:20px;color:#fff;cursor:pointer;margin-bottom:12px;animation:ctaShine 3s ease-in-out infinite;position:relative;overflow:hidden;transition:transform .3s" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+            <span style="position:absolute;top:10px;right:12px;background:#FFE66D;color:#1e1b4b;font-size:.7rem;font-weight:800;padding:4px 10px;border-radius:10px;animation:bounce 2.2s ease-in-out infinite">🎁 FREE</span>
+            <div style="position:absolute;top:-30px;right:-20px;font-size:7rem;opacity:.08;animation:float 5s ease-in-out infinite">📚</div>
+            <div style="display:flex;align-items:center;gap:14px;position:relative">
+                <div style="font-size:3rem;animation:bounce 2.5s ease-in-out infinite">📚</div>
                 <div style="flex:1">
-                    <div style="font-family:'Fredoka One',cursive;font-size:1.3rem;line-height:1.1">Bài Học Tiếng Anh</div>
-                    <div style="font-size:.85rem;opacity:.9;margin-top:3px">15 cấp độ · 92 từ vựng vui nhộn</div>
-                    <div style="background:rgba(255,255,255,.25);border-radius:6px;height:6px;overflow:hidden;margin-top:8px"><div style="height:100%;background:#FFE66D;border-radius:6px;width:0%" id="lessonsProgress"></div></div>
+                    <div id="bigLessonsTitle" style="font-family:'Fredoka One',cursive;font-size:1.3rem;line-height:1.1">Bài Học Tiếng Anh</div>
+                    <div id="bigLessonsSubtitle" style="font-size:.85rem;opacity:.9;margin-top:3px">12 lớp · 2,600+ từ vựng theo từng cấp</div>
+                    <div style="background:rgba(255,255,255,.25);border-radius:6px;height:6px;overflow:hidden;margin-top:8px"><div style="height:100%;background:linear-gradient(90deg,#FFE66D,#F59E0B);border-radius:6px;width:0%;transition:width 1s" id="lessonsProgress"></div></div>
                 </div>
-                <div style="font-size:1.5rem;background:rgba(255,255,255,.2);padding:8px 12px;border-radius:12px">▶</div>
+                <div style="font-size:1.5rem;background:rgba(255,255,255,.25);padding:8px 14px;border-radius:14px;font-weight:800">▶</div>
             </div>
         </div>
 
@@ -1632,12 +1659,13 @@ async function loadState() {
 
     applyMonth(state.selectedMonth);
 
-    // Initialize daily streak, motivation, daily goal, welcome, mistakes
+    // Initialize daily streak, motivation, daily goal, welcome, mistakes, big CTA
     DailyStreak.update();
     updateUI();
     DailyGoal.updateUI();
     if (typeof WelcomeBanner !== 'undefined') WelcomeBanner.show();
     if (typeof updateMistakesCard !== 'undefined') updateMistakesCard();
+    if (typeof updateBigLessonsCTA !== 'undefined') updateBigLessonsCTA();
     setTimeout(() => Motivation.startRotation(), 500);
 }
 
@@ -1880,7 +1908,38 @@ function goHome() {
     if (typeof DailyGoal !== 'undefined') DailyGoal.updateUI();
     if (typeof WelcomeBanner !== 'undefined') WelcomeBanner.show();
     if (typeof updateMistakesCard !== 'undefined') updateMistakesCard();
+    if (typeof updateBigLessonsCTA !== 'undefined') updateBigLessonsCTA();
     speakVi('Chào ' + (state.studentName || 'bạn nhỏ') + '! Hôm nay chúng mình học gì nào?');
+}
+
+// Update Big CTA on home with current grade info + progress
+async function updateBigLessonsCTA() {
+    const titleEl = document.getElementById('bigLessonsTitle');
+    const subEl = document.getElementById('bigLessonsSubtitle');
+    const progEl = document.getElementById('lessonsProgress');
+    if (!titleEl) return;
+
+    const grade = state.selectedGrade || 1;
+    const gradeInfo = (typeof GRADE_INFO !== 'undefined') ? GRADE_INFO.find(g => g.id === grade) : null;
+    const gradeName = gradeInfo ? gradeInfo.name : 'Lớp ' + grade;
+    titleEl.textContent = '📚 Bài học ' + gradeName;
+
+    // Try to load this grade's lessons to show real numbers
+    try {
+        await loadLessonsData(grade);
+        if (LESSONS_DATA && LESSONS_DATA.length > 0) {
+            const totalAll = LESSONS_DATA.reduce((s, lv) => s + lv.lessons.length, 0);
+            const viewed = lessonsState.viewedLessons || {};
+            const doneAll = LESSONS_DATA.reduce((s, lv) => s + lv.lessons.filter((_, li) => viewed[lv.level + '-' + li]).length, 0);
+            const pct = totalAll > 0 ? Math.round((doneAll/totalAll)*100) : 0;
+            subEl.textContent = `${LESSONS_DATA.length} chủ đề · ${totalAll} từ · ${doneAll}/${totalAll} đã học (${pct}%)`;
+            if (progEl) progEl.style.width = pct + '%';
+        } else {
+            subEl.textContent = '15 cấp độ · 92 từ vựng vui nhộn';
+        }
+    } catch(e) {
+        subEl.textContent = '15 cấp độ · 92 từ vựng vui nhộn';
+    }
 }
 
 // Update the "Review Mistakes" card on home
@@ -2447,22 +2506,31 @@ async function selectGrade(gradeId) {
     state.selectedLevel = 1;
     state.selectedMonth = 1;
 
-    document.getElementById('gradeContent').innerHTML = '<div style="text-align:center;padding:40px;color:#888">Đang tải giáo trình...</div>';
+    document.getElementById('gradeContent').innerHTML = '<div style="text-align:center;padding:40px;color:#888"><div style="font-size:3rem;margin-bottom:10px">⏳</div>Đang tải giáo trình lớp ' + gradeId + '...</div>';
 
     try {
         await loadGradeData(gradeId);
         applyMonth(1);
+
+        // CRITICAL: Reset and reload Lessons system to use this grade's vocab
+        LESSONS_DATA = null;
+        LESSONS_GRADE_LOADED = null;
+        await loadLessonsData(gradeId);
+        // Reset lesson navigation state
+        lessonsState.currentLevel = -1;
+        lessonsState.currentLesson = 0;
+
         saveState();
         renderGradeSelector();
         updateUI();
+        if (typeof updateBigLessonsCTA !== 'undefined') updateBigLessonsCTA();
     } catch(e) {
-        document.getElementById('gradeContent').innerHTML = `
-            <div style="text-align:center;padding:40px">
-                <div style="font-size:3rem;margin-bottom:10px">🚧</div>
-                <h3 style="font-family:'Fredoka One',cursive;color:#888">Giáo trình lớp ${gradeId} đang được xây dựng</h3>
-                <p style="color:#888;margin-top:8px">Giáo trình sẽ sớm được cập nhật. Hãy thử lớp khác!</p>
-                <button class="btn-next" onclick="renderGradeSelector()" style="margin-top:15px;background:linear-gradient(135deg,#888,#aaa)">← Quay lại</button>
-            </div>`;
+        console.warn('Grade load issue:', e);
+        // Even if grade*.js fails, lessons.json fallback works
+        try { await loadLessonsData(gradeId); } catch(_) {}
+        saveState();
+        renderGradeSelector();
+        updateUI();
     }
 }
 
@@ -2939,13 +3007,100 @@ function submitExam() {
 // STRUCTURED LESSONS SYSTEM
 // ============================================
 let LESSONS_DATA = null;
+let LESSONS_GRADE_LOADED = null;  // tracks which grade is currently in LESSONS_DATA
 let lessonsState = { currentLevel: -1, currentLesson: 0, viewedLessons: {}, inQuiz: false, quizQuestions: [], quizIndex: 0, quizScore: 0, quizResults: [] };
 
-async function loadLessonsData() {
-    if (LESSONS_DATA) return LESSONS_DATA;
+// ============================================
+// GRADE-BASED LESSONS ADAPTER
+// Converts data/gradeN.js (vocab topics) → lessons format used by UI
+// 12 grades × ~36 topics = 432 levels, ~4,300+ words total
+// ============================================
+
+// Color palette to assign to topics in rotation
+const _topicColors = ['#4ECDC4','#A855F7','#22C55E','#F59E0B','#EC4899','#3B82F6','#EF4444','#8B5CF6','#06B6D4','#10B981','#F97316','#6366F1'];
+
+function gradeToLessons(gradeId) {
+    if (typeof GRADE_DATA === 'undefined' || !GRADE_DATA[gradeId] || !GRADE_DATA[gradeId].vocab) {
+        return null;
+    }
+    const grade = GRADE_DATA[gradeId];
+    const topics = grade.vocab;
+    const topicKeys = Object.keys(topics);
+
+    // Convert each topic to a "level" with up to 8 lessons (one per word)
+    // Cap to keep level select page manageable
+    return topicKeys.map((key, idx) => {
+        const topic = topics[key];
+        // Find topic icon from first word's emoji (fallback to category default)
+        const firstEmoji = (topic.words && topic.words[0]) ? topic.words[0].emoji : '📚';
+        return {
+            level: idx + 1,
+            title: topic.name || key,
+            titleEn: key.replace(/_/g, ' '),
+            icon: firstEmoji,
+            color: _topicColors[idx % _topicColors.length],
+            month: topic.month,
+            sourceLevel: topic.level,  // beginner/elementary/pre-int
+            lessons: (topic.words || []).map(w => ({
+                word: w.en,
+                meaning: w.vi,
+                phonetic: w.phonetic || '',
+                emoji: w.emoji || '📚',
+                image: '',
+                audio: '',
+                example: w.example || w.en + '.',
+                exampleVi: w.exampleVi || w.vi + '.'
+            }))
+        };
+    }).filter(lv => lv.lessons.length > 0);
+}
+
+// Dynamically load the grade*.js script if not already loaded
+function loadGradeScript(gradeId) {
+    return new Promise((resolve, reject) => {
+        if (typeof GRADE_DATA !== 'undefined' && GRADE_DATA[gradeId] && GRADE_DATA[gradeId].vocab) {
+            return resolve();
+        }
+        const existing = document.querySelector(`script[data-grade="${gradeId}"]`);
+        if (existing) {
+            existing.addEventListener('load', resolve);
+            existing.addEventListener('error', reject);
+            return;
+        }
+        const s = document.createElement('script');
+        s.src = `data/grade${gradeId}.js`;
+        s.dataset.grade = gradeId;
+        s.onload = () => resolve();
+        s.onerror = () => reject(new Error('Cannot load grade' + gradeId + '.js'));
+        document.head.appendChild(s);
+    });
+}
+
+async function loadLessonsData(forceGrade) {
+    const targetGrade = forceGrade || state.selectedGrade || 1;
+
+    // Already loaded for this grade
+    if (LESSONS_DATA && LESSONS_GRADE_LOADED === targetGrade) return LESSONS_DATA;
+
+    try {
+        // Try grade-specific data first (rich content from grade*.js)
+        await loadGradeScript(targetGrade);
+        const adapted = gradeToLessons(targetGrade);
+        if (adapted && adapted.length > 0) {
+            LESSONS_DATA = adapted;
+            LESSONS_GRADE_LOADED = targetGrade;
+            console.log('[Lessons] Loaded grade ' + targetGrade + ':', adapted.length, 'topics,', adapted.reduce((s,l)=>s+l.lessons.length,0), 'words');
+            return LESSONS_DATA;
+        }
+    } catch(e) {
+        console.warn('[Lessons] Could not load grade' + targetGrade + '.js, falling back to lessons.json', e);
+    }
+
+    // Fallback to general lessons.json (15 levels, 92 words)
     try {
         const resp = await fetch('data/lessons.json');
         LESSONS_DATA = await resp.json();
+        LESSONS_GRADE_LOADED = 0; // marker for "general"
         return LESSONS_DATA;
     } catch(e) {
         console.error('Error loading lessons.json:', e);
@@ -2993,82 +3148,169 @@ async function startLessons() {
     renderLessonsLevelSelect();
 }
 
+// Filter state for lesson level select
+let _lessonsFilter = { month: 0, status: 'all' }; // month: 0 = all, status: all/inprogress/notdone/done
+
 function renderLessonsLevelSelect() {
+    if (!LESSONS_DATA || LESSONS_DATA.length === 0) {
+        document.getElementById('lessonsContent').innerHTML = '<div style="text-align:center;padding:60px 20px"><div style="font-size:3rem">⏳</div><p style="margin-top:12px;color:#666">Đang tải bài học...</p></div>';
+        return;
+    }
     const viewed = lessonsState.viewedLessons;
     const totalAll = LESSONS_DATA.reduce((s, lv) => s + lv.lessons.length, 0);
-    const doneAll = Object.keys(viewed).length;
+    const doneAll = LESSONS_DATA.reduce((s, lv) => s + lv.lessons.filter((_, li) => viewed[lv.level + '-' + li]).length, 0);
     const pctAll = totalAll > 0 ? Math.round((doneAll / totalAll) * 100) : 0;
+    const grade = state.selectedGrade || 1;
+    const gradeInfo = (typeof GRADE_INFO !== 'undefined') ? GRADE_INFO.find(g => g.id === grade) : null;
+    const gradeName = gradeInfo ? gradeInfo.name : 'Lớp ' + grade;
+    const gradeIcon = gradeInfo ? gradeInfo.icon : '🎓';
 
-    // Banner free + tổng quan
+    // Find resume target — first level with progress > 0 and < 100%
+    const resumeIdx = LESSONS_DATA.findIndex((lv, i) => {
+        const done = lv.lessons.filter((_, li) => viewed[lv.level + '-' + li]).length;
+        return done > 0 && done < lv.lessons.length;
+    });
+    const nextNewIdx = LESSONS_DATA.findIndex((lv, i) => {
+        const done = lv.lessons.filter((_, li) => viewed[lv.level + '-' + li]).length;
+        return done === 0;
+    });
+
+    // Detect available months from data (grade-based has month info)
+    const months = [...new Set(LESSONS_DATA.map(lv => lv.month).filter(Boolean))].sort((a,b)=>a-b);
+
+    // ============== HEADER: GRADE + STATS ==============
     let html = `
-    <div style="background:linear-gradient(135deg,#22C55E,#16A34A);border-radius:20px;padding:18px 22px;color:#fff;text-align:center;margin-bottom:18px;box-shadow:0 4px 14px rgba(34,197,94,.25)">
-        <div style="font-size:1.8rem;margin-bottom:4px">🎁</div>
-        <div style="font-family:'Fredoka One',cursive;font-size:1.2rem;line-height:1.2">Học hoàn toàn MIỄN PHÍ</div>
-        <div style="font-size:.85rem;opacity:.92;margin-top:4px">${LESSONS_DATA.length} cấp độ · ${totalAll} từ vựng · Vô số quiz vui nhộn!</div>
-    </div>
-
-    <div style="background:#fff;border-radius:16px;padding:14px 18px;box-shadow:0 2px 10px rgba(0,0,0,.05);margin-bottom:18px">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-            <div style="font-family:'Fredoka One',cursive;color:#1e1b4b;font-size:1rem">📊 Tiến trình của bạn</div>
-            <div style="font-weight:800;color:#22C55E">${doneAll}/${totalAll} bài (${pctAll}%)</div>
+    <div class="lesson-page-enter" style="background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:20px;padding:18px 22px;color:#fff;margin-bottom:14px;box-shadow:0 6px 20px rgba(102,126,234,.3);position:relative;overflow:hidden">
+        <div style="position:absolute;top:-20px;right:-20px;font-size:6rem;opacity:.12;animation:float 6s ease-in-out infinite">${gradeIcon}</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;position:relative">
+            <div>
+                <div style="font-size:.78rem;opacity:.85;margin-bottom:2px">Đang học</div>
+                <div style="font-family:'Fredoka One',cursive;font-size:1.4rem;line-height:1.1">${gradeIcon} ${gradeName}</div>
+            </div>
+            <button onclick="showGradeSelect()" style="background:rgba(255,255,255,.22);color:#fff;border:1px solid rgba(255,255,255,.3);padding:8px 14px;border-radius:12px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;backdrop-filter:blur(8px)">🎓 Đổi lớp</button>
         </div>
-        <div style="width:100%;height:10px;background:#eee;border-radius:5px;overflow:hidden">
-            <div style="width:${pctAll}%;height:100%;background:linear-gradient(90deg,#22C55E,#16A34A);border-radius:5px;transition:width .8s ease"></div>
+        <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;position:relative">
+            <div style="background:rgba(255,255,255,.18);padding:8px 12px;border-radius:12px;backdrop-filter:blur(6px)">
+                <div style="font-size:.7rem;opacity:.85">Chủ đề</div>
+                <div style="font-family:'Fredoka One',cursive;font-size:1.1rem">${LESSONS_DATA.length}</div>
+            </div>
+            <div style="background:rgba(255,255,255,.18);padding:8px 12px;border-radius:12px;backdrop-filter:blur(6px)">
+                <div style="font-size:.7rem;opacity:.85">Từ vựng</div>
+                <div style="font-family:'Fredoka One',cursive;font-size:1.1rem">${totalAll}</div>
+            </div>
+            <div style="background:rgba(255,255,255,.18);padding:8px 12px;border-radius:12px;backdrop-filter:blur(6px)">
+                <div style="font-size:.7rem;opacity:.85">Đã học</div>
+                <div style="font-family:'Fredoka One',cursive;font-size:1.1rem">${doneAll}/${totalAll}</div>
+            </div>
         </div>
-    </div>
-
-    <div style="text-align:center;margin-bottom:14px">
-        <h2 style="font-family:'Fredoka One',cursive;color:#1e1b4b;font-size:1.4rem">🌟 Chọn cấp độ học</h2>
-        <p style="color:#888;font-size:.85rem">Bắt đầu từ Level 1 để học từ dễ đến khó nhé!</p>
+        <div style="margin-top:10px;background:rgba(255,255,255,.2);height:8px;border-radius:4px;overflow:hidden;position:relative">
+            <div style="width:${pctAll}%;height:100%;background:linear-gradient(90deg,#FFE66D,#F59E0B);border-radius:4px;transition:width 1s cubic-bezier(.4,.2,.2,1);box-shadow:0 0 12px rgba(255,230,109,.6)"></div>
+        </div>
     </div>`;
 
+    // ============== RESUME / QUICK START BAR ==============
+    if (resumeIdx >= 0) {
+        const lv = LESSONS_DATA[resumeIdx];
+        const done = lv.lessons.filter((_, li) => viewed[lv.level + '-' + li]).length;
+        html += `
+        <div onclick="selectLessonsLevel(${resumeIdx})" class="resume-bar" style="background:linear-gradient(135deg,#22C55E,#16A34A);border-radius:16px;padding:14px 16px;color:#fff;cursor:pointer;margin-bottom:12px;box-shadow:0 4px 14px rgba(34,197,94,.3);display:flex;align-items:center;gap:12px;animation:pulseGlow 2.5s ease-in-out infinite">
+            <div style="font-size:2.2rem;animation:bounce 1.5s ease-in-out infinite">${lv.icon}</div>
+            <div style="flex:1">
+                <div style="font-size:.78rem;opacity:.95;font-weight:700">▶ Tiếp tục bài đang học</div>
+                <div style="font-family:'Fredoka One',cursive;font-size:1.05rem;line-height:1.1">${lv.title}</div>
+                <div style="font-size:.78rem;opacity:.9;margin-top:2px">${done}/${lv.lessons.length} từ đã học</div>
+            </div>
+            <div style="background:rgba(255,255,255,.25);padding:8px 14px;border-radius:12px;font-weight:800">▶</div>
+        </div>`;
+    } else if (nextNewIdx >= 0 && doneAll > 0) {
+        const lv = LESSONS_DATA[nextNewIdx];
+        html += `
+        <div onclick="selectLessonsLevel(${nextNewIdx})" class="resume-bar" style="background:linear-gradient(135deg,#3B82F6,#6366F1);border-radius:16px;padding:14px 16px;color:#fff;cursor:pointer;margin-bottom:12px;box-shadow:0 4px 14px rgba(59,130,246,.3);display:flex;align-items:center;gap:12px">
+            <div style="font-size:2.2rem">${lv.icon}</div>
+            <div style="flex:1">
+                <div style="font-size:.78rem;opacity:.95;font-weight:700">⭐ Chủ đề mới chờ bạn</div>
+                <div style="font-family:'Fredoka One',cursive;font-size:1.05rem">${lv.title}</div>
+            </div>
+            <div style="background:rgba(255,255,255,.25);padding:8px 14px;border-radius:12px;font-weight:800">▶</div>
+        </div>`;
+    }
+
+    // ============== FILTER BAR (months + status) ==============
+    if (months.length > 1) {
+        html += `<div style="background:#fff;border-radius:14px;padding:10px 12px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.04);overflow-x:auto">
+            <div style="display:flex;gap:6px;align-items:center;min-width:max-content">
+                <span style="font-size:.78rem;color:#666;font-weight:800;margin-right:6px">📅 Tháng:</span>
+                <button onclick="setLessonFilter('month',0)" class="filter-pill ${_lessonsFilter.month===0?'active':''}" style="border:none;padding:6px 12px;border-radius:14px;font-size:.78rem;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;background:${_lessonsFilter.month===0?'#667eea':'#f3f4f6'};color:${_lessonsFilter.month===0?'#fff':'#555'}">Tất cả</button>
+                ${months.map(m => `<button onclick="setLessonFilter('month',${m})" class="filter-pill" style="border:none;padding:6px 12px;border-radius:14px;font-size:.78rem;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;background:${_lessonsFilter.month===m?'#667eea':'#f3f4f6'};color:${_lessonsFilter.month===m?'#fff':'#555'}">T.${m}</button>`).join('')}
+            </div>
+        </div>`;
+    }
+
+    // ============== LEVEL CARDS GRID ==============
     html += '<div class="lessons-level-grid">';
+    let cardIdx = 0;
     LESSONS_DATA.forEach((lv, i) => {
+        // Apply month filter
+        if (_lessonsFilter.month && lv.month !== _lessonsFilter.month) return;
+
         const total = lv.lessons.length;
-        const done = lv.lessons.filter((_, li) => viewed[`${lv.level}-${li}`]).length;
+        const done = lv.lessons.filter((_, li) => viewed[lv.level + '-' + li]).length;
         const pct = Math.round((done / total) * 100);
         const isComplete = done === total;
         const inProgress = done > 0 && !isComplete;
         const badge = isComplete
-            ? '<span style="position:absolute;top:8px;right:8px;background:#22C55E;color:#fff;font-size:.7rem;font-weight:800;padding:3px 8px;border-radius:10px">✅ Xong</span>'
+            ? '<span style="position:absolute;top:8px;right:8px;background:#22C55E;color:#fff;font-size:.7rem;font-weight:800;padding:3px 8px;border-radius:10px">✅</span>'
             : inProgress
                 ? `<span style="position:absolute;top:8px;right:8px;background:${lv.color};color:#fff;font-size:.7rem;font-weight:800;padding:3px 8px;border-radius:10px">▶ ${pct}%</span>`
-                : '';
+                : `<span style="position:absolute;top:8px;right:8px;background:#f3f4f6;color:#888;font-size:.7rem;font-weight:800;padding:3px 8px;border-radius:10px">${total} từ</span>`;
+        const animDelay = (cardIdx * 0.04).toFixed(2);
+        cardIdx++;
         html += `
-        <div class="lessons-level-card ${isComplete ? 'completed' : ''}" style="color:${lv.color};border-color:${pct > 0 ? lv.color : '#eee'};position:relative;cursor:pointer" onclick="selectLessonsLevel(${i})">
+        <div class="lessons-level-card lesson-card-enter ${isComplete ? 'completed' : ''}" style="animation-delay:${animDelay}s;color:${lv.color};border-color:${pct > 0 ? lv.color : '#eee'};position:relative;cursor:pointer" onclick="selectLessonsLevel(${i})">
             ${badge}
-            <div style="font-size:2.8rem;margin-bottom:6px">${lv.icon}</div>
-            <div style="font-family:'Fredoka One',cursive;font-size:1.1rem;color:${lv.color}">Level ${lv.level}</div>
-            <div style="font-size:.82rem;color:#333;font-weight:700;margin:4px 0;min-height:36px">${lv.title}</div>
-            <div style="font-size:.7rem;color:#aaa;margin-bottom:8px;font-style:italic">${lv.titleEn}</div>
+            <div class="lesson-card-emoji" style="font-size:2.6rem;margin-bottom:6px">${lv.icon}</div>
+            <div style="font-size:.7rem;color:#aaa;font-weight:700;letter-spacing:.5px">CHỦ ĐỀ ${lv.level}</div>
+            <div style="font-size:.92rem;color:#222;font-weight:800;margin:3px 0;min-height:38px;line-height:1.2">${lv.title}</div>
+            ${lv.month ? `<div style="font-size:.65rem;color:#aaa;margin-bottom:6px">Tháng ${lv.month}</div>` : ''}
             <div style="width:100%;height:6px;background:#eee;border-radius:3px;overflow:hidden">
-                <div style="width:${pct}%;height:100%;background:${lv.color};border-radius:3px;transition:width .5s"></div>
+                <div style="width:${pct}%;height:100%;background:linear-gradient(90deg,${lv.color},${lv.color}cc);border-radius:3px;transition:width .8s cubic-bezier(.4,.2,.2,1)"></div>
             </div>
-            <div style="font-size:.75rem;color:#888;margin-top:6px;font-weight:700">${done}/${total} từ</div>
         </div>`;
     });
     html += '</div>';
 
-    // Khuyến khích cuối trang
+    if (cardIdx === 0) {
+        html += '<div style="text-align:center;padding:30px;color:#888"><div style="font-size:2.5rem">🔍</div><div style="margin-top:10px">Không có chủ đề nào trong tháng này</div><button onclick="setLessonFilter(\'month\',0)" style="margin-top:10px;background:#667eea;color:#fff;border:none;padding:8px 16px;border-radius:10px;font-weight:700;cursor:pointer;font-family:\'Nunito\',sans-serif">Xem tất cả</button></div>';
+    }
+
+    // ============== ENCOURAGEMENT FOOTER ==============
     if (pctAll === 100) {
-        html += `<div style="background:linear-gradient(135deg,#F59E0B,#D97706);border-radius:16px;padding:16px;color:#fff;text-align:center;margin-top:18px">
-            <div style="font-size:2rem">🏆</div>
-            <div style="font-family:'Fredoka One',cursive;font-size:1.1rem">Tuyệt vời! Bạn đã hoàn thành tất cả bài học!</div>
-            <div style="font-size:.85rem;opacity:.9;margin-top:4px">Tiếp tục ôn tập để nhớ lâu hơn nhé! 💪</div>
+        html += `<div style="background:linear-gradient(135deg,#F59E0B,#D97706);border-radius:16px;padding:16px;color:#fff;text-align:center;margin-top:18px;animation:slideUp .6s ease-out">
+            <div style="font-size:2.2rem;animation:bounce 1.4s ease-in-out infinite">🏆</div>
+            <div style="font-family:'Fredoka One',cursive;font-size:1.1rem">Hoàn thành toàn bộ ${gradeName}!</div>
+            <div style="font-size:.85rem;opacity:.92;margin-top:4px">Hãy thử lớp tiếp theo nhé!</div>
+            <button onclick="showGradeSelect()" style="margin-top:10px;background:#fff;color:#D97706;border:none;padding:8px 18px;border-radius:12px;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif">🎓 Chọn lớp khác</button>
         </div>`;
     } else if (doneAll > 0) {
-        html += `<div style="background:#FEF3C7;border-radius:16px;padding:14px;text-align:center;margin-top:18px;border:2px dashed #F59E0B">
-            <div style="font-size:1.2rem">💪 Còn ${totalAll - doneAll} từ nữa thôi!</div>
-            <div style="font-size:.85rem;color:#92400E;margin-top:2px">Cố lên, bạn làm được mà!</div>
+        html += `<div style="background:#FEF3C7;border-radius:16px;padding:14px;text-align:center;margin-top:18px;border:2px dashed #F59E0B;animation:slideUp .6s ease-out">
+            <div style="font-size:1.1rem;font-weight:800;color:#92400E">💪 Còn ${totalAll - doneAll} từ nữa là xong ${gradeName}!</div>
+            <div style="font-size:.82rem;color:#92400E;margin-top:2px;opacity:.85">Mỗi ngày 5 từ — chỉ cần ${Math.ceil((totalAll - doneAll) / 5)} ngày nữa thôi!</div>
         </div>`;
     } else {
-        html += `<div style="background:#EFF6FF;border-radius:16px;padding:14px;text-align:center;margin-top:18px;border:2px dashed #3B82F6">
-            <div style="font-size:1.2rem">🚀 Sẵn sàng bắt đầu hành trình?</div>
-            <div style="font-size:.85rem;color:#1E40AF;margin-top:2px">Bấm vào Level 1 để học từ đầu tiên!</div>
+        html += `<div style="background:#EFF6FF;border-radius:16px;padding:14px;text-align:center;margin-top:18px;border:2px dashed #3B82F6;animation:slideUp .6s ease-out">
+            <div style="font-size:1.1rem;font-weight:800;color:#1E40AF">🚀 Sẵn sàng bắt đầu ${gradeName}?</div>
+            <div style="font-size:.82rem;color:#1E40AF;margin-top:2px;opacity:.85">Bấm vào chủ đề đầu tiên để học từ vựng đầu tiên!</div>
         </div>`;
     }
 
     document.getElementById('lessonsContent').innerHTML = html;
+}
+
+// Helper to update filter and re-render
+function setLessonFilter(key, value) {
+    _lessonsFilter[key] = value;
+    SoundFX.click();
+    renderLessonsLevelSelect();
 }
 
 function selectLessonsLevel(levelIdx) {
