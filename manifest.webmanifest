@@ -1,0 +1,27 @@
+{
+  "name": "Fun English Kids — Học tiếng Anh miễn phí",
+  "short_name": "Fun English",
+  "description": "Học tiếng Anh vui — Miễn phí 100% · 12 lớp · 2,600+ từ vựng cho trẻ em Việt Nam.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FFF8F0",
+  "theme_color": "#667eea",
+  "lang": "vi",
+  "categories": ["education", "kids"],
+  "icons": [
+    {
+      "src": "icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

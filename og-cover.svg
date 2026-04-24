@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#667eea"/>
+      <stop offset="50%" stop-color="#764ba2"/>
+      <stop offset="100%" stop-color="#f093fb"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Floating decorations -->
+  <text x="80" y="120" font-size="60" opacity="0.25">📚</text>
+  <text x="1080" y="100" font-size="60" opacity="0.25">⭐</text>
+  <text x="100" y="540" font-size="50" opacity="0.25">🌈</text>
+  <text x="1050" y="560" font-size="55" opacity="0.25">🎯</text>
+
+  <!-- Logo emoji -->
+  <text x="600" y="200" text-anchor="middle" font-size="120">🎓</text>
+
+  <!-- Title -->
+  <text x="600" y="310" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="68" font-weight="900" fill="#FFFFFF">Fun English Kids</text>
+
+  <!-- Tagline -->
+  <text x="600" y="370" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="600" fill="#FFE66D">Học tiếng Anh vui — Miễn phí 100%</text>
+
+  <!-- Stats row -->
+  <g transform="translate(180, 440)">
+    <rect width="220" height="100" rx="20" fill="rgba(255,255,255,0.2)"/>
+    <text x="110" y="50" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="46" font-weight="900" fill="#FFE66D">12</text>
+    <text x="110" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#FFFFFF">lớp (1-12)</text>
+  </g>
+
+  <g transform="translate(490, 440)">
+    <rect width="220" height="100" rx="20" fill="rgba(255,255,255,0.2)"/>
+    <text x="110" y="50" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="46" font-weight="900" fill="#FFE66D">2,600+</text>
+    <text x="110" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#FFFFFF">từ vựng</text>
+  </g>
+
+  <g transform="translate(800, 440)">
+    <rect width="220" height="100" rx="20" fill="rgba(255,255,255,0.2)"/>
+    <text x="110" y="50" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="46" font-weight="900" fill="#FFE66D">100%</text>
+    <text x="110" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#FFFFFF">miễn phí</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="600" y="600" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="rgba(255,255,255,0.85)">thuhuongle.github.io/fun-english-kids</text>
+</svg>

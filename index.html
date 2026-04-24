@@ -2,8 +2,38 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fun English Kids - Học Tiếng Anh Vui</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=5.0">
+    <meta name="theme-color" content="#667eea">
+    <title>Fun English Kids — Học tiếng Anh miễn phí cho trẻ em Việt Nam</title>
+    <meta name="description" content="Học tiếng Anh vui — Miễn phí 100%. 12 lớp · 2,600+ từ vựng · Web Speech phát âm chuẩn. Dành cho học sinh Việt Nam từ lớp 1 đến lớp 12.">
+    <meta name="keywords" content="học tiếng anh, tiếng anh miễn phí, tiếng anh trẻ em, học tiếng anh lớp 1, lớp 2, lớp 3, từ vựng tiếng anh, fun english kids">
+
+    <!-- Open Graph (Facebook, Zalo, Messenger) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thuhuongle.github.io/fun-english-kids/">
+    <meta property="og:title" content="Fun English Kids — Học tiếng Anh miễn phí cho trẻ em Việt Nam">
+    <meta property="og:description" content="🎁 Miễn phí 100% · 12 lớp · 2,600+ từ vựng · Phát âm chuẩn · Game học vui mỗi ngày 5–10 phút.">
+    <meta property="og:image" content="https://thuhuongle.github.io/fun-english-kids/og-cover.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:site_name" content="Fun English Kids">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Fun English Kids — Học tiếng Anh miễn phí">
+    <meta name="twitter:description" content="🎁 Miễn phí 100% · 12 lớp · 2,600+ từ vựng · Cho trẻ em Việt Nam.">
+    <meta name="twitter:image" content="https://thuhuongle.github.io/fun-english-kids/og-cover.svg">
+
+    <!-- Favicons (emoji-based, no extra files needed) -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎓%3C/text%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23667eea'/%3E%3Ctext x='50' y='75' text-anchor='middle' font-size='70'%3E🎓%3C/text%3E%3C/svg%3E">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Fun English Kids">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap');
         *{margin:0;padding:0;box-sizing:border-box}
@@ -571,6 +601,38 @@
 </div>
 
 <!-- Lead Capture Modal removed - app is 100% free, no signup required -->
+
+<!-- ===== SHARE MODAL ===== -->
+<div class="modal-overlay" id="shareModal" style="display:none">
+    <div class="modal-content" style="max-width:420px;padding:28px 22px">
+        <div style="font-size:3rem;margin-bottom:6px">📤</div>
+        <h2 style="font-family:'Fredoka One',cursive;color:var(--purple);font-size:1.4rem;margin-bottom:4px">Chia sẻ với bạn bè</h2>
+        <p style="color:#666;font-size:.88rem;margin-bottom:18px">Giúp các bạn nhỏ khác cũng được học tiếng Anh miễn phí 💝</p>
+
+        <!-- Share buttons (native + social) -->
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+            <button onclick="ShareApp.native()" id="shareNativeBtn" style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;padding:13px;border-radius:12px;font-size:1rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px">
+                📱 Chia sẻ qua điện thoại
+            </button>
+            <button onclick="ShareApp.copyLink()" style="background:#fff;color:#667eea;border:2px solid #667eea;padding:11px;border-radius:12px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px">
+                <span id="copyBtnText">📋 Copy link</span>
+            </button>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                <a id="zaloShareBtn" href="#" target="_blank" rel="noopener" style="background:#0068FF;color:#fff;text-decoration:none;padding:11px;border-radius:12px;font-size:.92rem;font-weight:700;text-align:center;font-family:'Nunito',sans-serif">💬 Zalo</a>
+                <a id="fbShareBtn" href="#" target="_blank" rel="noopener" style="background:#1877F2;color:#fff;text-decoration:none;padding:11px;border-radius:12px;font-size:.92rem;font-weight:700;text-align:center;font-family:'Nunito',sans-serif">f Facebook</a>
+            </div>
+        </div>
+
+        <!-- QR code -->
+        <div style="background:#f8fafc;border-radius:14px;padding:14px;margin-bottom:14px;text-align:center">
+            <div style="font-size:.78rem;color:#666;font-weight:700;margin-bottom:8px">📷 Quét QR để mở trên điện thoại</div>
+            <img id="shareQrImg" alt="QR code" style="width:160px;height:160px;border-radius:10px;background:#fff" />
+            <div id="shareUrlDisplay" style="font-size:.7rem;color:#888;margin-top:6px;word-break:break-all;font-family:monospace"></div>
+        </div>
+
+        <button onclick="ShareApp.close()" style="background:none;border:none;color:#aaa;font-size:.85rem;cursor:pointer;font-family:'Nunito',sans-serif;padding:5px">Đóng</button>
+    </div>
+</div>
 <div class="main-container">
     <!-- HOME -->
     <div class="screen active" id="homeScreen">
@@ -587,6 +649,7 @@
             <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
                 <span style="background:linear-gradient(135deg,#22C55E,#16A34A);color:#fff;padding:6px 12px;border-radius:20px;font-size:.8rem;font-weight:700">🎁 100% Miễn phí</span>
                 <button class="btn-report" onclick="showGradeSelect()" style="background:linear-gradient(135deg,#6366F1,#A855F7)">🎓 Chọn lớp</button>
+                <button class="btn-report" onclick="ShareApp.show()" style="background:linear-gradient(135deg,#EC4899,#F472B6)">📤 Chia sẻ</button>
                 <button class="btn-report" onclick="showReport()">📊 Bảng điểm</button>
             </div>
         </div>
@@ -1370,6 +1433,84 @@ const WelcomeBanner = {
                 </div>
             </div>`;
         this.saveVisit();
+    }
+};
+
+// ============================================
+// SHARE APP — Web Share API + QR + social fallbacks
+// ============================================
+const ShareApp = {
+    SHARE_URL: 'https://thuhuongle.github.io/fun-english-kids/',
+    SHARE_TITLE: 'Fun English Kids — Học tiếng Anh miễn phí',
+    SHARE_TEXT: 'Mình đang học tiếng Anh trên Fun English Kids — Miễn phí 100%, có 12 lớp · 2,600+ từ vựng. Cùng học nào!',
+
+    show() {
+        const modal = document.getElementById('shareModal');
+        if (!modal) return;
+        // Build QR via free API (no JS lib needed)
+        const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=10&data=' + encodeURIComponent(this.SHARE_URL);
+        document.getElementById('shareQrImg').src = qrUrl;
+        document.getElementById('shareUrlDisplay').textContent = this.SHARE_URL;
+
+        // Zalo share — opens Zalo with share text
+        document.getElementById('zaloShareBtn').href =
+            'https://zalo.me/share?u=' + encodeURIComponent(this.SHARE_URL) +
+            '&t=' + encodeURIComponent(this.SHARE_TITLE);
+
+        // Facebook share
+        document.getElementById('fbShareBtn').href =
+            'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(this.SHARE_URL);
+
+        // Hide native share button if not supported
+        const nativeBtn = document.getElementById('shareNativeBtn');
+        if (!navigator.share) nativeBtn.style.display = 'none';
+
+        modal.style.display = 'flex';
+    },
+
+    close() {
+        document.getElementById('shareModal').style.display = 'none';
+    },
+
+    async native() {
+        if (!navigator.share) {
+            this.copyLink();
+            return;
+        }
+        try {
+            await navigator.share({
+                title: this.SHARE_TITLE,
+                text: this.SHARE_TEXT,
+                url: this.SHARE_URL
+            });
+        } catch(e) {
+            // User cancelled — that's fine
+        }
+    },
+
+    copyLink() {
+        const text = this.SHARE_TEXT + '\n' + this.SHARE_URL;
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.getElementById('copyBtnText');
+                if (btn) {
+                    const orig = btn.textContent;
+                    btn.textContent = '✅ Đã copy!';
+                    setTimeout(() => { btn.textContent = orig; }, 2000);
+                }
+            }).catch(() => this._copyFallback(text));
+        } else {
+            this._copyFallback(text);
+        }
+    },
+
+    _copyFallback(text) {
+        const ta = document.createElement('textarea');
+        ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); alert('✅ Đã copy link! Bạn có thể dán vào bất cứ đâu.'); }
+        catch(e) { alert('Copy thủ công: ' + this.SHARE_URL); }
+        document.body.removeChild(ta);
     }
 };
 
@@ -2516,9 +2657,10 @@ async function selectGrade(gradeId) {
         LESSONS_DATA = null;
         LESSONS_GRADE_LOADED = null;
         await loadLessonsData(gradeId);
-        // Reset lesson navigation state
+        // Reset lesson navigation state + reload viewed for this grade
         lessonsState.currentLevel = -1;
         lessonsState.currentLesson = 0;
+        lessonsState.viewedLessons = getLessonsViewed(gradeId);
 
         saveState();
         renderGradeSelector();
@@ -3108,18 +3250,42 @@ async function loadLessonsData(forceGrade) {
     }
 }
 
-function getLessonsViewed() {
-    const saved = localStorage.getItem('fekLessonsViewed');
-    return saved ? JSON.parse(saved) : {};
+// Storage is partitioned per grade so progress on Lớp 1 doesn't bleed into Lớp 5.
+// Schema: { "g1": {"1-0": true, "1-1": true}, "g5": {"1-0": true} }
+function _getViewedAll() {
+    try {
+        const raw = localStorage.getItem('fekLessonsViewed');
+        const parsed = raw ? JSON.parse(raw) : {};
+        // Migrate legacy flat format → per-grade (one-time)
+        if (parsed && typeof parsed === 'object' && Object.keys(parsed).length > 0) {
+            const firstKey = Object.keys(parsed)[0];
+            if (!firstKey.startsWith('g') || !parsed[firstKey] || typeof parsed[firstKey] !== 'object') {
+                // Legacy format detected — migrate to current grade
+                const g = state && state.selectedGrade ? state.selectedGrade : 1;
+                const migrated = { ['g' + g]: parsed };
+                localStorage.setItem('fekLessonsViewed', JSON.stringify(migrated));
+                return migrated;
+            }
+        }
+        return parsed;
+    } catch(e) { return {}; }
+}
+
+function getLessonsViewed(gradeId) {
+    const g = gradeId || (state && state.selectedGrade) || 1;
+    const all = _getViewedAll();
+    return all['g' + g] || {};
 }
 
 function saveLessonViewed(level, lessonIdx) {
-    const viewed = getLessonsViewed();
+    const g = (state && state.selectedGrade) || 1;
+    const all = _getViewedAll();
+    if (!all['g' + g]) all['g' + g] = {};
     const key = `${level}-${lessonIdx}`;
-    const isNew = !viewed[key];
-    viewed[key] = true;
-    localStorage.setItem('fekLessonsViewed', JSON.stringify(viewed));
-    lessonsState.viewedLessons = viewed;
+    const isNew = !all['g' + g][key];
+    all['g' + g][key] = true;
+    localStorage.setItem('fekLessonsViewed', JSON.stringify(all));
+    lessonsState.viewedLessons = all['g' + g];
     // Track for daily goal — only count NEW words
     if (isNew && typeof DailyGoal !== 'undefined') {
         DailyGoal.addWord();
@@ -3131,7 +3297,13 @@ function getLessonsProgress() {
     if (!LESSONS_DATA) return 0;
     const viewed = getLessonsViewed();
     const total = LESSONS_DATA.reduce((sum, lv) => sum + lv.lessons.length, 0);
-    const done = Object.keys(viewed).length;
+    // Only count keys that match current LESSONS_DATA shape
+    let done = 0;
+    LESSONS_DATA.forEach(lv => {
+        lv.lessons.forEach((_, li) => {
+            if (viewed[lv.level + '-' + li]) done++;
+        });
+    });
     return total > 0 ? Math.round((done / total) * 100) : 0;
 }
 
@@ -3142,7 +3314,7 @@ async function startLessons() {
         showScreen('lessonsScreen');
         return;
     }
-    lessonsState.viewedLessons = getLessonsViewed();
+    lessonsState.viewedLessons = getLessonsViewed(state.selectedGrade || 1);
     lessonsState.currentLevel = -1;
     showScreen('lessonsScreen');
     renderLessonsLevelSelect();
@@ -4625,6 +4797,18 @@ initFirebase();
 Auth.init();
 SoundFX.init();
 createFloatingShapes();
+
+// ============================================
+// SERVICE WORKER — Offline support + faster reloads
+// Register only on https or localhost (GitHub Pages → ok)
+// ============================================
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('[SW] Registered:', reg.scope))
+            .catch(err => console.warn('[SW] Registration failed:', err));
+    });
+}
 </script>
 </body>
 </html>
