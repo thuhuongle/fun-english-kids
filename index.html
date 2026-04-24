@@ -602,6 +602,21 @@
 
 <!-- Lead Capture Modal removed - app is 100% free, no signup required -->
 
+<!-- ===== PROFILE SWITCHER MODAL ===== -->
+<div class="modal-overlay" id="profileSwitcherModal" style="display:none">
+    <div class="modal-content" style="max-width:420px;padding:26px 22px">
+        <div style="font-size:2.8rem;margin-bottom:6px">👨‍👩‍👧‍👦</div>
+        <h2 style="font-family:'Fredoka One',cursive;color:var(--purple);font-size:1.4rem;margin-bottom:4px">Hồ sơ học sinh</h2>
+        <p style="color:#666;font-size:.85rem;margin-bottom:16px">Mỗi bé có tiến trình, XP, sao và streak riêng — tối đa 5 bé/máy.</p>
+
+        <div id="profileSwitcherList" style="margin-bottom:12px;max-height:300px;overflow-y:auto"></div>
+
+        <button id="addProfileBtn" onclick="Profiles.addNewFromModal()" style="background:linear-gradient(135deg,#22C55E,#16A34A);color:#fff;border:none;padding:13px;border-radius:12px;font-size:.95rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;width:100%;margin-bottom:8px">➕ Thêm học sinh mới</button>
+
+        <button onclick="Profiles.close()" style="background:none;border:none;color:#888;font-size:.85rem;cursor:pointer;font-family:'Nunito',sans-serif;padding:5px">Đóng</button>
+    </div>
+</div>
+
 <!-- ===== SHARE MODAL ===== -->
 <div class="modal-overlay" id="shareModal" style="display:none">
     <div class="modal-content" style="max-width:420px;padding:28px 22px">
@@ -658,6 +673,18 @@
 
         <!-- WELCOME BANNER (cá nhân hóa) -->
         <div id="welcomeBanner" style="background:linear-gradient(135deg,#667eea,#764ba2);border-radius:18px;padding:14px 18px;margin-bottom:12px;box-shadow:0 4px 14px rgba(102,126,234,.25)"></div>
+
+        <!-- USER PROFILE CARD — clickable to switch student -->
+        <div id="userProfileCard" onclick="Profiles.show()" style="background:#fff;border-radius:14px;padding:12px 16px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.05);display:flex;align-items:center;gap:12px;cursor:pointer;border:2px solid #e5e7eb;transition:all .2s" onmouseover="this.style.borderColor='#A855F7';this.style.transform='translateY(-1px)'" onmouseout="this.style.borderColor='#e5e7eb';this.style.transform='translateY(0)'">
+            <div id="userProfileAvatar" style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#A855F7,#EC4899);display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#fff">👶</div>
+            <div style="flex:1;min-width:0">
+                <div id="userProfileName" style="font-weight:800;color:#1e1b4b;font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Học sinh</div>
+                <div id="userProfileMeta" style="font-size:.75rem;color:#888">Lv 1 · Bấm để đổi/thêm bé</div>
+            </div>
+            <div style="background:#F3E8FF;color:#7C3AED;padding:6px 10px;border-radius:10px;font-size:.75rem;font-weight:800;display:flex;align-items:center;gap:4px">
+                <span id="userProfileCount">1</span> 👤
+            </div>
+        </div>
 
         <!-- DAILY GOAL CARD -->
         <div id="dailyGoalCard" style="background:linear-gradient(135deg,#F59E0B,#EF4444);border-radius:18px;padding:14px 18px;margin-bottom:12px;box-shadow:0 4px 14px rgba(239,68,68,.25);cursor:pointer" onclick="DailyGoal.updateUI()"></div>
@@ -1437,6 +1464,227 @@ const WelcomeBanner = {
 };
 
 // ============================================
+// PROFILES — Multi-student support trên cùng 1 thiết bị
+// Schema:
+//   fekProfiles = [{id, name, grade, avatar, createdAt}]
+//   fekActiveProfile = id
+//   fekProfileData_<id> = snapshot of all per-user keys
+// ============================================
+const Profiles = {
+    PROFILE_LIST_KEY: 'fekProfiles',
+    ACTIVE_KEY: 'fekActiveProfile',
+    MAX_PROFILES: 5,
+    // Keys that belong to user (will be snapshotted/restored on switch)
+    USER_KEYS: [
+        'funEnglishKidsV4',  // main state
+        'fekLessonsViewed',  // per-grade progress
+        'fekMistakeBank',    // wrong words
+        'fekDailyGoal',      // today's progress
+        'fekLessonsForBox',  // surprise reward counter
+        'fekLastVisit',      // welcome banner
+        'fekLeadSubmitted', 'fekLeadSkipped', 'fekLeadShowCount',  // legacy
+    ],
+    AVATARS: ['👶','👧','👦','🧒','👨‍🎓','👩‍🎓','🦊','🐼','🦄','🐯','🐰','🐨'],
+
+    list() {
+        try { return JSON.parse(localStorage.getItem(this.PROFILE_LIST_KEY) || '[]'); }
+        catch(e) { return []; }
+    },
+
+    saveList(list) {
+        localStorage.setItem(this.PROFILE_LIST_KEY, JSON.stringify(list));
+    },
+
+    activeId() {
+        return localStorage.getItem(this.ACTIVE_KEY) || null;
+    },
+
+    current() {
+        const id = this.activeId();
+        return this.list().find(p => p.id === id) || null;
+    },
+
+    add(name, grade) {
+        const list = this.list();
+        if (list.length >= this.MAX_PROFILES) {
+            alert('Tối đa ' + this.MAX_PROFILES + ' học sinh trên 1 thiết bị. Hãy xóa 1 hồ sơ trước.');
+            return null;
+        }
+        const id = 'p' + Date.now();
+        const profile = {
+            id,
+            name: name || 'Bé yêu',
+            grade: grade || 1,
+            avatar: this.AVATARS[list.length % this.AVATARS.length],
+            createdAt: new Date().toISOString(),
+            lastActive: new Date().toISOString()
+        };
+        list.push(profile);
+        this.saveList(list);
+        return profile;
+    },
+
+    update(id, patch) {
+        const list = this.list();
+        const idx = list.findIndex(p => p.id === id);
+        if (idx >= 0) {
+            list[idx] = { ...list[idx], ...patch, lastActive: new Date().toISOString() };
+            this.saveList(list);
+        }
+    },
+
+    remove(id) {
+        if (!confirm('Xóa hồ sơ này? Toàn bộ tiến trình của bé sẽ mất.')) return;
+        // Remove snapshot data
+        try { localStorage.removeItem('fekProfileData_' + id); } catch(e) {}
+        const list = this.list().filter(p => p.id !== id);
+        this.saveList(list);
+        if (this.activeId() === id) {
+            // Active profile removed → switch to first or none
+            if (list.length > 0) this.switch(list[0].id);
+            else {
+                localStorage.removeItem(this.ACTIVE_KEY);
+                this._clearActiveKeys();
+                location.reload();
+            }
+        } else {
+            this._renderSwitcher();
+        }
+    },
+
+    // Take snapshot of current user data (called before switching away)
+    _snapshotCurrent() {
+        const id = this.activeId();
+        if (!id) return;
+        const snap = {};
+        this.USER_KEYS.forEach(k => {
+            const v = localStorage.getItem(k);
+            if (v !== null) snap[k] = v;
+        });
+        localStorage.setItem('fekProfileData_' + id, JSON.stringify(snap));
+    },
+
+    _clearActiveKeys() {
+        this.USER_KEYS.forEach(k => localStorage.removeItem(k));
+    },
+
+    _restoreSnapshot(id) {
+        try {
+            const snap = JSON.parse(localStorage.getItem('fekProfileData_' + id) || '{}');
+            this._clearActiveKeys();
+            Object.keys(snap).forEach(k => localStorage.setItem(k, snap[k]));
+        } catch(e) {
+            console.warn('[Profiles] Restore failed:', e);
+        }
+    },
+
+    switch(id) {
+        const list = this.list();
+        const target = list.find(p => p.id === id);
+        if (!target) return;
+        // Save current data
+        this._snapshotCurrent();
+        // Activate new profile
+        localStorage.setItem(this.ACTIVE_KEY, id);
+        this._restoreSnapshot(id);
+        this.update(id, {});  // bump lastActive
+        // Reload to ensure all UI re-init with new state
+        location.reload();
+    },
+
+    // Migrate legacy single-user data to a profile (called on first init)
+    autoMigrate() {
+        const list = this.list();
+        if (list.length > 0) return;  // already has profiles
+        // Check if there's existing data to migrate
+        const stateRaw = localStorage.getItem('funEnglishKidsV4');
+        if (!stateRaw) return;  // fresh install, nothing to migrate
+        try {
+            const old = JSON.parse(stateRaw);
+            const profile = {
+                id: 'p' + Date.now(),
+                name: old.studentName || 'Học sinh',
+                grade: old.selectedGrade || 1,
+                avatar: '👶',
+                createdAt: new Date().toISOString(),
+                lastActive: new Date().toISOString()
+            };
+            this.saveList([profile]);
+            localStorage.setItem(this.ACTIVE_KEY, profile.id);
+            // Snapshot existing data into this profile
+            this._snapshotCurrent();
+            console.log('[Profiles] Migrated existing user → profile', profile.id);
+        } catch(e) {
+            console.warn('[Profiles] Migration failed:', e);
+        }
+    },
+
+    // ============== UI ==============
+
+    show() {
+        this.autoMigrate();
+        const modal = document.getElementById('profileSwitcherModal');
+        if (!modal) return;
+        this._renderSwitcher();
+        modal.style.display = 'flex';
+    },
+
+    close() {
+        const modal = document.getElementById('profileSwitcherModal');
+        if (modal) modal.style.display = 'none';
+    },
+
+    _renderSwitcher() {
+        const list = this.list();
+        const activeId = this.activeId();
+        const container = document.getElementById('profileSwitcherList');
+        if (!container) return;
+
+        if (list.length === 0) {
+            container.innerHTML = `
+                <div style="text-align:center;padding:20px;color:#888">
+                    <div style="font-size:2.5rem;margin-bottom:6px">👶</div>
+                    <p>Chưa có hồ sơ nào. Thêm bé đầu tiên!</p>
+                </div>`;
+        } else {
+            container.innerHTML = list.map(p => {
+                const isActive = p.id === activeId;
+                const gradeName = (typeof GRADE_INFO !== 'undefined') ? (GRADE_INFO.find(g => g.id === p.grade)?.name || 'Lớp ' + p.grade) : 'Lớp ' + p.grade;
+                return `
+                <div style="display:flex;align-items:center;gap:12px;padding:12px;background:${isActive ? '#F0FDF4' : '#fff'};border:2px solid ${isActive ? '#22C55E' : '#e5e7eb'};border-radius:14px;margin-bottom:8px;cursor:${isActive ? 'default' : 'pointer'}" ${!isActive ? `onclick="Profiles.switch('${p.id}')"` : ''}>
+                    <div style="width:46px;height:46px;border-radius:50%;background:${isActive ? '#22C55E' : '#f3f4f6'};display:flex;align-items:center;justify-content:center;font-size:1.6rem">${p.avatar || '👶'}</div>
+                    <div style="flex:1;text-align:left">
+                        <div style="font-weight:800;color:#1e1b4b;font-size:.95rem">${p.name}</div>
+                        <div style="font-size:.78rem;color:#666">${gradeName}${isActive ? ' · <span style="color:#22C55E;font-weight:700">đang dùng</span>' : ''}</div>
+                    </div>
+                    ${list.length > 1 ? `<button onclick="event.stopPropagation();Profiles.remove('${p.id}')" style="background:#FEE2E2;color:#DC2626;border:none;width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:.9rem" title="Xóa hồ sơ">✕</button>` : ''}
+                </div>`;
+            }).join('');
+        }
+
+        // Add new profile button
+        const addBtn = document.getElementById('addProfileBtn');
+        if (addBtn) {
+            if (list.length >= this.MAX_PROFILES) {
+                addBtn.style.display = 'none';
+            } else {
+                addBtn.style.display = 'block';
+                addBtn.textContent = list.length === 0 ? '👶 Thêm học sinh đầu tiên' : '➕ Thêm học sinh mới';
+            }
+        }
+    },
+
+    addNewFromModal() {
+        // Snapshot current data first
+        this._snapshotCurrent();
+        // Clear current state to force name modal
+        this._clearActiveKeys();
+        localStorage.removeItem(this.ACTIVE_KEY);
+        location.reload();
+    }
+};
+
+// ============================================
 // SHARE APP — Web Share API + QR + social fallbacks
 // ============================================
 const ShareApp = {
@@ -1800,6 +2048,9 @@ async function loadState() {
 
     applyMonth(state.selectedMonth);
 
+    // Auto-migrate legacy single-user data → profile system
+    if (typeof Profiles !== 'undefined') Profiles.autoMigrate();
+
     // Initialize daily streak, motivation, daily goal, welcome, mistakes, big CTA
     DailyStreak.update();
     updateUI();
@@ -1807,6 +2058,7 @@ async function loadState() {
     if (typeof WelcomeBanner !== 'undefined') WelcomeBanner.show();
     if (typeof updateMistakesCard !== 'undefined') updateMistakesCard();
     if (typeof updateBigLessonsCTA !== 'undefined') updateBigLessonsCTA();
+    if (typeof updateUserProfileCard !== 'undefined') updateUserProfileCard();
     setTimeout(() => Motivation.startRotation(), 500);
 }
 
@@ -1827,6 +2079,18 @@ function saveName() {
     state.studentName = n;
     if (p && p.length >= 9) state.studentPhone = p;  // phone is optional
     document.getElementById('nameModal').style.display = 'none';
+
+    // Profile system: ensure this student has a profile entry
+    if (typeof Profiles !== 'undefined') {
+        const current = Profiles.current();
+        if (!current) {
+            // First-time or just-switched: create profile
+            const newProfile = Profiles.add(n, state.selectedGrade || 1);
+            if (newProfile) localStorage.setItem(Profiles.ACTIVE_KEY, newProfile.id);
+        } else {
+            Profiles.update(current.id, { name: n, grade: state.selectedGrade || 1 });
+        }
+    }
 
     // Save user profile to Firestore (only if phone provided)
     if (firebaseReady && p && p.length >= 9) {
@@ -2050,7 +2314,36 @@ function goHome() {
     if (typeof WelcomeBanner !== 'undefined') WelcomeBanner.show();
     if (typeof updateMistakesCard !== 'undefined') updateMistakesCard();
     if (typeof updateBigLessonsCTA !== 'undefined') updateBigLessonsCTA();
+    if (typeof updateUserProfileCard !== 'undefined') updateUserProfileCard();
     speakVi('Chào ' + (state.studentName || 'bạn nhỏ') + '! Hôm nay chúng mình học gì nào?');
+}
+
+function updateUserProfileCard() {
+    const list = (typeof Profiles !== 'undefined') ? Profiles.list() : [];
+    const current = (typeof Profiles !== 'undefined') ? Profiles.current() : null;
+    const nameEl = document.getElementById('userProfileName');
+    const metaEl = document.getElementById('userProfileMeta');
+    const avatarEl = document.getElementById('userProfileAvatar');
+    const countEl = document.getElementById('userProfileCount');
+    if (!nameEl) return;
+
+    const studentName = state.studentName || (current ? current.name : 'Học sinh');
+    nameEl.textContent = studentName;
+
+    if (avatarEl && current && current.avatar) avatarEl.textContent = current.avatar;
+
+    const grade = state.selectedGrade || 1;
+    const gradeInfo = (typeof GRADE_INFO !== 'undefined') ? GRADE_INFO.find(g => g.id === grade) : null;
+    const gradeName = gradeInfo ? gradeInfo.name : 'Lớp ' + grade;
+    const profCount = list.length || 1;
+    metaEl.textContent = `Level ${state.level || 1} · ${gradeName} · ${profCount > 1 ? 'Bấm để đổi bé' : 'Bấm để thêm bé khác'}`;
+
+    if (countEl) countEl.textContent = profCount;
+
+    // Auto-update profile name in storage if user changed name
+    if (current && state.studentName && current.name !== state.studentName) {
+        Profiles.update(current.id, { name: state.studentName, grade });
+    }
 }
 
 // Update Big CTA on home with current grade info + progress
